@@ -15,7 +15,6 @@ import {
 } from '@/components/ui/carousel'
 
 import { posterURL } from '@/lib/movies/utils'
-import { addMovieAction } from '@/lib/movies/index'
 
 export default function AddFavoritesPage() {
   const [query, setQuery] = useState('')
@@ -30,11 +29,6 @@ export default function AddFavoritesPage() {
   }, [query])
 
   const router = useRouter()
-
-  async function addMovie(id: number) {
-    await addMovieAction(id)
-    router.push(`/`)
-  }
 
   return (
     <main className='mt-5'>
@@ -56,7 +50,6 @@ export default function AddFavoritesPage() {
                 <h1 className='my-5 truncate text-center text-xl font-bold'>
                   {title}
                 </h1>
-                <Button onClick={() => addMovie(id)}>Add</Button>
               </CarouselItem>
             ))}
           </CarouselContent>
