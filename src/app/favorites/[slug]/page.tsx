@@ -9,14 +9,13 @@ import { Badge } from '@/components/ui/badge'
 import { getFavorite } from '@/db/queries'
 
 interface FavoritesPageProps {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export async function generateMetadata(
-  { params, searchParams }: FavoritesPageProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: FavoritesPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const { slug } = params
 
   const favorite = await getFavorite(slug)
@@ -30,7 +29,8 @@ export async function generateMetadata(
   }
 }
 
-export default async function FavoritesPage({ params }: FavoritesPageProps) {
+export default async function FavoritesPage(props: FavoritesPageProps) {
+  const params = await props.params;
   const { slug } = params
 
   const favorite = await getFavorite(slug)

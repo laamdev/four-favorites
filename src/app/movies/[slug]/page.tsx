@@ -7,11 +7,12 @@ import { StatCard } from '@/components/movies/stat-card'
 
 import { getMovie } from '@/db/queries'
 
-export const generateMetadata = async ({
-  params
-}: {
-  params: { slug: string }
-}) => {
+export const generateMetadata = async (
+  props: {
+    params: Promise<{ slug: string }>
+  }
+) => {
+  const params = await props.params;
   const movie = await getMovie(params.slug)
 
   if (!movie) {
