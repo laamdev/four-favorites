@@ -1,0 +1,27 @@
+ const favorites = [
+  {
+    artist: {
+      name: "Sean Evans",
+      role: "misc",
+    },
+    movies: [
+      {
+        id: 47126,
+        title: "Windy City Heat",
+        genres: [35,99,10770],
+        country: "USA",
+        overview: "A man caught up in the glamor of being a Hollywood celebrity has no idea that the production he's in is a fake.",
+
+      },
+      {
+        title: "Major League"
+      },
+      {
+        title: "Kingpin"
+      },
+      {
+        title: "The Dark Knight"
+      }
+    ]
+  }
+]
