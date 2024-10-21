@@ -10,7 +10,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-export const SortSelect = ({ sort }) => {
+export const SortSelect = ({ sort }: { sort: string }) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()

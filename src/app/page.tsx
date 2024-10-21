@@ -16,13 +16,7 @@ import { EmptyState } from '@/components/globals/empty-state'
 import { getFavorites } from '@/db/queries'
 
 interface HomePageProps {
-  searchParams: {
-    view: string
-    filter: string
-    sort: string
-    query: string
-    page: number
-  }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export const metadata: Metadata = {
@@ -34,12 +28,12 @@ export const metadata: Metadata = {
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { view, filter, sort, query, page } = await searchParams
 
-  const currentPage = page ? parseInt(page) : 1
+  const currentPage = page ? parseInt(page as string) : 1
 
   const { favorites, totalCount } = await getFavorites({
-    filter,
-    sort,
-    query,
+    filter: filter as string,
+    sort: sort as string,
+    query: query as string,
     page: currentPage
   })
 
@@ -86,7 +80,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
           <div className='flex flex-col gap-y-3'>
             <Label className='text-xs uppercase tracking-wider text-zinc-300'>{`Sort`}</Label>
-            <SortSelect sort={sort} />
+            <SortSelect sort={sort as string} />
           </div>
 
           <div className='py-5'>
@@ -95,7 +89,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
           <div className='flex flex-col gap-y-3'>
             <Label className='text-xs uppercase tracking-wider text-zinc-300'>{`Artist Role`}</Label>
-            <FiltersRadio filter={filter} />
+            <FiltersRadio filter={filter as string} />
           </div>
         </div>
 

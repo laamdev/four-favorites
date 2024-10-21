@@ -3,7 +3,7 @@
 import { and, desc, eq, asc, like, sql, exists, count } from 'drizzle-orm'
 
 import { db } from '@/db'
-import { artists, favorites } from '@/db/schema'
+import { artists, favorites, movies } from '@/db/schema'
 
 interface GetFavoritesProps {
   filter?: string
@@ -30,9 +30,7 @@ export async function getFavorites({
             : [asc(favorites.name)]
 
   const whereClause = and(
-    query
-      ? like(sql`LOWER(${favorites.name})`, `%${query.toLowerCase()}%`)
-      : undefined,
+    query ? like(favorites.name, sql`%${query.toLowerCase()}%`) : undefined,
     filter && filter !== 'all'
       ? exists(
           db
@@ -41,7 +39,17 @@ export async function getFavorites({
             .where(
               and(
                 eq(artists.favoriteId, favorites.id),
-                eq(artists.role, filter)
+                eq(
+                  artists.role,
+                  filter as
+                    | 'actor'
+                    | 'director'
+                    | 'producer'
+                    | 'writer'
+                    | 'composer'
+                    | 'singer'
+                    | 'musician'
+                )
               )
             )
         )
@@ -60,7 +68,7 @@ export async function getFavorites({
         }
       },
       limit: 10,
-      offset: (page - 1) * 10, // Assuming 10 items per page
+      offset: page !== undefined ? (page - 1) * 10 : 0,
       orderBy: orderBy
     }),
     db
@@ -104,7 +112,11 @@ export async function getMovie(slug: string) {
   return await db.query.movies.findFirst({
     where: eq(movies.slug, slug),
     with: {
-      moviesToFavorites: true
+      moviesToFavorites: {
+        with: {
+          favorite: true
+        }
+      }
     }
   })
 }

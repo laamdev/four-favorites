@@ -12,7 +12,7 @@ export interface Movie {
   id: number
   name: string
   slug: string
-  genres: any[]
+  genres: string[] | null
   overview: string
   updatedAt: string
   createdAt: string

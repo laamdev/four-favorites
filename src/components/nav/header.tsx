@@ -19,7 +19,11 @@ export const Header = () => {
   )
 }
 
-const Chip = ({ tab }) => {
+const Chip = ({
+  tab
+}: {
+  tab: { id: number; label: string; href: string }
+}) => {
   const pathname = usePathname()
   const selected = pathname === tab.href
   return (

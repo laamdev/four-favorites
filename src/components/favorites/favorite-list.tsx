@@ -7,7 +7,7 @@ interface FavoriteListProps {
 export const FavoriteList = ({ favorites }: FavoriteListProps) => {
   return (
     <ul className='flex flex-col gap-y-2.5'>
-      {favorites.map(favorite => (
+      {favorites.map((favorite: any) => (
         <Link
           href={`/favorites/${favorite.slug}`}
           className='tw-link-hover text-lg font-medium text-zinc-300 hover:text-foreground'

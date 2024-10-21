@@ -13,9 +13,12 @@ interface FavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export async function generateMetadata(props: FavoritesPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const searchParams = await props.searchParams;
-  const params = await props.params;
+export async function generateMetadata(
+  props: FavoritesPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const searchParams = await props.searchParams
+  const params = await props.params
   const { slug } = params
 
   const favorite = await getFavorite(slug)
@@ -30,7 +33,7 @@ export async function generateMetadata(props: FavoritesPageProps, parent: Resolv
 }
 
 export default async function FavoritesPage(props: FavoritesPageProps) {
-  const params = await props.params;
+  const params = await props.params
   const { slug } = params
 
   const favorite = await getFavorite(slug)
@@ -41,7 +44,7 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
 
   return (
     <div>
-      <Badge variant='outline' className='capitalize'>
+      <Badge className='capitalize'>
         {favorite.category
           ? `${favorite.category} Favorites`
           : 'All Time Favorites'}
