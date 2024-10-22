@@ -7,12 +7,10 @@ import { StatCard } from '@/components/movies/stat-card'
 
 import { getMovie } from '@/db/queries'
 
-export const generateMetadata = async (
-  props: {
-    params: Promise<{ slug: string }>
-  }
-) => {
-  const params = await props.params;
+export const generateMetadata = async (props: {
+  params: Promise<{ slug: string }>
+}) => {
+  const params = await props.params
   const movie = await getMovie(params.slug)
 
   if (!movie) {
@@ -43,8 +41,8 @@ export default async function MoviePage(props: {
   return (
     <div>
       <div className='max-w-5xl'>
-        <PageTitle className='text-5xl'>{movie.name}</PageTitle>
-        <p className='mt-5 text-lg'>{movie.overview}</p>
+        <PageTitle>{movie.name}</PageTitle>
+        <p className='mt-5 text-lg text-zinc-300'>{movie.overview}</p>
       </div>
       <div className='mt-20 flex gap-x-10'>
         <div className='relative aspect-[2/3] h-[520px] w-auto rounded'>
