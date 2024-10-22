@@ -49,7 +49,7 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
           ? `${favorite.category} Favorites`
           : 'All Time Favorites'}
       </Badge>
-      <PageTitle className='mt-2.5'>{favorite.name}</PageTitle>
+      <PageTitle className='mt-5'>{favorite.name}</PageTitle>
 
       <div className='mt-10'>
         {favorite.moviesToFavorites && favorite.moviesToFavorites.length > 0 ? (

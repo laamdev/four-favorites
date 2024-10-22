@@ -1,5 +1,7 @@
 import { ReactNode } from 'react'
 import localFont from 'next/font/local'
+import Link from 'next/link'
+import '@/app/globals.css'
 import {
   ClerkProvider,
   SignInButton,
@@ -7,12 +9,10 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import { FilmReel } from '@phosphor-icons/react/dist/ssr'
 
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { AppSidebar } from '@/components/navigation/app-sidebar'
-import { Header } from '@/components/nav/header'
+import { Menu } from '@/components/nav/menu'
 
-import '@/app/globals.css'
 import { cn } from '@/lib/utils'
 
 const grafier = localFont({
@@ -115,13 +115,14 @@ export default function Layout({ children }: { children: ReactNode }) {
         )}
       >
         <body>
-          {/* <SidebarProvider> */}
-          {/* <AppSidebar /> */}
+          <div className='flex items-center justify-between py-5'>
+            <Link href='/'>
+              <FilmReel weight='fill' className='size-7' />
+            </Link>
+            <Menu />
+          </div>
           <UserButton />
-          {/* <Header /> */}
-          {/* <SidebarTrigger /> */}
           <main className='py-10'>{children}</main>
-          {/* </SidebarProvider> */}
         </body>
       </html>
     </ClerkProvider>

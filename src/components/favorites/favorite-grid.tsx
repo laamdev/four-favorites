@@ -6,7 +6,7 @@ interface FavoriteGridProps {
 
 export const FavoriteGrid = ({ favorites }: FavoriteGridProps) => {
   return (
-    <ul className='grid grid-cols-5 gap-7'>
+    <ul className='grid grid-cols-2 gap-5 md:grid-cols-5'>
       {favorites.map((favorite: any) => (
         <FavoriteCard key={favorite.id} favorite={favorite} />
       ))}

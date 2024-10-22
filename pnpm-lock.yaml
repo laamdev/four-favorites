@@ -75,7 +75,7 @@ dependencies:
     specifier: ^16.4.5
     version: 16.4.5
   drizzle-orm:
-    specifier: ^0.35.2
+    specifier: ^0.35.3
     version: 0.35.3(@libsql/client-wasm@0.14.0)(@neondatabase/serverless@0.10.1)(@types/pg@8.11.10)(@types/react@18.3.11)(pg@8.13.0)(react@19.0.0-rc-69d4b800-20241021)
   embla-carousel-react:
     specifier: ^8.3.0

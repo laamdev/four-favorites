@@ -6,13 +6,13 @@ interface FavoriteListProps {
 
 export const FavoriteList = ({ favorites }: FavoriteListProps) => {
   return (
-    <ul className='flex flex-col gap-y-2.5'>
+    <ul className='mx-auto flex flex-col gap-y-5 text-center'>
       {favorites.map((favorite: any) => (
         <Link
           href={`/favorites/${favorite.slug}`}
-          className='tw-link-hover text-lg font-medium text-zinc-300 hover:text-foreground'
+          className='tw-link-hover font-serif text-2xl font-medium text-zinc-300 hover:text-primary'
         >
-          {favorite.name} {favorite.category}
+          {favorite.name}
         </Link>
       ))}
     </ul>
