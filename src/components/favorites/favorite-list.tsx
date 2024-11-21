@@ -1,18 +1,18 @@
 import Link from 'next/link'
 
-interface FavoriteListProps {
-  favorites: any
+interface ItemListProps {
+  items: any
 }
 
-export const FavoriteList = ({ favorites }: FavoriteListProps) => {
+export const ItemList = ({ items }: ItemListProps) => {
   return (
     <ul className='mx-auto flex flex-col gap-y-5 text-center'>
-      {favorites.map((favorite: any) => (
+      {items.map((item: any) => (
         <Link
-          href={`/favorites/${favorite.slug}`}
-          className='tw-link-hover font-serif text-2xl font-medium text-zinc-300 hover:text-primary'
+          href={`/${item.slug}`}
+          className='tw-animation font-serif text-2xl font-medium text-zinc-300 hover:text-primary'
         >
-          {favorite.name}
+          {item.name}
         </Link>
       ))}
     </ul>

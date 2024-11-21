@@ -34,9 +34,9 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
                   src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.movie.posterUrl}`}
                   alt={movie.movie.name}
                   fill
-                  className='tw-gradient tw-card-hover rounded bg-gradient-to-br object-cover object-center group-hover:scale-105'
+                  className='tw-gradient tw-animation rounded bg-gradient-to-br object-cover object-center group-hover:scale-105'
                 />
-                <div className='tw-card-hover absolute inset-0 rounded bg-black opacity-20 group-hover:opacity-0' />
+                <div className='tw-animation absolute inset-0 rounded bg-black opacity-20 group-hover:opacity-0' />
               </div>
               <h2 className='mt-2.5 text-xl font-semibold'>
                 {movie.movie.name}

@@ -12,6 +12,7 @@ import {
 import { FilmReel } from '@phosphor-icons/react/dist/ssr'
 
 import { Menu } from '@/components/nav/menu'
+import { Toaster } from '@/components/ui/sonner'
 
 import { cn } from '@/lib/utils'
 
@@ -114,15 +115,15 @@ export default function Layout({ children }: { children: ReactNode }) {
           grafier.variable
         )}
       >
-        <body>
-          <div className='flex items-center justify-between py-5'>
+        <body className=''>
+          <div className='absolute inset-x-0 top-0 flex items-center justify-between px-5 py-5 sm:px-10'>
             <Link href='/'>
               <FilmReel weight='fill' className='size-7' />
             </Link>
             <Menu />
           </div>
-          <UserButton />
-          <main className='py-10'>{children}</main>
+          <main>{children}</main>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

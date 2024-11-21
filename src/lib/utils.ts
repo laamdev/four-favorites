@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from 'clsx'
+import { format } from 'date-fns'
 import { twMerge } from 'tailwind-merge'
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -27,7 +28,15 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the current page is somewhere in the middle,
   // show the first page, an ellipsis, the current page and its neighbors,
   // another ellipsis, and the last page.
-  return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages]
+  return [
+    1,
+    '...',
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+    '...',
+    totalPages
+  ]
 }
 
 export const getOrdinalSuffix = (n: number): string => {
@@ -48,4 +57,16 @@ export const getOrdinalSuffix = (n: number): string => {
     default:
       return `${n}th`
   }
+}
+
+export const getFormattedDate = (date: string, dateFormat: string = 'yyyy') => {
+  const formattedDate = format(new Date(date), dateFormat)
+
+  return formattedDate
+}
+
+export const getYear = (date: string) => {
+  const year = date.split('-')[0]
+
+  return year
 }

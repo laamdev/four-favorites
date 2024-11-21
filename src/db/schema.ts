@@ -6,9 +6,11 @@ import {
   numeric,
   integer,
   pgEnum,
-  primaryKey
+  primaryKey,
+  unique,
+  check
 } from 'drizzle-orm/pg-core'
-import { relations } from 'drizzle-orm'
+import { relations, sql } from 'drizzle-orm'
 
 export const artistsRolesEnum = pgEnum('artists_roles_enum', [
   'actor',
@@ -60,14 +62,15 @@ export const movies = pgTable('movies', {
 })
 
 export const moviesRelations = relations(movies, ({ many }) => ({
-  moviesToFavorites: many(moviesToFavorites)
+  moviesToFavorites: many(moviesToFavorites),
+  userMovies: many(userMovies)
 }))
 
 export const favorites = pgTable('favorites', {
   id: serial('id').primaryKey().notNull(),
   name: varchar('name').notNull(),
   slug: varchar('slug').notNull().unique(),
-  votes: numeric('votes').default('0').notNull(),
+  likes: numeric('likes').default('0').notNull(),
   publishingDate: timestamp('publishing_date', {
     precision: 3,
     withTimezone: true,
@@ -85,7 +88,8 @@ export const favorites = pgTable('favorites', {
 
 export const favoritesRelations = relations(favorites, ({ one, many }) => ({
   artist: one(artists),
-  moviesToFavorites: many(moviesToFavorites)
+  moviesToFavorites: many(moviesToFavorites),
+  userLikes: many(userLikes)
 }))
 
 export const artists = pgTable('artists', {
@@ -150,3 +154,66 @@ export const moviesToFavoritesRelations = relations(
     })
   })
 )
+
+export const userLikes = pgTable(
+  'user_likes',
+  {
+    userId: varchar('user_id').notNull(),
+    favoriteId: integer('favorite_id')
+      .notNull()
+      .references(() => favorites.id),
+    createdAt: timestamp('created_at', {
+      precision: 3,
+      withTimezone: true,
+      mode: 'string'
+    })
+      .defaultNow()
+      .notNull()
+  },
+  t => ({
+    pk: primaryKey({ columns: [t.userId, t.favoriteId] })
+  })
+)
+
+// Relations need to be defined after all tables
+export const userLikesRelations = relations(userLikes, ({ one }) => ({
+  favorite: one(favorites, {
+    fields: [userLikes.favoriteId],
+    references: [favorites.id]
+  })
+}))
+
+export const userMovies = pgTable(
+  'user_movies',
+  {
+    id: serial('id').primaryKey().notNull(),
+    userId: varchar('user_id').notNull(),
+    movieId: integer('movie_id')
+      .references(() => movies.id)
+      .notNull(),
+    position: integer('position').notNull(), // 1-4 position
+    createdAt: timestamp('created_at', {
+      precision: 3,
+      withTimezone: true,
+      mode: 'string'
+    })
+      .defaultNow()
+      .notNull()
+  },
+  table => ({
+    // Ensure unique movie per user
+    unqMoviePerUser: unique().on(table.userId, table.movieId),
+    // Ensure unique position per user
+    unqPositionPerUser: unique().on(table.userId, table.position),
+    // Ensure position is between 1-4
+    checkPosition: check('position_range', sql`position between 1 and 4`)
+  })
+)
+
+// Add relations
+export const userMoviesRelations = relations(userMovies, ({ one }) => ({
+  movie: one(movies, {
+    fields: [userMovies.movieId],
+    references: [movies.id]
+  })
+}))

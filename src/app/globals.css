@@ -29,21 +29,21 @@
     --chart-3: #4682b4;
     --chart-4: #ffb6c1;
     --chart-5: #ff4500;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: #fafafa;
+    --sidebar-foreground: #424242;
+    --sidebar-primary: #191919;
+    --sidebar-primary-foreground: #fafafa;
+    --sidebar-accent: #f4f4f5;
+    --sidebar-accent-foreground: #191919;
+    --sidebar-border: #e8e8e8;
+    --sidebar-ring: #3b82f6;
   }
 
   .dark {
     /* --background: #0e0e0e; */
     --background: #231f20;
     --foreground: #ffffff;
-    --card: #323232;
+    --card: #41393b;
     --card-foreground: #ffffff;
     --popover: #1a1a1a;
     --popover-foreground: #fafafa;
@@ -57,22 +57,22 @@
     --accent-foreground: #fafafa;
     --destructive: #993333;
     --destructive-foreground: #fafafa;
-    --border: #262626;
-    --input: #212121;
+    --border: #41393b;
+    --input: #41393b;
     --ring: #b6995d;
     --chart-1: #4169e1;
     --chart-2: #2e8b57;
     --chart-3: #ff8c00;
     --chart-4: #ba55d3;
     --chart-5: #ff1493;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: #191919;
+    --sidebar-foreground: #f4f4f5;
+    --sidebar-primary: #3b5bdb;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #292929;
+    --sidebar-accent-foreground: #f4f4f5;
+    --sidebar-border: #292929;
+    --sidebar-ring: #3b82f6;
   }
 }
 
@@ -94,11 +94,8 @@
 }
 
 @layer components {
-  .tw-card-hover {
-    @apply transition duration-200 ease-in-out;
-  }
-  .tw-link-hover {
-    @apply transition duration-300 ease-in-out;
+  .tw-animation {
+    @apply transition-all duration-300 ease-in-out;
   }
   .tw-gradient {
     @apply bg-gradient-to-br from-zinc-900 to-zinc-800;

@@ -1,0 +1,1 @@
+ALTER TABLE "favorites" RENAME COLUMN "votes" TO "likes";

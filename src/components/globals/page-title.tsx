@@ -10,7 +10,7 @@ export const PageTitle = ({ children, className }: PageTitleProps) => {
   return (
     <h1
       className={cn(
-        'max-w-2xl font-serif text-7xl font-bold uppercase leading-none',
+        'max-w-3xl font-serif text-4xl font-bold uppercase md:text-7xl',
         className
       )}
     >
