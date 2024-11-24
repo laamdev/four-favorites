@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SlidersHorizontal } from '@phosphor-icons/react/dist/ssr'
 
@@ -10,6 +11,12 @@ import { Pagination } from '@/components/favorites/pagination'
 import { ItemGrid } from '@/components/favorites/favorite-grid'
 
 import { getRankedMovies } from '@/db/queries'
+
+export const metadata: Metadata = {
+  title: 'Movies',
+  description:
+    'A list of all the movies present in a Four Favorites celebrity pick.'
+}
 
 interface MoviesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -29,6 +36,8 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
 
   const totalPages = Math.ceil(totalCount / itemsPerPage)
 
+  console.log(JSON.stringify(movies, null, 2), 'movies')
+
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
       <div>
@@ -46,7 +55,7 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
           <span>{`celebrity pick.`}</span>
         </p>
       </div>
-      {/* <div className='mt-10 flex items-center justify-between'>
+      <div className='mt-10 flex items-center justify-between'>
         <div className='flex items-center gap-x-2.5'>
           <SlidersHorizontal weight='fill' className='size-4' />
           <FiltersSlider
@@ -56,17 +65,17 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
           />
         </div>
         <ViewToggleGroup />
-      </div> */}
+      </div>
 
-      {/* <div className='col-span-4 mt-10'>
+      <div className='col-span-4 mt-10'>
         {movies.length === 0 ? (
           <EmptyState>{`No favorites found.`}</EmptyState>
         ) : (
           <div>
             {view === 'grid' || !view ? (
-              <ItemGrid items={movies} baseUrl={'/movies'} />
+              <ItemGrid items={movies} baseUrl={'/movies'} type='movie' />
             ) : (
-              <ItemList items={movies} baseUrl={'/movies'} />
+              <ItemList items={movies} />
             )}
           </div>
         )}
@@ -80,7 +89,7 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
             />
           </div>
         )}
-      </div> */}
+      </div>
     </div>
   )
 }

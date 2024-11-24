@@ -13,7 +13,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.4.0",
+    "@clerk/nextjs": "^6.4.1",
     "@neondatabase/serverless": "^0.10.3",
     "@phosphor-icons/react": "^2.1.7",
     "@radix-ui/react-checkbox": "^1.1.2",
@@ -33,11 +33,11 @@
     "@tailwindcss/typography": "^0.5.15",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cmdk": "1.0.0",
+    "cmdk": "1.0.4",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.3",
-    "embla-carousel-react": "^8.4.0",
+    "embla-carousel-react": "^8.5.1",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.460.0",
     "next": "^15.0.3",
@@ -67,8 +67,8 @@
     "eslint-plugin-tailwindcss": "^3.17.5",
     "postcss": "^8",
     "prettier": "^3.3.3",
-    "prettier-plugin-packagejson": "^2.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
+    "prettier-plugin-packagejson": "^2.5.5",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.15",
     "typescript": "^5"
   }

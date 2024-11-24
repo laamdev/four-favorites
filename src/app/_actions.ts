@@ -61,10 +61,12 @@ export async function likeFourFavoritesAction(
 
 interface addUserMovieProps {
   movie: {
+    id: number
     title: string
     overview: string
     poster_path: string
     release_date: string
+    genre_ids: string[]
   }
   position: number
 }
@@ -82,16 +84,19 @@ export async function addUserMovie({ movie, position }: addUserMovieProps) {
     let movieId: number
 
     if (!existingMovie) {
+      console.log(typeof movie.genres)
       // Insert new movie if it doesn't exist
       const [newMovie] = await db
         .insert(movies)
         .values({
+          id: movie.id,
           name: movie.title,
           slug: movie.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
           overview: movie.overview,
-          director: 'TBD',
-          posterUrl: `https://image.tmdb.org/t/p/w1280${movie.poster_path}`,
-          releaseDate: new Date(movie.release_date).toISOString()
+          director: 'N/A',
+          posterUrl: movie.poster_path,
+          releaseDate: new Date(movie.release_date).toISOString(),
+          genres: movie.genre_ids
         })
         .returning()
 

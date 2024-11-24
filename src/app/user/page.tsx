@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Metadata, ResolvingMetadata } from 'next'
 import { currentUser } from '@clerk/nextjs/server'
 import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
 
@@ -7,6 +8,14 @@ import { PageTitle } from '@/components/globals/page-title'
 import { DeleteMovieButton } from '@/components/user/delete-movie-button'
 
 import { getUserMovies } from '@/db/queries'
+
+export async function generateMetadata() {
+  const user = await currentUser()
+
+  return {
+    title: user?.fullName || 'User'
+  }
+}
 
 export default async function UserPage() {
   const user = await currentUser()
@@ -30,7 +39,7 @@ export default async function UserPage() {
             <div key={position}>
               <div className='group relative aspect-[2/3] overflow-hidden rounded'>
                 <Image
-                  src={movie.movie.posterUrl}
+                  src={`https://image.tmdb.org/t/p/w1280/${movie.movie.posterUrl}`}
                   alt={movie.movie.name}
                   fill
                   className='tw-animation rounded bg-zinc-800 object-cover transition-transform'

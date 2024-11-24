@@ -2,19 +2,14 @@ import { ReactNode } from 'react'
 import localFont from 'next/font/local'
 import Link from 'next/link'
 import '@/app/globals.css'
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
 import { FilmReel } from '@phosphor-icons/react/dist/ssr'
 
 import { Menu } from '@/components/nav/menu'
 import { Toaster } from '@/components/ui/sonner'
 
 import { cn } from '@/lib/utils'
+import { SITE } from '@/utils/constants'
 
 const grafier = localFont({
   src: [
@@ -104,6 +99,60 @@ const neueMontreal = localFont({
   display: 'swap',
   variable: '--font-neueMontreal'
 })
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE.URL),
+  title: {
+    default: SITE.TITLE,
+    template: `%s | ${SITE.TITLE}`
+  },
+  description: SITE.DESCRIPTION,
+  openGraph: {
+    title: SITE.TITLE,
+    description: SITE.DESCRIPTION,
+    url: SITE.URL,
+    siteName: SITE.TITLE,
+    images: [
+      {
+        url: `${SITE.URL}/images/og.png`,
+        width: 1200,
+        height: 630
+      }
+    ],
+    locale: 'es-ES',
+    type: 'website'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  twitter: {
+    title: SITE.TITLE,
+    site: SITE.TITLE,
+    card: 'summary_large_image',
+    description: SITE.DESCRIPTION,
+    images: [
+      {
+        url: `${SITE.URL}/images/og.png`,
+        alt: `${SITE.TITLE} logo`,
+        width: 1200,
+        height: 630
+      }
+    ]
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/images/apple-icon.png'
+  }
+}
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

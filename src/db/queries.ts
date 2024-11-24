@@ -319,3 +319,22 @@ export async function checkMoviePosition(userId: string, position: number) {
     }
   })
 }
+
+export async function getFavoriteListMovies() {
+  return await db.query.moviesToFavorites.findMany({
+    with: {
+      movie: {
+        columns: {
+          id: true,
+          name: true,
+          slug: true,
+          posterUrl: true,
+          director: true,
+          releaseDate: true
+        }
+      }
+    },
+    // Use distinct to avoid duplicate movies
+    orderBy: (moviesToFavorites, { asc }) => [asc(moviesToFavorites.movieId)]
+  })
+}

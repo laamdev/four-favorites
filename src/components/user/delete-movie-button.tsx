@@ -25,7 +25,7 @@ export const DeleteMovieButton = ({
     >
       <MinusCircle
         weight='fill'
-        className='tw-animation h-6 w-6 text-white hover:text-primary'
+        className='tw-animation size-12 text-white hover:text-primary'
       />
     </button>
   )
