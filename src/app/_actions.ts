@@ -84,7 +84,6 @@ export async function addUserMovie({ movie, position }: addUserMovieProps) {
     let movieId: number
 
     if (!existingMovie) {
-      console.log(typeof movie.genres)
       // Insert new movie if it doesn't exist
       const [newMovie] = await db
         .insert(movies)

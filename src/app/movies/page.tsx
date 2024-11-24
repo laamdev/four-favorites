@@ -36,8 +36,6 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
 
   const totalPages = Math.ceil(totalCount / itemsPerPage)
 
-  console.log(JSON.stringify(movies, null, 2), 'movies')
-
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
       <div>
@@ -58,11 +56,7 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
       <div className='mt-10 flex items-center justify-between'>
         <div className='flex items-center gap-x-2.5'>
           <SlidersHorizontal weight='fill' className='size-4' />
-          <FiltersSlider
-            label={`Show Filters`}
-            sort={sort as string}
-            filter={filter as string}
-          />
+          <FiltersSlider sort={sort as string} filter={filter as string} />
         </div>
         <ViewToggleGroup />
       </div>

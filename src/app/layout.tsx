@@ -1,7 +1,9 @@
-import { ReactNode } from 'react'
-import localFont from 'next/font/local'
-import Link from 'next/link'
 import '@/app/globals.css'
+
+import { ReactNode } from 'react'
+import { Metadata } from 'next'
+import Link from 'next/link'
+import localFont from 'next/font/local'
 import { ClerkProvider } from '@clerk/nextjs'
 import { FilmReel } from '@phosphor-icons/react/dist/ssr'
 
