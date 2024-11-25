@@ -1,18 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Metadata, ResolvingMetadata } from 'next'
 import { currentUser } from '@clerk/nextjs/server'
 import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
 
 import { PageTitle } from '@/components/globals/page-title'
-import {
-  DeleteMovieButton,
-  UserMovieActionButtons
-} from '@/components/user/user-movie-action-buttons'
+import { UserMovieActionButtons } from '@/components/user/user-movie-action-buttons'
+import { SectionHeading } from '@/components/globals/section-heading'
 
 import { getUserLikedFavorites, getUserMovies } from '@/db/queries'
-import { SectionHeading } from '@/components/globals/section-heading'
-import { cosineDistance } from 'drizzle-orm'
 import { getFormattedYear } from '@/lib/utils'
 
 export async function generateMetadata() {
@@ -102,7 +97,7 @@ export default async function UserPage() {
                 <Link href={favoriteList.favorite.slug}>
                   <div className='group relative aspect-[2/3] overflow-hidden rounded'>
                     <Image
-                      src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2${favoriteList.favorite.artist.headshotUrl}`}
+                      src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2${favoriteList.favorite.artist?.headshotUrl}`}
                       alt={favoriteList.favorite.name}
                       fill
                       className='tw-gradient tw-animation relative rounded object-cover object-center group-hover:scale-105'

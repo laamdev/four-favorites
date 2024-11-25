@@ -174,6 +174,29 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Menu />
           </div>
           <main>{children}</main>
+
+          <footer>
+            <div>
+              <span>{`Created by `}</span>
+              <a
+                href='https://www.laam.dev'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {`laam.dev`}
+              </a>
+
+              <span>{`. You can `}</span>
+              <a
+                href='buymeacoffee.com/laamdev'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {`buy me a cofee`}
+              </a>
+              <span>{`if you like my work.`}</span>
+            </div>
+          </footer>
           <Toaster />
         </body>
       </html>
