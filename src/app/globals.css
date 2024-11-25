@@ -81,7 +81,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground selection:bg-[#ece7d5] selection:text-[#301f18];
   }
   h1,
   h2,

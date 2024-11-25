@@ -5,9 +5,15 @@ import { currentUser } from '@clerk/nextjs/server'
 import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
 
 import { PageTitle } from '@/components/globals/page-title'
-import { DeleteMovieButton } from '@/components/user/delete-movie-button'
+import {
+  DeleteMovieButton,
+  UserMovieActionButtons
+} from '@/components/user/user-movie-action-buttons'
 
-import { getUserMovies } from '@/db/queries'
+import { getUserLikedFavorites, getUserMovies } from '@/db/queries'
+import { SectionHeading } from '@/components/globals/section-heading'
+import { cosineDistance } from 'drizzle-orm'
+import { getFormattedYear } from '@/lib/utils'
 
 export async function generateMetadata() {
   const user = await currentUser()
@@ -24,14 +30,16 @@ export default async function UserPage() {
 
   const userMovies = await getUserMovies(user.id)
 
-  console.log(JSON.stringify(userMovies, null, 2), 'XXX')
+  const userLikedFavoriteLists = await getUserLikedFavorites(user.id)
+
+  console.log(JSON.stringify(userMovies, null, 2))
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
-      <div className='flex items-end justify-between gap-x-2.5'>
+      <div className='flex items-end justify-between gap-x-2'>
         <PageTitle>My Four Favorites</PageTitle>
       </div>
 
-      <div className='mt-10 grid grid-cols-4 gap-8'>
+      <div className='mt-6 grid grid-cols-2 gap-6 sm:mt-12 sm:grid-cols-4'>
         {[0, 1, 2, 3].map(position => {
           const movie = userMovies.find(m => m.position === position + 1)
 
@@ -46,18 +54,19 @@ export default async function UserPage() {
                 />
                 <div className='tw-animation absolute inset-0 z-10 bg-black opacity-0 group-hover:opacity-50' />
 
-                <DeleteMovieButton
+                <UserMovieActionButtons
                   movieId={movie.movieId}
                   position={position + 1}
+                  movieSlug={movie.movie.slug}
                 />
               </div>
               <div className='mt-2 flex flex-col gap-y-1'>
-                <h2 className='text-base font-bold text-white'>
+                <h2 className='text-sm font-bold text-white sm:text-base'>
                   {`${movie.movie.name} `}
                 </h2>
-                {/* <h3 className='text-sm text-zinc-300'>
-                  {movie.movie. && getFormattedDate(movie.release_date)}
-                </h3> */}
+                <h3 className='text-sm text-zinc-300'>
+                  {movie.movie && getFormattedYear(movie.movie.releaseDate)}
+                </h3>
               </div>
             </div>
           ) : (
@@ -71,6 +80,44 @@ export default async function UserPage() {
           )
         })}
       </div>
+
+      <section className='mt-24 sm:mt-28'>
+        <SectionHeading text='Your liked lists' />
+
+        {userLikedFavoriteLists.length === 0 ? (
+          <div className='mt-8 rounded-lg bg-zinc-800/50 p-8 text-center'>
+            <p className='text-lg text-zinc-400'>
+              <span>{`You haven't liked any lists yet.`}</span>
+              <Link
+                href='/'
+                className='tw-animation hover:text-primary'
+              >{` Explore some lists and hit
+              the like button!.`}</Link>
+            </p>
+          </div>
+        ) : (
+          <ul className='mt-8 grid grid-cols-5 gap-4'>
+            {userLikedFavoriteLists.map(favoriteList => (
+              <li key={favoriteList.favorite.id}>
+                <Link href={favoriteList.favorite.slug}>
+                  <div className='group relative aspect-[2/3] overflow-hidden rounded'>
+                    <Image
+                      src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2${favoriteList.favorite.artist.headshotUrl}`}
+                      alt={favoriteList.favorite.name}
+                      fill
+                      className='tw-gradient tw-animation relative rounded object-cover object-center group-hover:scale-105'
+                    />
+                    <div className='tw-animation absolute inset-0 z-10 bg-black opacity-30 group-hover:opacity-0' />
+                    <h2 className='absolute bottom-0 left-0 z-20 rounded-tr bg-[#b6995d]/75 px-3 py-2 text-sm font-bold text-primary-foreground backdrop-blur-sm'>
+                      {favoriteList.favorite.name}
+                    </h2>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   )
 }

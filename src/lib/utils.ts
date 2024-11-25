@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { format } from 'date-fns'
 import { twMerge } from 'tailwind-merge'
+import { enGB } from 'date-fns/locale'
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
@@ -59,7 +60,18 @@ export const getOrdinalSuffix = (n: number): string => {
   }
 }
 
-export const getFormattedDate = (date: string, dateFormat: string = 'yyyy') => {
+export const getFormattedDate = (
+  date: string,
+  dateFormat: string = 'EEEE, MMM d, yyyy'
+) => {
+  const formattedDate = format(new Date(date), dateFormat, {
+    locale: enGB
+  })
+
+  return formattedDate
+}
+
+export const getFormattedYear = (date: string, dateFormat: string = 'yyyy') => {
   const formattedDate = format(new Date(date), dateFormat)
 
   return formattedDate

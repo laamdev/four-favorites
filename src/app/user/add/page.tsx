@@ -5,7 +5,7 @@ import { PageTitle } from '@/components/globals/page-title'
 import { MovieSearch } from '@/components/user/movie-search'
 import { AddMovieButton } from '@/components/user/add-movie-button'
 
-import { getFormattedDate } from '@/lib/utils'
+import { getFormattedYear } from '@/lib/utils'
 import { searchMovies } from '@/utils/tmdb'
 import { checkMoviePosition } from '@/db/queries'
 
@@ -62,7 +62,7 @@ export default async function AddMoviePage({
                   {`${movie.title} `}
                 </h2>
                 <h3 className='text-sm text-zinc-300'>
-                  {movie.release_date && getFormattedDate(movie.release_date)}
+                  {movie.release_date && getFormattedYear(movie.release_date)}
                 </h3>
               </div>
 

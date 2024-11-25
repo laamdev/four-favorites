@@ -34,7 +34,9 @@ export async function getFavorites({
           ? [asc(favorites.publishingDate)]
           : sort === '-publishing_date'
             ? [desc(favorites.publishingDate)]
-            : [asc(favorites.name)]
+            : sort === 'most_liked'
+              ? [desc(favorites.likes)]
+              : [desc(favorites.publishingDate)]
 
   const whereClause = and(
     query ? like(favorites.name, `%${query.toLowerCase()}%`) : undefined,
@@ -247,10 +249,9 @@ export async function getUserLikedFavorites(userId: string) {
       with: {
         favorite: {
           with: {
-            artist: true,
-            moviesToFavorites: {
-              with: {
-                movie: true
+            artist: {
+              columns: {
+                headshotUrl: true
               }
             }
           }
@@ -300,7 +301,8 @@ export async function getUserMovies(userId: string) {
           id: true,
           name: true,
           slug: true,
-          posterUrl: true
+          posterUrl: true,
+          releaseDate: true
         }
       }
     },
@@ -336,5 +338,30 @@ export async function getFavoriteListMovies() {
     },
     // Use distinct to avoid duplicate movies
     orderBy: (moviesToFavorites, { asc }) => [asc(moviesToFavorites.movieId)]
+  })
+}
+
+export async function getMostRecentFavorite() {
+  return await db.query.favorites.findFirst({
+    orderBy: desc(favorites.publishingDate),
+    columns: {
+      publishingDate: true
+    }
+  })
+}
+
+export async function getFavoriteListsLikedByUser(userId: string) {
+  return await db.query.userLikes.findMany({
+    where: eq(userLikes.userId, userId),
+    with: {
+      favorite: {
+        columns: {
+          id: true,
+          name: true,
+          slug: true,
+          publishingDate: true
+        }
+      }
+    }
   })
 }

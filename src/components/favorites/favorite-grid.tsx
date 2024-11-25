@@ -16,7 +16,7 @@ export const ItemGrid = ({
   }
 
   return (
-    <ul className='grid grid-cols-2 gap-5 md:grid-cols-5'>
+    <ul className='grid grid-cols-2 gap-4 md:grid-cols-5'>
       {items.map((item: any) => (
         <ItemCard
           key={item.id}

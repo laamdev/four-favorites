@@ -11,52 +11,64 @@ export async function likeFourFavoritesAction(
   favoriteId: number,
   userId: string
 ) {
-  console.log(JSON.stringify(favoriteId, null, 2), 'favoriteId')
-  console.log(JSON.stringify(userId, null, 2), 'userId')
-  // Check if the user has already liked the favorite
-  const existingLike = await db.query.userLikes.findFirst({
-    where: and(
-      eq(userLikes.userId, userId),
-      eq(userLikes.favoriteId, favoriteId)
-    )
-  })
-
-  if (existingLike) {
-    // Unlike and decrement
-    await db
-      .delete(userLikes)
-      .where(
-        and(eq(userLikes.userId, userId), eq(userLikes.favoriteId, favoriteId))
+  try {
+    // Check if the user has already liked the favorite
+    const existingLike = await db.query.userLikes.findFirst({
+      where: and(
+        eq(userLikes.userId, userId),
+        eq(userLikes.favoriteId, favoriteId)
       )
+    })
+
+    if (existingLike) {
+      // Unlike and decrement
+      await db
+        .delete(userLikes)
+        .where(
+          and(
+            eq(userLikes.userId, userId),
+            eq(userLikes.favoriteId, favoriteId)
+          )
+        )
+        .execute()
+
+      const result = await db
+        .update(favorites)
+        .set({
+          likes: sql`${favorites.likes} - 1`
+        })
+        .where(eq(favorites.id, favoriteId))
+        .returning()
+        .execute()
+
+      revalidatePath('/user')
+      return result
+    }
+
+    // Like and increment
+    await db
+      .insert(userLikes)
+      .values({
+        userId,
+        favoriteId
+      })
       .execute()
 
-    return await db
+    const result = await db
       .update(favorites)
       .set({
-        likes: sql`${favorites.likes} - 1`
+        likes: sql`${favorites.likes} + 1`
       })
       .where(eq(favorites.id, favoriteId))
       .returning()
       .execute()
+
+    revalidatePath('/favorites')
+    return result
+  } catch (error) {
+    console.error('Error in likeFourFavoritesAction:', error)
+    throw new Error('Failed to update favorite like status')
   }
-
-  // Like and increment
-  await db
-    .insert(userLikes)
-    .values({
-      userId,
-      favoriteId
-    })
-    .execute()
-
-  return await db
-    .update(favorites)
-    .set({
-      likes: sql`${favorites.likes} + 1`
-    })
-    .where(eq(favorites.id, favoriteId))
-    .returning()
-    .execute()
 }
 
 interface addUserMovieProps {

@@ -26,15 +26,19 @@ export const SortSelect = ({ sort }: { sort: string }) => {
   }
 
   return (
-    <Select defaultValue={sort ?? 'name'} onValueChange={handleSort}>
+    <Select
+      defaultValue={sort ?? '-publishing_date'}
+      onValueChange={handleSort}
+    >
       <SelectTrigger className='w-[180px]'>
         <SelectValue placeholder='Sort' />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value='name'>{`A-Z`}</SelectItem>
-        <SelectItem value='-name'>{`Z-A`}</SelectItem>
         <SelectItem value='-publishing_date'>{`Newest`}</SelectItem>
         <SelectItem value='publishing_date'>{`Oldest`}</SelectItem>
+        <SelectItem value='name'>{`A-Z`}</SelectItem>
+        <SelectItem value='-name'>{`Z-A`}</SelectItem>
+        <SelectItem value='most_liked'>{`Most Liked`}</SelectItem>
       </SelectContent>
     </Select>
   )

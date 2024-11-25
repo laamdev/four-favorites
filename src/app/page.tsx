@@ -9,7 +9,8 @@ import { Pagination } from '@/components/favorites/pagination'
 import { EmptyState } from '@/components/globals/empty-state'
 import { FiltersSlider } from '@/components/favorites/filters-slider'
 
-import { getFavorites } from '@/db/queries'
+import { getFavorites, getMostRecentFavorite } from '@/db/queries'
+import { getFormattedDate } from '@/lib/utils'
 
 interface FourFavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -39,6 +40,8 @@ export default async function FourFavoritesPage({
     return notFound()
   }
 
+  const lastUpdated = await getMostRecentFavorite()
+
   const itemsPerPage = 10
 
   const totalPages = Math.ceil(totalCount / itemsPerPage)
@@ -50,15 +53,15 @@ export default async function FourFavoritesPage({
           <span>{`Four`}</span>
           <span>{`Favorites`}</span>
         </PageTitle>
-        <p className='mt-2.5 max-w-lg text-xl'>
+        <p className='mt-2.5 max-w-lg text-xl text-zinc-300'>
           <span>{`An every growing collection of Letterboxd's `}</span>
           <a
             href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'
             target='_blank'
             rel='noopener noreferrer'
-            className='tw-animation font-bold hover:bg-primary hover:bg-clip-text hover:text-transparent'
+            className='tw-animation font-bold hover:bg-clip-text hover:text-primary'
           >{`Four Favorites `}</a>
-          <span>{`picks by celebrities.`}</span>
+          <span>{`picks by celebrities. Last updated on ${getFormattedDate(lastUpdated?.publishingDate!)}.`}</span>
         </p>
       </div>
 

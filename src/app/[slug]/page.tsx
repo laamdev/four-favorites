@@ -1,14 +1,16 @@
 import { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
+import { auth } from '@clerk/nextjs/server'
 
 import { MovieCarousel } from '@/components/favorites/movie-carousel'
 import { PageTitle } from '@/components/globals/page-title'
 import { EmptyState } from '@/components/globals/empty-state'
+import { SectionHeading } from '@/components/globals/section-heading'
 import { Badge } from '@/components/ui/badge'
+import { LikeButton } from '@/components/favorites/like-button'
 
 import { getFavorite } from '@/db/queries'
-import { LikeButton } from '@/components/favorites/like-button'
-import { auth } from '@clerk/nextjs/server'
+import { getFormattedDate } from '@/lib/utils'
 
 interface FavoritesPageProps {
   params: Promise<{ slug: string }>
@@ -16,14 +18,12 @@ interface FavoritesPageProps {
 }
 
 export async function generateMetadata(
-  props: FavoritesPageProps,
-  parent: ResolvingMetadata
+  props: FavoritesPageProps
 ): Promise<Metadata> {
-  const searchParams = await props.searchParams
   const params = await props.params
   const { slug } = params
 
-  const { userId, redirectToSignIn } = await auth()
+  const { userId } = await auth()
 
   const favorite = await getFavorite(slug, userId!)
 
@@ -40,7 +40,7 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
   const params = await props.params
   const { slug } = params
 
-  const { userId, redirectToSignIn } = await auth()
+  const { userId } = await auth()
 
   const favorite = await getFavorite(slug, userId!)
 
@@ -58,6 +58,7 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
 
       <div className='flex items-end justify-between'>
         <PageTitle className='mt-5'>{favorite.name}</PageTitle>
+
         <LikeButton
           favoriteId={favorite.id}
           userId={userId!}
@@ -68,10 +69,28 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
 
       <div className='mt-10'>
         {favorite.moviesToFavorites && favorite.moviesToFavorites.length > 0 ? (
-          <MovieCarousel movies={favorite.moviesToFavorites} />
+          <div>
+            <MovieCarousel movies={favorite.moviesToFavorites} />
+          </div>
         ) : (
           <EmptyState>No movies found.</EmptyState>
         )}
+
+        <div className='relative mx-auto mt-10 aspect-video h-full w-full max-w-5xl'>
+          <div className='mt-24 flex flex-col items-center justify-center sm:mt-28'>
+            <SectionHeading
+              text={`Published on ${getFormattedDate(favorite.publishingDate)}`}
+            />
+          </div>
+          <iframe
+            src={favorite.videoUrl}
+            title='YouTube video player'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+            referrerPolicy='strict-origin-when-cross-origin'
+            allowFullScreen
+            className='mt-5 h-full w-full'
+          />
+        </div>
       </div>
     </div>
   )
