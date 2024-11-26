@@ -10,9 +10,9 @@ import { ItemCard } from '@/components/globals/item-card'
 import { getFormattedYear } from '@/lib/utils'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     userId: string
-  }
+  }>
 }
 
 export default async function UserPage({ params }: PageProps) {
