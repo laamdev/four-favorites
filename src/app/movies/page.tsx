@@ -12,6 +12,7 @@ import { ItemCard } from '@/components/globals/item-card'
 
 import { getRankedMovies } from '@/db/queries'
 import { getFormattedYear } from '@/lib/utils'
+import { PageSummary } from '@/components/globals/page-summary'
 
 export const metadata: Metadata = {
   title: 'Movies',
@@ -43,16 +44,17 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
         <PageTitle className='flex flex-col'>
           <span>{`Movies`}</span>
         </PageTitle>
-        <p className='mt-2 max-w-lg text-xl'>
-          <span>{`A list of all the movies present in a`}</span>
+
+        <PageSummary>
+          <span>{`A list of all the movies present in a `}</span>
           <a
             href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'
             target='_blank'
             rel='noopener noreferrer'
-            className='tw-animation font-bold hover:text-primary'
-          >{` Four Favorites `}</a>
-          <span>{`celebrity pick.`}</span>
-        </p>
+            className='tw-animation font-medium text-white underline hover:text-primary'
+          >{`Four Favorites`}</a>
+          <span>{` celebrity pick.`}</span>
+        </PageSummary>
       </div>
       <div className='mt-4 flex items-center justify-between sm:mt-8'>
         <div className='flex items-center gap-x-2'>

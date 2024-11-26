@@ -7,7 +7,12 @@ interface PageSummaryProps {
 
 export const PageSummary = ({ children, className }: PageSummaryProps) => {
   return (
-    <p className={cn('prose text-base text-zinc-300 sm:text-lg', className)}>
+    <p
+      className={cn(
+        'prose mt-2 max-w-2xl text-base text-zinc-300 sm:mt-4 sm:text-lg',
+        className
+      )}
+    >
       {children}
     </p>
   )

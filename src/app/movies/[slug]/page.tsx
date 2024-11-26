@@ -50,7 +50,7 @@ export default async function MoviePage(props: {
           </h2>
         </div>
 
-        <PageSummary className='mt-2 sm:mt-4'>{movie.overview}</PageSummary>
+        <PageSummary>{movie.overview}</PageSummary>
       </div>
       <div className='mt-8 flex gap-x-4 sm:mt-12'>
         <div className='relative aspect-[2/3] h-[520px] w-auto rounded'>

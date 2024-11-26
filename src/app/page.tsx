@@ -11,6 +11,7 @@ import { ItemCard } from '@/components/globals/item-card'
 
 import { getFavorites, getMostRecentFavorite } from '@/db/queries'
 import { getFormattedDate } from '@/lib/utils'
+import { PageSummary } from '@/components/globals/page-summary'
 
 interface FourFavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -53,16 +54,16 @@ export default async function FourFavoritesPage({
           <span>{`Four`}</span>
           <span>{`Favorites`}</span>
         </PageTitle>
-        <p className='mt-2.5 max-w-lg text-xl text-zinc-300'>
+        <PageSummary>
           <span>{`An every growing collection of Letterboxd's `}</span>
           <a
             href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'
             target='_blank'
             rel='noopener noreferrer'
-            className='tw-animation font-bold hover:bg-clip-text hover:text-primary'
-          >{`Four Favorites `}</a>
-          <span>{`picks by celebrities. Last updated on ${getFormattedDate(lastUpdated?.publishingDate!)}.`}</span>
-        </p>
+            className='tw-animation font-medium text-white hover:text-primary'
+          >{`Four Favorites`}</a>
+          <span>{` picks by celebrities. Last updated on ${getFormattedDate(lastUpdated?.publishingDate!)}.`}</span>
+        </PageSummary>
       </div>
 
       <div className='mt-4 flex items-center justify-between sm:mt-8'>
