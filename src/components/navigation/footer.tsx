@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <footer className='pb-8 pt-16'>
+    <footer className='pb-8 pt-24'>
       <div className='tw-animation text-center text-xs text-zinc-400'>
         <span>{`Created by `}</span>
         <a

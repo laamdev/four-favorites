@@ -179,8 +179,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
           <main>{children}</main>
 
-          <Footer />
           <Toaster />
+
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
