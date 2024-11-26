@@ -42,7 +42,7 @@ export default async function MoviePage(props: {
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
       <div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-y-8 sm:gap-y-0'>
           <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between'>
             <PageTitle>{movie.name}</PageTitle>
             <h2 className='mt-2 flex items-baseline gap-x-2'>
@@ -54,16 +54,16 @@ export default async function MoviePage(props: {
           <PageSummary>{movie.overview}</PageSummary>
         </div>
       </div>
-      <div className='mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2'>
-        <div className='relative aspect-[2/3] h-[520px] w-auto rounded'>
+      <div className='mt-8 grid gap-4 sm:mt-12 sm:grid-cols-3'>
+        <div className='relative col-span-1 aspect-[2/3] w-auto rounded-lg bg-white'>
           <Image
             src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.posterUrl}`}
             alt={movie.name}
             fill
-            className='tw-gradient rounded object-cover object-center'
+            className='tw-gradient rounded-lg object-cover object-center'
           />
         </div>
-        <div className='grid h-fit w-full grid-cols-2 gap-4'>
+        <div className='grid h-fit grid-cols-2 flex-col gap-4 sm:col-span-2'>
           <StatCard label={`Number of Lists`} value={movieCountInFavorites!} />
           <StatCard label={`Rank`} value={movie.rank!} />
           <StatCard
