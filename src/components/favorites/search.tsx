@@ -9,7 +9,7 @@ interface SearchProps {
   className?: string
 }
 
-export const Search = ({ placeholder, className }: SearchProps) => {
+export const Search = ({ placeholder }: SearchProps) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -28,7 +28,7 @@ export const Search = ({ placeholder, className }: SearchProps) => {
   return (
     <Input
       placeholder={placeholder}
-      onChange={(e) => {
+      onChange={e => {
         handleSearch(e.target.value)
       }}
       defaultValue={searchParams.get('query')?.toString()}

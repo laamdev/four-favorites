@@ -7,7 +7,7 @@ import {
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
+  PaginationPrevious
 } from '@/components/ui/pagination'
 import { cn } from '@/lib/utils'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -19,7 +19,11 @@ export interface PaginationProps {
   totalDocs: number
 }
 
-export const Pagination = ({ totalPages, totalPagesToDisplay = 5, totalDocs }: PaginationProps) => {
+export const Pagination = ({
+  totalPages,
+  totalPagesToDisplay = 5,
+  totalDocs
+}: PaginationProps) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const currentPage = Number(searchParams.get('page')) || 1
@@ -33,7 +37,8 @@ export const Pagination = ({ totalPages, totalPagesToDisplay = 5, totalDocs }: P
   }
 
   const showLeftEllipsis = currentPage - 1 > totalPagesToDisplay / 2
-  const showRightEllipsis = totalPages - currentPage + 1 > totalPagesToDisplay / 2
+  const showRightEllipsis =
+    totalPages - currentPage + 1 > totalPagesToDisplay / 2
 
   const getPageNumbers = () => {
     if (totalPages <= totalPagesToDisplay) {
@@ -67,9 +72,12 @@ export const Pagination = ({ totalPages, totalPagesToDisplay = 5, totalDocs }: P
 
   const renderPaginationItems = () => {
     const pageNumbers = getPageNumbers()
-    return pageNumbers.map((pageNumber) => (
+    return pageNumbers.map(pageNumber => (
       <PaginationItem key={pageNumber}>
-        <PaginationLink href={createPageURL(pageNumber)} isActive={pageNumber === currentPage}>
+        <PaginationLink
+          href={createPageURL(pageNumber)}
+          isActive={pageNumber === currentPage}
+        >
           {pageNumber}
         </PaginationLink>
       </PaginationItem>
@@ -77,14 +85,16 @@ export const Pagination = ({ totalPages, totalPagesToDisplay = 5, totalDocs }: P
   }
 
   return (
-    <div className="flex flex-col gap-y-2.5 items-center">
+    <div className='flex flex-col items-center gap-y-2'>
       <PaginationNav>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
               href={createPageURL(currentPage - 1)}
               aria-disabled={currentPage === 1}
-              className={cn(currentPage === 1 && 'opacity-50 pointer-events-none')}
+              className={cn(
+                currentPage === 1 && 'pointer-events-none opacity-50'
+              )}
             />
           </PaginationItem>
           {showLeftEllipsis && (
@@ -102,13 +112,15 @@ export const Pagination = ({ totalPages, totalPagesToDisplay = 5, totalDocs }: P
             <PaginationNext
               href={createPageURL(currentPage + 1)}
               aria-disabled={currentPage === totalPages}
-              className={cn(currentPage === totalPages && 'opacity-50 pointer-events-none')}
+              className={cn(
+                currentPage === totalPages && 'pointer-events-none opacity-50'
+              )}
             />
           </PaginationItem>
         </PaginationContent>
       </PaginationNav>
 
-      <p className="text-xs text-zinc-400">{`Showing ${startPost} to ${endPost} of ${totalDocs}`}</p>
+      <p className='text-xs text-zinc-400'>{`Showing ${startPost} to ${endPost} of ${totalDocs}`}</p>
     </div>
   )
 }
