@@ -1,4 +1,3 @@
-// components/user/movie-search.tsx
 'use client'
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'

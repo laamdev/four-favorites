@@ -41,7 +41,7 @@ export async function likeFourFavoritesAction(
         .returning()
         .execute()
 
-      revalidatePath('/user')
+      revalidatePath('/profile')
       return result
     }
 
@@ -123,7 +123,7 @@ export async function addUserMovie({ movie, position }: addUserMovieProps) {
       position
     })
 
-    revalidatePath('/user')
+    revalidatePath('/profile')
     return { success: true }
   } catch (error) {
     console.error('Failed to add movie:', error)
@@ -152,7 +152,7 @@ export async function deleteUserMovie({
         )
       )
 
-    revalidatePath('/user')
+    revalidatePath('/profile')
     return { success: true }
   } catch (error) {
     console.error('Failed to delete movie:', error)

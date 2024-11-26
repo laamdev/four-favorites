@@ -42,8 +42,10 @@ export const Menu = async () => {
             </MenubarItem>
           </SignedOut>
           <SignedIn>
-            <Link href={`/user`}>
-              <MenubarItem className='w-full cursor-pointer'>User</MenubarItem>
+            <Link href={`/profile`}>
+              <MenubarItem className='w-full cursor-pointer'>
+                My Favorites
+              </MenubarItem>
             </Link>
             <MenubarItem className='w-full cursor-pointer'>
               <SignOutButton>Sign Out</SignOutButton>

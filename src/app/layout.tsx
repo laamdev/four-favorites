@@ -167,7 +167,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           grafier.variable
         )}
       >
-        <body className=''>
+        <body>
           <div className='absolute inset-x-0 top-0 flex items-center justify-between p-4 sm:px-8'>
             <Link href='/'>
               <FilmReel weight='fill' className='size-7' />

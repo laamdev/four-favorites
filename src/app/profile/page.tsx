@@ -7,6 +7,7 @@ import { PageTitle } from '@/components/globals/page-title'
 import { UserMovieActionButtons } from '@/components/user/user-movie-action-buttons'
 import { SectionHeading } from '@/components/globals/section-heading'
 import { EmptyState } from '@/components/globals/empty-state'
+import { ShareButton } from '@/components/user/share-button'
 
 import { getUserLikedFavorites, getUserMovies } from '@/db/queries'
 import { getFormattedYear } from '@/lib/utils'
@@ -19,7 +20,7 @@ export async function generateMetadata() {
   }
 }
 
-export default async function UserPage() {
+export default async function ProfilePage() {
   const user = await currentUser()
 
   if (!user?.id) return null
@@ -32,8 +33,8 @@ export default async function UserPage() {
     <div className='mb-12 mt-24 sm:mt-28'>
       <div className='flex items-end justify-between gap-x-2'>
         <PageTitle>My Four Favorites</PageTitle>
+        <ShareButton userId={user.id} />
       </div>
-
       <div className='mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-4'>
         {[0, 1, 2, 3].map(position => {
           const movie = userMovies.find(m => m.position === position + 1)
@@ -67,7 +68,7 @@ export default async function UserPage() {
           ) : (
             <Link
               key={position}
-              href={`/user/add?position=${position + 1}`}
+              href={`/profile/add?position=${position + 1}`}
               className='group relative aspect-[2/3] overflow-hidden rounded bg-zinc-800'
             >
               <PlusCircle className='tw-animation absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 text-white group-hover:text-primary' />

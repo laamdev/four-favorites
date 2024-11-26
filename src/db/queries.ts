@@ -450,3 +450,99 @@ export async function getFavoriteListsLikedByUser(userId: string) {
     }
   })
 }
+
+interface GetUsersFavoritesProps {
+  page?: number
+  sort?: string
+  filter?: string
+}
+
+export const getUsersFavorites = async ({
+  page = 1,
+  sort,
+  filter
+}: GetUsersFavoritesProps = {}) => {
+  const orderBy =
+    sort === 'date'
+      ? [desc(userMovies.createdAt)]
+      : sort === '-date'
+        ? [asc(userMovies.createdAt)]
+        : sort === 'position'
+          ? [asc(userMovies.position)]
+          : [desc(userMovies.createdAt)]
+
+  const whereClause = and(
+    filter && filter !== 'all'
+      ? exists(
+          db
+            .select()
+            .from(movies)
+            .where(
+              and(
+                eq(movies.id, userMovies.movieId),
+                like(movies.genres, `%${filter}%`)
+              )
+            )
+        )
+      : undefined
+  )
+
+  const [results, totalCount] = await Promise.all([
+    db
+      .select({
+        userId: userMovies.userId,
+        movieId: userMovies.movieId,
+        position: userMovies.position,
+        movie: {
+          id: movies.id,
+          name: movies.name,
+          slug: movies.slug,
+          posterUrl: movies.posterUrl,
+          genres: movies.genres
+        }
+      })
+      .from(userMovies)
+      .leftJoin(movies, eq(movies.id, userMovies.movieId))
+      .where(whereClause)
+      .orderBy(...orderBy)
+      .limit(10)
+      .offset((page - 1) * 10),
+
+    db
+      .select({ count: count() })
+      .from(userMovies)
+      .where(whereClause)
+      .then(res => res[0].count)
+  ])
+
+  // Group movies by userId
+  const userFavorites = results.reduce(
+    (acc, curr) => {
+      const { userId, ...movieData } = curr
+      if (!acc[userId]) {
+        acc[userId] = []
+      }
+      acc[userId].push(movieData)
+      return acc
+    },
+    {} as Record<string, any[]>
+  )
+
+  return {
+    favorites: Object.entries(userFavorites).map(([userId, movies]) => ({
+      userId,
+      movies: movies.sort((a, b) => a.position - b.position)
+    })),
+    totalCount: Number(totalCount)
+  }
+}
+
+export const getUserFavorites = async (userId: string) => {
+  return await db.query.userMovies.findMany({
+    where: eq(userMovies.userId, userId),
+    with: {
+      movie: true
+    },
+    orderBy: asc(userMovies.position)
+  })
+}

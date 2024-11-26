@@ -19,7 +19,7 @@ export const AddMovieButton = ({ movie, position }: AddMovieButtonProps) => {
 
         toast.success(`Added ${movie.title} as your #${position} favorite.`)
 
-        redirect('/user')
+        redirect('/profile')
       }}
       className='tw-animation absolute left-2 top-2 z-50 scale-75 transform opacity-0 group-hover:scale-100 group-hover:opacity-100'
     >
