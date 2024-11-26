@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import Image from 'next/image'
 import { auth } from '@clerk/nextjs/server'
 
@@ -6,11 +7,15 @@ import { MovieSearch } from '@/components/user/movie-search'
 import { AddMovieButton } from '@/components/user/add-movie-button'
 
 import { getFormattedYear } from '@/lib/utils'
-import { searchMovies } from '@/utils/tmdb'
 import { checkMoviePosition } from '@/db/queries'
+import { searchMovies } from '@/utils/tmdb'
 
 interface AddMoviePageProps {
   searchParams: Promise<{ position: string; query: string }>
+}
+
+export const metadata: Metadata = {
+  title: 'Add Favorite'
 }
 
 export default async function AddMoviePage({

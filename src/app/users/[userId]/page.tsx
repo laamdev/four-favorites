@@ -1,21 +1,32 @@
-import Image from 'next/image'
-import { auth, currentUser } from '@clerk/nextjs/server'
+import { Metadata } from 'next'
+import { currentUser } from '@clerk/nextjs/server'
 import { notFound } from 'next/navigation'
 
-import { getUserFavorites } from '@/db/queries'
 import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
 import { EmptyState } from '@/components/globals/empty-state'
 import { ItemCard } from '@/components/globals/item-card'
+
+import { getUserFavorites } from '@/db/queries'
 import { getFormattedYear } from '@/lib/utils'
 
-interface PageProps {
-  params: Promise<{
-    userId: string
-  }>
+interface UserPageProps {
+  params: Promise<{ userId: string }>
 }
 
-export default async function UserPage({ params }: PageProps) {
+export async function generateMetadata() {
+  const user = await currentUser()
+
+  if (!user) {
+    return notFound()
+  }
+
+  return {
+    title: user.fullName
+  }
+}
+
+export default async function UserPage({ params }: UserPageProps) {
   const { userId } = await params
   const user = await currentUser()
   const favorites = await getUserFavorites(userId)

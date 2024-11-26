@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { SlidersHorizontal } from '@phosphor-icons/react/dist/ssr'
 
 import { PageTitle } from '@/components/globals/page-title'
 import { ItemList } from '@/components/favorites/favorite-list'
