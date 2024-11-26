@@ -20,7 +20,7 @@ interface FourFavoritesPageProps {
 export const metadata: Metadata = {
   title: 'Four Favorites',
   description:
-    "An every growing collection of Letterboxd's Four Favorites picks by celebrities."
+    "An ever-growing collection of Letterboxd's Four Favorites picks by celebrities."
 }
 
 export default async function FourFavoritesPage({
@@ -55,7 +55,7 @@ export default async function FourFavoritesPage({
           <span>{`Favorites`}</span>
         </PageTitle>
         <PageSummary>
-          <span>{`An every growing collection of Letterboxd's `}</span>
+          <span>{`An ever-growing collection of Letterboxd's `}</span>
           <a
             href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'
             target='_blank'

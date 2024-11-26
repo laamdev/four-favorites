@@ -1,7 +1,7 @@
 export const SITE = {
   TITLE: 'Four Favorites',
   DESCRIPTION:
-    "An every growing collection of Letterboxd's Four Favorites picks by celebrities.",
+    "An ever-growing collection of Letterboxd's Four Favorites picks by celebrities.",
   URL: 'https://fourfavorites.vercel.app'
 }
 
