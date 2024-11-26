@@ -20,11 +20,10 @@ export const ItemGrid = ({
       {items.map((item: any) => (
         <ItemCard
           key={item.id}
-          id={item.id}
           slug={`${baseUrl}/${item.slug}`}
           heading={item.name}
           image={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2${
-            type === 'movie' ? item.posterUrl : item.artist.headshotUrl
+            item.artist.headshotUrl
           }`}
         />
       ))}
