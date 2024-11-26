@@ -5,5 +5,7 @@ interface EmptyStateProps {
 }
 
 export const EmptyState = ({ children }: EmptyStateProps) => {
-  return <div className='border-primary'>{children}</div>
+  return (
+    <div className='rounded-lg bg-zinc-800/50 p-10 text-center'>{children}</div>
+  )
 }

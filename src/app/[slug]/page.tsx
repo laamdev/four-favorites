@@ -57,7 +57,7 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
       </Badge>
 
       <div className='flex items-end justify-between'>
-        <PageTitle className='mt-5'>{favorite.name}</PageTitle>
+        <PageTitle className='mt-4 sm:mt-2'>{favorite.name}</PageTitle>
 
         <LikeButton
           favoriteId={favorite.id}
@@ -67,7 +67,7 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
         />
       </div>
 
-      <div className='mt-10'>
+      <div className='mt-4 sm:mt-8'>
         {favorite.moviesToFavorites && favorite.moviesToFavorites.length > 0 ? (
           <div>
             <MovieCarousel movies={favorite.moviesToFavorites} />
@@ -76,7 +76,7 @@ export default async function FavoritesPage(props: FavoritesPageProps) {
           <EmptyState>No movies found.</EmptyState>
         )}
 
-        <div className='relative mx-auto mt-10 aspect-video h-full w-full max-w-5xl'>
+        <div className='relative mx-auto mt-4 aspect-video h-full w-full max-w-5xl sm:mt-8'>
           <div className='mt-24 flex flex-col items-center justify-center sm:mt-28'>
             <SectionHeading
               text={`Published on ${getFormattedDate(favorite.publishingDate)}`}

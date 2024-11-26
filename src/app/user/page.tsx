@@ -6,6 +6,7 @@ import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
 import { PageTitle } from '@/components/globals/page-title'
 import { UserMovieActionButtons } from '@/components/user/user-movie-action-buttons'
 import { SectionHeading } from '@/components/globals/section-heading'
+import { EmptyState } from '@/components/globals/empty-state'
 
 import { getUserLikedFavorites, getUserMovies } from '@/db/queries'
 import { getFormattedYear } from '@/lib/utils'
@@ -27,14 +28,13 @@ export default async function UserPage() {
 
   const userLikedFavoriteLists = await getUserLikedFavorites(user.id)
 
-  console.log(JSON.stringify(userMovies, null, 2))
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
       <div className='flex items-end justify-between gap-x-2'>
         <PageTitle>My Four Favorites</PageTitle>
       </div>
 
-      <div className='mt-6 grid grid-cols-2 gap-6 sm:mt-12 sm:grid-cols-4'>
+      <div className='mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-4'>
         {[0, 1, 2, 3].map(position => {
           const movie = userMovies.find(m => m.position === position + 1)
 
@@ -80,18 +80,20 @@ export default async function UserPage() {
         <SectionHeading text='Your liked lists' />
 
         {userLikedFavoriteLists.length === 0 ? (
-          <div className='mt-8 rounded-lg bg-zinc-800/50 p-8 text-center'>
-            <p className='text-lg text-zinc-400'>
-              <span>{`You haven't liked any lists yet.`}</span>
-              <Link
-                href='/'
-                className='tw-animation hover:text-primary'
-              >{` Explore some lists and hit
-              the like button!.`}</Link>
-            </p>
+          <div className='mt-4 sm:mt-8'>
+            <EmptyState>
+              <p className='text-lg text-zinc-400'>
+                <span>{`You haven't liked any lists yet. `}</span>
+                <Link
+                  href='/'
+                  className='tw-animation font-medium underline hover:text-primary'
+                >{`Explore some lists`}</Link>
+                <span>{` and hit the like button!`}</span>
+              </p>
+            </EmptyState>
           </div>
         ) : (
-          <ul className='mt-8 grid grid-cols-5 gap-4'>
+          <ul className='mt-4 grid grid-cols-5 gap-4 sm:mt-8'>
             {userLikedFavoriteLists.map(favoriteList => (
               <li key={favoriteList.favorite.id}>
                 <Link href={favoriteList.favorite.slug}>

@@ -71,10 +71,10 @@ export const getFormattedDate = (
   return formattedDate
 }
 
-export const getFormattedYear = (date: string, dateFormat: string = 'yyyy') => {
-  const formattedDate = format(new Date(date), dateFormat)
+export const getFormattedYear = (date: string) => {
+  const formattedYear = getYear(date)
 
-  return formattedDate
+  return formattedYear
 }
 
 export const getYear = (date: string) => {

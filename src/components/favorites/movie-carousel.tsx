@@ -8,8 +8,10 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { ItemCard } from '@/components/globals/item-card'
 
 import { MoviesToFavorites } from '@/types'
+import { getFormattedYear } from '@/lib/utils'
 
 interface MovieCarouselProps {
   movies: MoviesToFavorites[]
@@ -22,26 +24,18 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
         align: 'start'
       }}
     >
-      <CarouselContent className='-ml-7'>
-        {movies.map(movie => (
+      <CarouselContent className='-ml-4'>
+        {movies.map(item => (
           <CarouselItem
-            key={movie.movie.id}
-            className='pl-7 md:basis-1/2 lg:basis-1/4'
+            key={item.movie.id}
+            className='pl-4 md:basis-1/2 lg:basis-1/4'
           >
-            <Link href={`/movies/${movie.movie.slug}`}>
-              <div className='group relative aspect-[2/3] overflow-hidden rounded'>
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.movie.posterUrl}`}
-                  alt={movie.movie.name}
-                  fill
-                  className='tw-gradient tw-animation rounded bg-gradient-to-br object-cover object-center group-hover:scale-105'
-                />
-                <div className='tw-animation absolute inset-0 rounded bg-black opacity-20 group-hover:opacity-0' />
-              </div>
-              <h2 className='mt-2.5 text-xl font-semibold'>
-                {movie.movie.name}
-              </h2>
-            </Link>
+            <ItemCard
+              slug={`/movies/${item.movie.slug}`}
+              heading={item.movie.name}
+              subheading={getFormattedYear(item.movie.releaseDate)}
+              image={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.movie.posterUrl}`}
+            />
           </CarouselItem>
         ))}
       </CarouselContent>

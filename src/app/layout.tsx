@@ -12,6 +12,7 @@ import { Toaster } from '@/components/ui/sonner'
 
 import { cn } from '@/lib/utils'
 import { SITE } from '@/utils/constants'
+import { Footer } from '@/components/navigation/footer'
 
 const grafier = localFont({
   src: [
@@ -167,7 +168,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         )}
       >
         <body className=''>
-          <div className='absolute inset-x-0 top-0 flex items-center justify-between px-5 py-5 sm:px-10'>
+          <div className='absolute inset-x-0 top-0 flex items-center justify-between p-4 sm:px-8'>
             <Link href='/'>
               <FilmReel weight='fill' className='size-7' />
             </Link>
@@ -175,28 +176,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
           <main>{children}</main>
 
-          <footer>
-            <div>
-              <span>{`Created by `}</span>
-              <a
-                href='https://www.laam.dev'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {`laam.dev`}
-              </a>
-
-              <span>{`. You can `}</span>
-              <a
-                href='buymeacoffee.com/laamdev'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {`buy me a cofee`}
-              </a>
-              <span>{`if you like my work.`}</span>
-            </div>
-          </footer>
+          <Footer />
           <Toaster />
         </body>
       </html>

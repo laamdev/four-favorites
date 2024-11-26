@@ -152,7 +152,6 @@ export async function deleteUserMovie({
         )
       )
 
-    console.log('siuuuuu')
     revalidatePath('/user')
     return { success: true }
   } catch (error) {

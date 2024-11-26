@@ -39,11 +39,11 @@ export default async function AddMoviePage({
     <div className='mb-12 mt-24 sm:mt-28'>
       <PageTitle>favorite #{Number(position)}</PageTitle>
 
-      <div className='mt-8'>
+      <div className='mt-4 sm:mt-8'>
         <MovieSearch />
       </div>
 
-      <ul className='mt-8 grid grid-cols-5 gap-6'>
+      <ul className='mt-4 grid grid-cols-5 gap-4 sm:mt-8'>
         {query &&
           movies.length > 0 &&
           movies.map(movie => (

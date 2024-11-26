@@ -2,12 +2,12 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PageTitle } from '@/components/globals/page-title'
-import { ItemGrid } from '@/components/favorites/favorite-grid'
 import { ItemList } from '@/components/favorites/favorite-list'
 import { ViewToggleGroup } from '@/components/favorites/view-toggle-group'
 import { Pagination } from '@/components/favorites/pagination'
 import { EmptyState } from '@/components/globals/empty-state'
 import { FiltersSlider } from '@/components/favorites/filters-slider'
+import { ItemCard } from '@/components/globals/item-card'
 
 import { getFavorites, getMostRecentFavorite } from '@/db/queries'
 import { getFormattedDate } from '@/lib/utils'
@@ -65,18 +65,27 @@ export default async function FourFavoritesPage({
         </p>
       </div>
 
-      <div className='mt-10 flex items-center justify-between'>
+      <div className='mt-4 flex items-center justify-between sm:mt-8'>
         <FiltersSlider sort={sort as string} filter={filter as string} />
         <ViewToggleGroup />
       </div>
 
-      <div className='col-span-4 mt-10'>
+      <div className='col-span-4 mt-4 sm:mt-8'>
         {favorites.length === 0 ? (
           <EmptyState>{`No favorites found.`}</EmptyState>
         ) : (
           <div>
             {view === 'grid' || !view ? (
-              <ItemGrid items={favorites} type='artist' />
+              <div className='grid grid-cols-2 gap-4 md:grid-cols-5'>
+                {favorites.map((item: any) => (
+                  <ItemCard
+                    key={item.id}
+                    slug={item.slug}
+                    heading={item.name}
+                    image={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.artist.headshotUrl}`}
+                  />
+                ))}
+              </div>
             ) : (
               <ItemList items={favorites} />
             )}
@@ -84,7 +93,7 @@ export default async function FourFavoritesPage({
         )}
 
         {totalPages > 1 && (
-          <div className='mt-10'>
+          <div className='mt-8'>
             <Pagination
               totalPages={totalPages}
               totalDocs={totalCount}

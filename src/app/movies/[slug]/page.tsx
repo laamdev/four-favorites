@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { format, parseISO } from 'date-fns'
 
 import { PageTitle } from '@/components/globals/page-title'
+import { PageSummary } from '@/components/globals/page-summary'
 import { StatCard } from '@/components/movies/stat-card'
 
 import { getMovie } from '@/db/queries'
@@ -39,19 +40,19 @@ export default async function MoviePage(props: {
   const movieCountInFavorites = movie.moviesToFavorites.length
 
   return (
-    <div>
+    <div className='mb-12 mt-24 sm:mt-28'>
       <div>
-        <div className='flex items-end justify-between gap-x-2.5'>
+        <div className='flex items-end justify-between gap-x-2'>
           <PageTitle>{movie.name}</PageTitle>
-          <h2 className='mt-2.5 flex items-baseline gap-x-2.5'>
+          <h2 className='mt-2 flex items-baseline gap-x-2'>
             <span className='text-xs uppercase text-zinc-400'>{`Directed by`}</span>
             <span className='text-lg font-medium'>{movie.director}</span>
           </h2>
         </div>
 
-        <p className='prose mt-10 text-lg text-zinc-300'>{movie.overview}</p>
+        <PageSummary className='mt-2 sm:mt-4'>{movie.overview}</PageSummary>
       </div>
-      <div className='mt-20 flex gap-x-10'>
+      <div className='mt-8 flex gap-x-4 sm:mt-12'>
         <div className='relative aspect-[2/3] h-[520px] w-auto rounded'>
           <Image
             src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.posterUrl}`}
@@ -60,7 +61,7 @@ export default async function MoviePage(props: {
             className='tw-gradient rounded object-cover object-center'
           />
         </div>
-        <div className='grid h-fit w-full grid-cols-2 gap-10'>
+        <div className='grid h-fit w-full grid-cols-2 gap-4'>
           <StatCard label={`Number of Lists`} value={movieCountInFavorites!} />
           <StatCard label={`Rank`} value={movie.rank!} />
           <StatCard
