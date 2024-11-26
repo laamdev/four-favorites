@@ -26,7 +26,9 @@ export const ItemCard = ({
         <div className='tw-animation absolute inset-0 z-10 bg-black opacity-30 group-hover:opacity-0' />
       </div>
       <h2 className='mt-2 text-base font-bold sm:text-lg'>{heading}</h2>
-      {subheading && <p className='text-sm text-zinc-300'>{subheading}</p>}
+      {subheading && (
+        <p className='text-sm text-zinc-300 sm:text-base'>{subheading}</p>
+      )}
     </Link>
   )
 }

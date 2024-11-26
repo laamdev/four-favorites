@@ -42,17 +42,19 @@ export default async function MoviePage(props: {
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
       <div>
-        <div className='flex items-end justify-between gap-x-2'>
-          <PageTitle>{movie.name}</PageTitle>
-          <h2 className='mt-2 flex items-baseline gap-x-2'>
-            <span className='text-xs uppercase text-zinc-400'>{`Directed by`}</span>
-            <span className='text-lg font-medium'>{movie.director}</span>
-          </h2>
-        </div>
+        <div className='flex flex-col'>
+          <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between'>
+            <PageTitle>{movie.name}</PageTitle>
+            <h2 className='mt-2 flex items-baseline gap-x-2'>
+              <span className='text-xs uppercase text-zinc-400'>{`Directed by`}</span>
+              <span className='text-lg font-medium'>{movie.director}</span>
+            </h2>
+          </div>
 
-        <PageSummary>{movie.overview}</PageSummary>
+          <PageSummary>{movie.overview}</PageSummary>
+        </div>
       </div>
-      <div className='mt-8 flex gap-x-4 sm:mt-12'>
+      <div className='mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2'>
         <div className='relative aspect-[2/3] h-[520px] w-auto rounded'>
           <Image
             src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.posterUrl}`}

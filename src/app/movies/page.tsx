@@ -77,7 +77,7 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
         ) : (
           <div>
             {view === 'grid' || !view ? (
-              <div className='grid grid-cols-5 gap-4'>
+              <div className='grid grid-cols-2 gap-4 md:grid-cols-5'>
                 {movies.map((item: any) => (
                   <ItemCard
                     key={item.id}

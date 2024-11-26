@@ -82,7 +82,7 @@ export default async function UserPage() {
         {userLikedFavoriteLists.length === 0 ? (
           <div className='mt-4 sm:mt-8'>
             <EmptyState>
-              <p className='text-lg text-zinc-400'>
+              <p>
                 <span>{`You haven't liked any lists yet. `}</span>
                 <Link
                   href='/'
