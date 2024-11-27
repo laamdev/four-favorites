@@ -1,12 +1,14 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { format, parseISO } from 'date-fns'
+import { LinkSimple } from '@phosphor-icons/react/dist/ssr'
 
 import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
 import { StatCard } from '@/components/movies/stat-card'
 
 import { getMovie } from '@/db/queries'
+import { buttonVariants } from '@/components/ui/button'
 
 export const generateMetadata = async (props: {
   params: Promise<{ slug: string }>
@@ -55,13 +57,24 @@ export default async function MoviePage(props: {
         </div>
       </div>
       <div className='mt-8 grid gap-4 sm:mt-12 sm:grid-cols-3'>
-        <div className='relative col-span-1 aspect-[2/3] w-auto rounded-lg bg-white'>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.posterUrl}`}
-            alt={movie.name}
-            fill
-            className='tw-gradient rounded-lg object-cover object-center'
-          />
+        <div className='col-span-1'>
+          <div className='relative aspect-[2/3] w-auto rounded-lg bg-white'>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.posterUrl}`}
+              alt={movie.name}
+              fill
+              className='tw-gradient rounded-lg object-cover object-center'
+            />
+          </div>
+          <a
+            href={movie.letterboxdUrl!}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={buttonVariants({ className: 'mt-4 w-full' })}
+          >
+            <LinkSimple weight='bold' className='size-4' />
+            View on Letterboxd
+          </a>
         </div>
         <div className='grid h-fit grid-cols-2 flex-col gap-4 sm:col-span-2'>
           <StatCard label={`Number of Lists`} value={movieCountInFavorites!} />

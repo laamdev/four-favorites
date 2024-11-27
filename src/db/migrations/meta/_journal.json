@@ -29,6 +29,13 @@
       "when": 1732179832435,
       "tag": "0003_goofy_magik",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1732704529940,
+      "tag": "0004_wooden_doctor_spectrum",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,1 @@
+ALTER TABLE "movies" ADD COLUMN "letterboxd_url" varchar DEFAULT 'https://letterboxd.com/';

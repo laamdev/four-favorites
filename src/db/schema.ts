@@ -45,6 +45,7 @@ export const movies = pgTable('movies', {
   posterUrl: varchar('poster_url')
     .default('https://image.tmdb.org/t/p/w1280/')
     .notNull(),
+  letterboxdUrl: varchar('letterboxd_url').default('https://letterboxd.com/'),
   updatedAt: timestamp('updated_at', {
     precision: 3,
     withTimezone: true,
