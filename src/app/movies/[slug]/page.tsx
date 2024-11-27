@@ -6,9 +6,9 @@ import { LinkSimple } from '@phosphor-icons/react/dist/ssr'
 import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
 import { StatCard } from '@/components/movies/stat-card'
+import { buttonVariants } from '@/components/ui/button'
 
 import { getMovie } from '@/db/queries'
-import { buttonVariants } from '@/components/ui/button'
 
 export const generateMetadata = async (props: {
   params: Promise<{ slug: string }>
