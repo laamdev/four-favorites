@@ -138,7 +138,11 @@ export async function getMovie(slug: string) {
     with: {
       moviesToFavorites: {
         with: {
-          favorite: true
+          favorite: {
+            with: {
+              artist: true
+            }
+          }
         }
       }
     }
@@ -146,7 +150,7 @@ export async function getMovie(slug: string) {
 
   if (!movie) return null
 
-  // Get all movies with their list counts
+  // Rest of ranking logic remains the same
   const moviesWithCounts = await db
     .select({
       id: movies.id,
@@ -160,7 +164,6 @@ export async function getMovie(slug: string) {
     .groupBy(movies.id, movies.name)
     .orderBy(desc(sql`list_count`), asc(movies.name))
 
-  // Calculate rank
   let currentRank = 0
   let previousListCount = Number.MAX_SAFE_INTEGER
   let rank = 0
@@ -179,13 +182,21 @@ export async function getMovie(slug: string) {
     }
   }
 
+  // Extract favorites data
+  const favorites = movie.moviesToFavorites.map(mtf => ({
+    id: mtf.favorite.id,
+    name: mtf.favorite.name,
+    slug: mtf.favorite.slug,
+    artist: mtf.favorite.artist
+  }))
+
   return {
     ...movie,
     rank,
-    listCount
+    listCount,
+    favorites
   }
 }
-
 // // export const getRankedMovies = async () => {
 // //   const [moviesWithCounts, [{ totalCount }]] = await Promise.all([
 // //     db

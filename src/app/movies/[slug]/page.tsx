@@ -7,8 +7,11 @@ import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
 import { StatCard } from '@/components/movies/stat-card'
 import { buttonVariants } from '@/components/ui/button'
+import { EmptyState } from '@/components/globals/empty-state'
+import { SectionHeading } from '@/components/globals/section-heading'
 
 import { getMovie } from '@/db/queries'
+import { ItemCard } from '@/components/globals/item-card'
 
 export const generateMetadata = async (props: {
   params: Promise<{ slug: string }>
@@ -84,6 +87,28 @@ export default async function MoviePage(props: {
             value={format(parseISO(movie.releaseDate), 'yyyy')}
           />
         </div>
+      </div>
+
+      <div className='mt-24 sm:mt-28'>
+        <SectionHeading text='Picked by' />
+        {movie.favorites.length > 0 ? (
+          <div className='mt-4 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-5'>
+            {movie.favorites.map(favorite => (
+              <ItemCard
+                key={favorite.id}
+                slug={`/${favorite.slug}`}
+                heading={favorite.name}
+                image={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${favorite.artist?.headshotUrl}`}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className='mt-4 sm:mt-8'>
+            <EmptyState>
+              This movie is not included in any lists yet.
+            </EmptyState>
+          </div>
+        )}
       </div>
     </div>
   )
