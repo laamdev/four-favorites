@@ -1,6 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
-
 import {
   Carousel,
   CarouselContent,
@@ -10,8 +7,8 @@ import {
 } from '@/components/ui/carousel'
 import { ItemCard } from '@/components/globals/item-card'
 
-import { MoviesToFavorites } from '@/types'
 import { getFormattedYear } from '@/lib/utils'
+import { MoviesToFavorites } from '@/types'
 
 interface MovieCarouselProps {
   movies: MoviesToFavorites[]
@@ -34,7 +31,11 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
               slug={`/movies/${item.movie.slug}`}
               heading={item.movie.name}
               subheading={getFormattedYear(item.movie.releaseDate)}
-              image={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.movie.posterUrl}`}
+              image={
+                item.movie.posterUrl
+                  ? `https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.movie.posterUrl}`
+                  : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
+              }
             />
           </CarouselItem>
         ))}

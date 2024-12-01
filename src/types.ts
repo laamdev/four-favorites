@@ -18,7 +18,7 @@ export interface Movie {
   createdAt: string
   releaseDate: string
   country: string
-  posterUrl: string
+  posterUrl: string | null
 }
 
 export interface MoviesToFavorites {
