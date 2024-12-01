@@ -1,0 +1,1 @@
+ALTER TABLE "movies" ALTER COLUMN "genres" SET DATA TYPE text[];

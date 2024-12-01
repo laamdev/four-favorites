@@ -1,0 +1,1 @@
+ALTER TABLE "favorites" ALTER COLUMN "category" SET DEFAULT 'overall';

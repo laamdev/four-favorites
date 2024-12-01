@@ -9,9 +9,9 @@ import { StatCard } from '@/components/movies/stat-card'
 import { buttonVariants } from '@/components/ui/button'
 import { EmptyState } from '@/components/globals/empty-state'
 import { SectionHeading } from '@/components/globals/section-heading'
+import { ItemCard } from '@/components/globals/item-card'
 
 import { getMovie } from '@/db/queries'
-import { ItemCard } from '@/components/globals/item-card'
 
 export const generateMetadata = async (props: {
   params: Promise<{ slug: string }>

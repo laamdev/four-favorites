@@ -39,7 +39,9 @@ export async function getFavorites({
               : [desc(favorites.publishingDate)]
 
   const whereClause = and(
-    query ? like(favorites.name, `%${query.toLowerCase()}%`) : undefined,
+    query
+      ? sql`LOWER(${favorites.name}) LIKE ${`%${query.toLowerCase()}%`}`
+      : undefined,
     filter && filter !== 'all'
       ? exists(
           db

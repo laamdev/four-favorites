@@ -83,7 +83,11 @@ export default async function FourFavoritesPage({
                     key={item.id}
                     slug={item.slug}
                     heading={item.name}
-                    image={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.artist.headshotUrl}`}
+                    image={
+                      item.artist?.headshotUrl
+                        ? `https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.artist.headshotUrl}`
+                        : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+                    }
                   />
                 ))}
               </div>

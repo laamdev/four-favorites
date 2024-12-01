@@ -23,7 +23,7 @@ export const ItemGrid = ({
           slug={`${baseUrl}/${item.slug}`}
           heading={item.name}
           image={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2${
-            item.artist.headshotUrl
+            item.artist?.headshotUrl
           }`}
         />
       ))}

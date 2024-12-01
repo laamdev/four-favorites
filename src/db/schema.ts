@@ -8,7 +8,9 @@ import {
   pgEnum,
   primaryKey,
   unique,
-  check
+  check,
+  PgArray,
+  text
 } from 'drizzle-orm/pg-core'
 import { relations, sql } from 'drizzle-orm'
 
@@ -37,15 +39,13 @@ export const movies = pgTable('movies', {
   overview: varchar('overview').notNull(),
   director: varchar('director').notNull(),
   country: varchar('country').notNull().default('US'),
-  genres: varchar('genres').array(),
+  genres: text('genres').array().default([]),
   releaseDate: timestamp('release_date', {
     precision: 3,
     withTimezone: true,
     mode: 'string'
   }).notNull(),
-  posterUrl: varchar('poster_url')
-    .default('https://image.tmdb.org/t/p/w1280/')
-    .notNull(),
+  posterUrl: varchar('poster_url'),
   letterboxdUrl: varchar('letterboxd_url').default('https://letterboxd.com/'),
   updatedAt: timestamp('updated_at', {
     precision: 3,
@@ -85,7 +85,7 @@ export const favorites = pgTable('favorites', {
       'https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'
     )
     .notNull(),
-  category: favoritesCategoriesEnum().notNull().default('all')
+  category: favoritesCategoriesEnum().notNull().default('overall')
 })
 
 export const favoritesRelations = relations(favorites, ({ one, many }) => ({
