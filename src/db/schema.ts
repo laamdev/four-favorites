@@ -117,8 +117,6 @@ export const artists = pgTable('artists', {
     .notNull(),
   role: artistsRolesEnum().notNull().default('actor'),
   headshotUrl: varchar('headshot_url')
-    .default('https://media.themoviedb.org/t/p/w600_and_h900_bestv2/')
-    .notNull()
 })
 
 export const artistsRelations = relations(artists, ({ one }) => ({
