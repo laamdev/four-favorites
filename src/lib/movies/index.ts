@@ -1,9 +1,5 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
-
-import { posterURL } from '@/lib/movies/utils'
-
 export async function searchMovies(query: string) {
   const response = await fetch(
     `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(

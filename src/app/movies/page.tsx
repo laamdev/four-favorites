@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
+import { ItemCardSuspense } from '@/components/globals/item-card-suspense'
 import { PageTitle } from '@/components/globals/page-title'
 import { ItemList } from '@/components/favorites/favorite-list'
 import { FiltersSlider } from '@/components/movies/filters-slider'
@@ -33,12 +35,17 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
   const { sort, filter, view, page, query } = await searchParams
   const currentPage = page ? parseInt(page as string) : 1
 
-  const { movies, totalCount } = await getRankedMovies({
-    filter: filter as string,
-    sort: sort as string,
-    query: query as string,
-    page: currentPage
-  })
+  const delay = new Promise(resolve => setTimeout(resolve, 10000))
+
+  const [_, { movies, totalCount }] = await Promise.all([
+    delay,
+    getRankedMovies({
+      filter: filter as string,
+      sort: sort as string,
+      query: query as string,
+      page: currentPage
+    })
+  ])
 
   if (!movies) {
     return notFound()

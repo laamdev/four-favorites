@@ -8,10 +8,10 @@ import { Pagination } from '@/components/favorites/pagination'
 import { EmptyState } from '@/components/globals/empty-state'
 import { FiltersSlider } from '@/components/favorites/filters-slider'
 import { ItemCard } from '@/components/globals/item-card'
+import { PageSummary } from '@/components/globals/page-summary'
 
 import { getFavorites, getMostRecentFavorite } from '@/db/queries'
 import { getFormattedDate } from '@/lib/utils'
-import { PageSummary } from '@/components/globals/page-summary'
 
 interface FourFavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>

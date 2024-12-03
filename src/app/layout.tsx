@@ -9,10 +9,10 @@ import { FilmReel } from '@phosphor-icons/react/dist/ssr'
 
 import { Menu } from '@/components/nav/menu'
 import { Toaster } from '@/components/ui/sonner'
+import { Footer } from '@/components/navigation/footer'
 
 import { cn } from '@/lib/utils'
 import { SITE } from '@/utils/constants'
-import { Footer } from '@/components/navigation/footer'
 
 const grafier = localFont({
   src: [

@@ -199,57 +199,6 @@ export async function getMovie(slug: string) {
     favorites
   }
 }
-// // export const getRankedMovies = async () => {
-// //   const [moviesWithCounts, [{ totalCount }]] = await Promise.all([
-// //     db
-// //       .select({
-// //         id: movies.id,
-// //         name: movies.name,
-// //         slug: movies.slug,
-// //         overview: movies.overview,
-// //         director: movies.director,
-// //         country: movies.country,
-// //         genres: movies.genres,
-// //         releaseDate: movies.releaseDate,
-// //         posterUrl: movies.posterUrl,
-// //         listCount: count(moviesToFavorites.favoriteId).as('list_count')
-// //       })
-// //       .from(movies)
-// //       .leftJoin(
-// //         moviesToFavorites,
-// //         sql`${movies.id} = ${moviesToFavorites.movieId}`
-// //       )
-// //       .groupBy(movies.id, movies.name, movies.slug)
-// //       .orderBy(desc(sql`list_count`), asc(movies.name))
-// //       .limit(10),
-
-// //     db
-// //       .select({
-// //         totalCount: sql<number>`count(*)`.as('total_count')
-// //       })
-// //       .from(movies)
-// //   ])
-
-// //   let currentRank = 0
-// //   let previousListCount = Number.MAX_SAFE_INTEGER
-
-// //   const rankedMovies = moviesWithCounts.map(movie => {
-// //     if (movie.listCount < previousListCount) {
-// //       currentRank = currentRank + 1
-// //     }
-// //     previousListCount = movie.listCount
-
-// //     return {
-// //       ...movie,
-// //       rank: currentRank
-// //     }
-// //   })
-
-// //   return {
-// //     movies: rankedMovies,
-// //     totalCount
-// //   }
-// // }
 interface GetRankedMoviesProps {
   filter?: string
   sort?: string
