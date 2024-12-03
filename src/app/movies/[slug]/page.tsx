@@ -11,13 +11,23 @@ import { EmptyState } from '@/components/globals/empty-state'
 import { SectionHeading } from '@/components/globals/section-heading'
 import { ItemCard } from '@/components/globals/item-card'
 
-import { getMovie } from '@/db/queries'
+import { getMovie, getMoviesSlugs } from '@/db/queries'
 
-export const generateMetadata = async (props: {
+interface MoviePageProps {
   params: Promise<{ slug: string }>
-}) => {
-  const params = await props.params
-  const movie = await getMovie(params.slug)
+}
+
+export async function generateStaticParams() {
+  const slugs = await getMoviesSlugs()
+
+  return slugs.map(slug => ({
+    slug: slug
+  }))
+}
+
+export const generateMetadata = async ({ params }: MoviePageProps) => {
+  const { slug } = await params
+  const movie = await getMovie(slug)
 
   if (!movie) {
     return {

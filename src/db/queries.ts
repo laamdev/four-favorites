@@ -561,11 +561,21 @@ export const getUserFavorites = async (userId: string) => {
 }
 
 export async function getFavoriteSlugs() {
-  const results = await db.query.favorites.findMany({
+  const favorites = await db.query.favorites.findMany({
     columns: {
       slug: true
     }
   })
 
-  return results.map(result => result.slug)
+  return favorites.map(favorite => favorite.slug)
+}
+
+export async function getMoviesSlugs() {
+  const movies = await db.query.movies.findMany({
+    columns: {
+      slug: true
+    }
+  })
+
+  return movies.map(movie => movie.slug)
 }
