@@ -9,12 +9,19 @@ import { SectionHeading } from '@/components/globals/section-heading'
 import { Badge } from '@/components/ui/badge'
 import { LikeButton } from '@/components/favorites/like-button'
 
-import { getFavorite } from '@/db/queries'
+import { getFavorite, getFavoriteSlugs } from '@/db/queries'
 import { getFormattedDate } from '@/lib/utils'
 
 interface FavoritesPageProps {
   params: Promise<{ slug: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export async function generateStaticParams() {
+  const slugs = await getFavoriteSlugs()
+
+  return slugs.map(slug => ({
+    slug: slug
+  }))
 }
 
 export async function generateMetadata(
@@ -36,9 +43,8 @@ export async function generateMetadata(
   }
 }
 
-export default async function FavoritesPage(props: FavoritesPageProps) {
-  const params = await props.params
-  const { slug } = params
+export default async function FavoritesPage({ params }: FavoritesPageProps) {
+  const { slug } = await params
 
   const { userId } = await auth()
 

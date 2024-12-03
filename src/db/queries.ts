@@ -559,3 +559,13 @@ export const getUserFavorites = async (userId: string) => {
     orderBy: asc(userMovies.position)
   })
 }
+
+export async function getFavoriteSlugs() {
+  const results = await db.query.favorites.findMany({
+    columns: {
+      slug: true
+    }
+  })
+
+  return results.map(result => result.slug)
+}
