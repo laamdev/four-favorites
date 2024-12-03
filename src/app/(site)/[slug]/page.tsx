@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { currentUser } from '@clerk/nextjs/server'
+import { auth } from '@clerk/nextjs/server'
 
 import { MovieCarousel } from '@/components/favorites/movie-carousel'
 import { PageTitle } from '@/components/globals/page-title'
@@ -30,9 +30,9 @@ export async function generateMetadata(
   const params = await props.params
   const { slug } = params
 
-  const user = await currentUser()
+  const { userId } = await auth()
 
-  const favorite = await getFavorite(slug, user?.id!)
+  const favorite = await getFavorite(slug, userId!)
 
   if (!favorite) {
     return notFound()
@@ -46,9 +46,9 @@ export async function generateMetadata(
 export default async function FavoritesPage({ params }: FavoritesPageProps) {
   const { slug } = await params
 
-  const user = await currentUser()
+  const { userId } = await auth()
 
-  const favorite = await getFavorite(slug, user?.id!)
+  const favorite = await getFavorite(slug, userId!)
 
   if (!favorite) {
     return notFound()
@@ -67,7 +67,7 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
 
         <LikeButton
           favoriteId={favorite.id}
-          userId={user?.id!}
+          userId={userId!}
           likedByUser={favorite.likedByUser}
           likes={Number(favorite.likes)}
         />

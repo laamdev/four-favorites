@@ -11,6 +11,7 @@ import { ShareButton } from '@/components/user/share-button'
 
 import { getUserLikedFavorites, getUserMovies } from '@/db/queries'
 import { getFormattedYear } from '@/lib/utils'
+import { ItemCard } from '@/components/globals/item-card'
 
 export async function generateMetadata() {
   const user = await currentUser()
@@ -28,7 +29,7 @@ export default async function ProfilePage() {
   const userMovies = await getUserMovies(user.id)
 
   const userLikedFavoriteLists = await getUserLikedFavorites(user.id)
-
+  console.log(userLikedFavoriteLists)
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
       <div className='flex items-end justify-between gap-x-2'>
@@ -94,26 +95,20 @@ export default async function ProfilePage() {
             </EmptyState>
           </div>
         ) : (
-          <ul className='mt-4 grid grid-cols-5 gap-4 sm:mt-8'>
-            {userLikedFavoriteLists.map(favoriteList => (
-              <li key={favoriteList.favorite.id}>
-                <Link href={favoriteList.favorite.slug}>
-                  <div className='group relative aspect-[2/3] overflow-hidden rounded'>
-                    <Image
-                      src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2${favoriteList.favorite.artist?.headshotUrl}`}
-                      alt={favoriteList.favorite.name}
-                      fill
-                      className='tw-gradient tw-animation relative rounded object-cover object-center group-hover:scale-105'
-                    />
-                    <div className='tw-animation absolute inset-0 z-10 bg-black opacity-30 group-hover:opacity-0' />
-                    <h2 className='absolute bottom-0 left-0 z-20 rounded-tr bg-[#b6995d]/75 px-3 py-2 text-sm font-bold text-primary-foreground backdrop-blur-sm'>
-                      {favoriteList.favorite.name}
-                    </h2>
-                  </div>
-                </Link>
-              </li>
+          <div className='mt-4 grid grid-cols-5 gap-4 sm:mt-8'>
+            {userLikedFavoriteLists.map(({ favorite }) => (
+              <ItemCard
+                key={favorite.id}
+                slug={favorite.slug}
+                heading={favorite.name}
+                image={
+                  favorite.artist?.headshotUrl
+                    ? `https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${favorite.artist.headshotUrl}`
+                    : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+                }
+              />
             ))}
-          </ul>
+          </div>
         )}
       </section>
     </div>

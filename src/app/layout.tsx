@@ -2,14 +2,12 @@ import '@/app/globals.css'
 
 import { ReactNode } from 'react'
 import { Metadata } from 'next'
-import Link from 'next/link'
 import localFont from 'next/font/local'
 import { ClerkProvider } from '@clerk/nextjs'
-import { FilmReel } from '@phosphor-icons/react/dist/ssr'
 
-import { Menu } from '@/components/nav/menu'
 import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/navigation/footer'
+import { Header } from '@/components/navigation/header'
 
 import { cn } from '@/lib/utils'
 import { SITE } from '@/utils/constants'
@@ -162,21 +160,13 @@ export default function Layout({ children }: { children: ReactNode }) {
     <ClerkProvider>
       <html
         className={cn(
-          'dark container font-sans',
+          'dark font-sans',
           neueMontreal.variable,
           grafier.variable
         )}
       >
         <body>
-          <div className='absolute inset-x-0 top-0 flex items-center justify-between p-4 sm:px-8'>
-            <Link href='/'>
-              <FilmReel
-                weight='fill'
-                className='tw-animation size-7 hover:text-primary'
-              />
-            </Link>
-            <Menu />
-          </div>
+          <Header />
           <main>{children}</main>
 
           <Toaster />
