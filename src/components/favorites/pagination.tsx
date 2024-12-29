@@ -1,5 +1,7 @@
 'use client'
 
+import { usePathname, useSearchParams } from 'next/navigation'
+
 import {
   Pagination as PaginationNav,
   PaginationContent,
@@ -9,8 +11,8 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
+
 import { cn } from '@/lib/utils'
-import { usePathname, useSearchParams } from 'next/navigation'
 
 export interface PaginationProps {
   totalPages: number
@@ -24,14 +26,20 @@ export const Pagination = ({
   totalPagesToDisplay = 5,
   totalDocs
 }: PaginationProps) => {
+  const itemsPerPage = 10
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const currentPage = Number(searchParams.get('page')) || 1
-  const startPost = (currentPage - 1) * 10 + 1
-  const endPost = Math.min(currentPage * 10, totalDocs)
+
+  const currentPage = Math.min(
+    Math.max(1, Number(searchParams.get('page')) || 1),
+    totalPages
+  )
+
+  const startPost = Math.min((currentPage - 1) * itemsPerPage + 1, totalDocs)
+  const endPost = Math.min(currentPage * itemsPerPage, totalDocs)
 
   const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams.toString())
     params.set('page', pageNumber.toString())
     return `${pathname}?${params.toString()}`
   }

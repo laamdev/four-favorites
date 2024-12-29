@@ -25,6 +25,8 @@ export async function getFavorites({
   query,
   page
 }: GetFavoritesProps) {
+  const itemsPerPage = 10
+
   const orderBy =
     sort === 'name'
       ? [asc(favorites.name)]
@@ -50,24 +52,14 @@ export async function getFavorites({
             .where(
               and(
                 eq(artists.favoriteId, favorites.id),
-                eq(
-                  artists.role,
-                  filter as
-                    | 'actor'
-                    | 'director'
-                    | 'producer'
-                    | 'writer'
-                    | 'composer'
-                    | 'singer'
-                    | 'musician'
-                )
+                eq(artists.role, filter as string)
               )
             )
         )
       : undefined
   )
 
-  const [results, totalCount] = await Promise.all([
+  const [results, [{ count: totalCount }]] = await Promise.all([
     db.query.favorites.findMany({
       where: whereClause,
       with: {
@@ -78,16 +70,16 @@ export async function getFavorites({
           }
         }
       },
-      limit: 10,
-      offset: page !== undefined ? (page - 1) * 10 : 0,
+      limit: itemsPerPage,
+      offset: (page - 1) * itemsPerPage,
       orderBy: orderBy
     }),
     db
-      .select({ count: count() })
+      .select({
+        count: sql<number>`count(DISTINCT ${favorites.id})`
+      })
       .from(favorites)
       .where(whereClause)
-      .execute()
-      .then(result => result[0].count)
   ])
 
   return {

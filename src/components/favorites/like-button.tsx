@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Heart } from '@phosphor-icons/react/dist/ssr'
+
 import { likeFourFavoritesAction } from '@/app/_actions'
 import { cn } from '@/lib/utils'
 
@@ -59,7 +60,7 @@ export const LikeButton = ({
     >
       <Heart
         weight='fill'
-        className={cn('tw-animation size-8 group-hover:fill-white', {
+        className={cn('tw-animation size-6 group-hover:fill-white sm:size-8', {
           'fill-stone-300': !isLiked,
           'fill-red-600': isLiked
         })}

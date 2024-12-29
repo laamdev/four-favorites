@@ -63,7 +63,14 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
       </Badge>
 
       <div className='flex items-end justify-between'>
-        <PageTitle className='mt-4 sm:mt-2'>{favorite.name}</PageTitle>
+        <div className='mt-4 flex flex-col gap-y-2 sm:mt-2'>
+          <PageTitle>
+            {favorite.name}
+            <span className='ml-2 font-sans text-xs font-medium uppercase tracking-wider text-zinc-400 sm:text-sm'>
+              {favorite.artist?.role}
+            </span>
+          </PageTitle>
+        </div>
 
         <LikeButton
           favoriteId={favorite.id}
@@ -75,7 +82,7 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
 
       <div className='mt-4 sm:mt-8'>
         {favorite.moviesToFavorites && favorite.moviesToFavorites.length > 0 ? (
-          <div>
+          <div className='px-8 sm:px-0'>
             <MovieCarousel movies={favorite.moviesToFavorites} />
           </div>
         ) : (

@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/carousel'
 import { ItemCard } from '@/components/globals/item-card'
 
-import { getFormattedYear } from '@/lib/utils'
+import { cn, getFormattedYear } from '@/lib/utils'
 import { MoviesToFavorites } from '@/types'
 
 interface MovieCarouselProps {
@@ -40,12 +40,18 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      {movies.length > 4 && (
+
+      <div className={cn('', movies.length <= 4 && 'sm:hidden')}>
+        <CarouselPrevious />
+        <CarouselNext />
+      </div>
+
+      {/* {movies.length > 4 && (
         <>
           <CarouselPrevious />
           <CarouselNext />
         </>
-      )}
+      )} */}
     </Carousel>
   )
 }

@@ -26,6 +26,8 @@ export const metadata: Metadata = {
 export default async function FourFavoritesPage({
   searchParams
 }: FourFavoritesPageProps) {
+  const itemsPerPage = 10
+
   const { view, filter, sort, query, page } = await searchParams
 
   const currentPage = page ? parseInt(page as string) : 1
@@ -42,8 +44,6 @@ export default async function FourFavoritesPage({
   }
 
   const lastUpdated = await getMostRecentFavorite()
-
-  const itemsPerPage = 10
 
   const totalPages = Math.ceil(totalCount / itemsPerPage)
 

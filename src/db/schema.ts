@@ -22,7 +22,8 @@ export const artistsRolesEnum = pgEnum('artists_roles_enum', [
   'composer',
   'costume',
   'singer',
-  'musician'
+  'musician',
+  'cinematographer'
 ])
 
 export const favoritesCategoriesEnum = pgEnum('favorites_categories', [
