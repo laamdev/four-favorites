@@ -45,6 +45,8 @@ export default async function FourFavoritesPage({
 
   const lastUpdated = await getMostRecentFavorite()
 
+  console.log(JSON.stringify(lastUpdated, null, 2))
+
   const totalPages = Math.ceil(totalCount / itemsPerPage)
 
   return (
