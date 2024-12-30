@@ -1,6 +1,7 @@
 'use server'
 
 import { and, desc, eq, asc, like, sql, exists, count } from 'drizzle-orm'
+import { artistsRolesEnum } from '@/db/schema'
 
 import { db } from '@/db'
 import {
@@ -52,7 +53,10 @@ export async function getFavorites({
             .where(
               and(
                 eq(artists.favoriteId, favorites.id),
-                eq(artists.role, filter as string)
+                eq(
+                  artists.role,
+                  filter as (typeof artistsRolesEnum.enumValues)[number]
+                )
               )
             )
         )
@@ -71,7 +75,7 @@ export async function getFavorites({
         }
       },
       limit: itemsPerPage,
-      offset: (page - 1) * itemsPerPage,
+      offset: ((page ?? 1) - 1) * itemsPerPage,
       orderBy: orderBy
     }),
     db
