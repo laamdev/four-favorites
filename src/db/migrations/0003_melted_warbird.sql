@@ -1,0 +1,1 @@
+ALTER TABLE "favorites" ADD COLUMN "isFeatured" boolean DEFAULT false;

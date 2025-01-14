@@ -1,0 +1,1 @@
+ALTER TYPE "public"."artists_roles_enum" ADD VALUE 'critic';
