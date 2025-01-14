@@ -20,19 +20,17 @@ interface FavoritesPageProps {
 // //   return slugs.map(slug => ({ slug }))
 // // }
 
-// // export async function generateMetadata({
-// //   params
-// // }: FavoritesPageProps): Promise<Metadata> {
-// //   const { listSlug } = await params
-// //   const { userId } = await auth()
+export async function generateMetadata({
+  params
+}: FavoritesPageProps): Promise<Metadata> {
+  const { listSlug } = await params
 
-// //   console.log(userId, 'xxxxxxxxxx')
-// //   const favorite = await getFavorite(listSlug, userId!)
+  const favorite = await getFavorite(listSlug)
 
-// //   if (!favorite) return notFound()
+  if (!favorite) return notFound()
 
-// //   return { title: favorite.name }
-// // }
+  return { title: favorite.name }
+}
 
 export default async function FavoritesPage({ params }: FavoritesPageProps) {
   const { listSlug } = await params
