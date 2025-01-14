@@ -12,7 +12,7 @@ import { getFavorite, getFavoritesSlugs } from '@/db/queries'
 import { getFormattedDate } from '@/lib/utils'
 
 interface FavoritesPageProps {
-  params: Promise<{ movieSlug: string }>
+  params: Promise<{ listSlug: string }>
 }
 
 export async function generateStaticParams() {
@@ -23,9 +23,9 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   props: FavoritesPageProps
 ): Promise<Metadata> {
-  const { movieSlug } = await props.params
+  const { listSlug } = await props.params
   const { userId } = await auth()
-  const favorite = await getFavorite(movieSlug, userId!)
+  const favorite = await getFavorite(listSlug, userId!)
 
   if (!favorite) return notFound()
 
@@ -33,9 +33,9 @@ export async function generateMetadata(
 }
 
 export default async function FavoritesPage({ params }: FavoritesPageProps) {
-  const { movieSlug } = await params
+  const { listSlug } = await params
   const { userId } = await auth()
-  const favorite = await getFavorite(movieSlug, userId!)
+  const favorite = await getFavorite(listSlug, userId!)
 
   if (!favorite) return notFound()
 

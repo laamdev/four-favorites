@@ -34,7 +34,7 @@ export const FavoritesGrid = async ({
           return (
             <ItemCard
               key={favorite.id}
-              slug={favorite.slug}
+              slug={`/lists/${favorite.slug}`}
               heading={favorite.name}
               image={
                 favorite.artistsToFavorites?.[0]?.artist?.headshotUrl?.includes(

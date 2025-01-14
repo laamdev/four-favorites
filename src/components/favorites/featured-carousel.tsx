@@ -53,7 +53,7 @@ export function FeaturedCarousel({
               className='basis-1/2 pl-4 md:basis-1/2 lg:basis-1/4'
             >
               <ItemCard
-                slug={`/${featuredFavorite.slug}`}
+                slug={`/lists/${featuredFavorite.slug}`}
                 heading={featuredFavorite.name}
                 subheading={featuredFavorite.artistsToFavorites[0]?.artist.name}
                 image={
