@@ -5,31 +5,33 @@ import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 interface FitlersRadioProps {
-  filter: string
+  role: string
 }
 
-export const FiltersRadio = ({ filter }: FitlersRadioProps) => {
+export const FiltersRadio = ({ role }: FitlersRadioProps) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
 
-  const handleFilter = (filter: string) => {
+  const currentRole = searchParams.get('role') || 'all'
+
+  const handleFilter = (role: string) => {
     const params = new URLSearchParams(searchParams)
-    if (filter) {
-      if (filter === 'all') {
-        params.delete('filter')
+    if (role) {
+      if (role === 'all') {
+        params.delete('role')
       } else {
-        params.set('filter', filter)
+        params.set('role', role)
       }
       params.set('page', '1')
     } else {
-      params.delete('filter')
+      params.delete('role')
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
   return (
-    <RadioGroup defaultValue={filter ?? 'all'} onValueChange={handleFilter}>
+    <RadioGroup defaultValue={currentRole} onValueChange={handleFilter}>
       <div className='flex items-center space-x-2'>
         <RadioGroupItem value='all' id='all' />
         <Label htmlFor='actor'>{`All`}</Label>

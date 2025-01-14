@@ -4,14 +4,21 @@ import { Label } from '@/components/ui/label'
 import { Search } from '@/components/favorites/search'
 import { FiltersRadio } from '@/components/favorites/filters-radio'
 import { SortSelect } from '@/components/favorites/sort-select'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import {
+  SheetDescription,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@/components/ui/sheet'
 
 interface FiltersSliderProps {
   sort: string
-  filter: string
+  role: string
 }
 
-export const FiltersSlider = ({ sort, filter }: FiltersSliderProps) => {
+export const FiltersSlider = ({ sort, role }: FiltersSliderProps) => {
   return (
     <Sheet>
       <SheetTrigger className='flex items-center gap-x-2'>
@@ -19,10 +26,10 @@ export const FiltersSlider = ({ sort, filter }: FiltersSliderProps) => {
         <span className='text-sm'>Show filters</span>
       </SheetTrigger>
       <SheetContent side='right'>
-        {/* <SheetHeader>
-          <SheetTitle>Filters & Sort</SheetTitle>
+        <SheetHeader>
+          <SheetTitle>Lists Filters</SheetTitle>
           <SheetDescription>{`Filter, search, and sort the Four Favorite lists of your favorite artists.`}</SheetDescription>
-        </SheetHeader> */}
+        </SheetHeader>
 
         <div className='mt-8 flex max-h-[calc(100vh-8rem)] flex-col gap-y-8 overflow-y-auto'>
           <div className='flex flex-col gap-y-3'>
@@ -37,7 +44,7 @@ export const FiltersSlider = ({ sort, filter }: FiltersSliderProps) => {
 
           <div className='flex flex-col gap-y-3'>
             <Label className='text-xs uppercase tracking-wider text-zinc-300'>{`Role`}</Label>
-            <FiltersRadio filter={filter as string} />
+            <FiltersRadio role={role as string} />
           </div>
         </div>
       </SheetContent>
