@@ -16,7 +16,7 @@ import { getMovie, getMoviesSlugs } from '@/db/queries'
 import { movieGenres } from '@/lib/data/movie-genres'
 
 interface MoviePageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ movieSlug: string }>
 }
 
 export async function generateStaticParams() {
@@ -28,8 +28,8 @@ export async function generateStaticParams() {
 }
 
 export const generateMetadata = async ({ params }: MoviePageProps) => {
-  const { slug } = await params
-  const movie = await getMovie(slug)
+  const { movieSlug } = await params
+  const movie = await getMovie(movieSlug)
 
   if (!movie) {
     return {
@@ -42,13 +42,10 @@ export const generateMetadata = async ({ params }: MoviePageProps) => {
   }
 }
 
-export default async function MoviePage(props: {
-  params: Promise<{ slug: string }>
-}) {
-  const params = await props.params
-  const { slug } = params
+export default async function MoviePage({ params }: MoviePageProps) {
+  const { movieSlug } = await params
 
-  const movie = await getMovie(slug)
+  const movie = await getMovie(movieSlug)
 
   if (!movie) {
     return notFound()
@@ -101,8 +98,6 @@ export default async function MoviePage(props: {
               )
             })}
           </div>
-
-          {/* <PageSummary>{movie.overview}</PageSummary> */}
         </div>
       </div>
       <div className='mt-4 grid gap-4 sm:mt-8 sm:grid-cols-3'>
@@ -142,7 +137,7 @@ export default async function MoviePage(props: {
             {movie.favorites.map(favorite => (
               <ItemCard
                 key={favorite.id}
-                slug={`/${favorite.slug}`}
+                slug={`/lists/${favorite.slug}`}
                 heading={favorite.name}
                 image={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${favorite.artists[0]?.headshotUrl}`}
               />
