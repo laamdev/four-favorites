@@ -19,13 +19,13 @@ interface MoviePageProps {
   params: Promise<{ movieSlug: string }>
 }
 
-export async function generateStaticParams() {
-  const slugs = await getMoviesSlugs()
+// // export async function generateStaticParams() {
+// //   const slugs = await getMoviesSlugs()
 
-  return slugs.map(slug => ({
-    slug: slug
-  }))
-}
+// //   return slugs.map(slug => ({
+// //     slug: slug
+// //   }))
+// // }
 
 export const generateMetadata = async ({ params }: MoviePageProps) => {
   const { movieSlug } = await params
