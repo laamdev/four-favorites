@@ -15,27 +15,29 @@ interface FavoritesPageProps {
   params: Promise<{ listSlug: string }>
 }
 
-export async function generateStaticParams() {
-  const slugs = await getFavoritesSlugs()
-  return slugs.map(slug => ({ slug }))
-}
+// // export async function generateStaticParams() {
+// //   const slugs = await getFavoritesSlugs()
+// //   return slugs.map(slug => ({ slug }))
+// // }
 
-export async function generateMetadata({
-  params
-}: FavoritesPageProps): Promise<Metadata> {
-  const { listSlug } = await params
-  const { userId } = await auth()
-  const favorite = await getFavorite(listSlug, userId!)
+// // export async function generateMetadata({
+// //   params
+// // }: FavoritesPageProps): Promise<Metadata> {
+// //   const { listSlug } = await params
+// //   const { userId } = await auth()
 
-  if (!favorite) return notFound()
+// //   console.log(userId, 'xxxxxxxxxx')
+// //   const favorite = await getFavorite(listSlug, userId!)
 
-  return { title: favorite.name }
-}
+// //   if (!favorite) return notFound()
+
+// //   return { title: favorite.name }
+// // }
 
 export default async function FavoritesPage({ params }: FavoritesPageProps) {
   const { listSlug } = await params
   const { userId } = await auth()
-  const favorite = await getFavorite(listSlug, userId!)
+  const favorite = await getFavorite(listSlug)
 
   if (!favorite) return notFound()
 

@@ -12,6 +12,7 @@ import {
   artistsRolesEnum
 } from '@/db/schema'
 import { movieGenres } from '@/lib/data/movie-genres'
+import { auth } from '@clerk/nextjs/server'
 
 export interface DecadeCount {
   decade: number
@@ -167,7 +168,9 @@ export async function getFavorites({
   }
 }
 
-export async function getFavorite(slug: string, userId: string) {
+export async function getFavorite(slug: string) {
+  const { userId } = await auth()
+
   const favorite = await db.query.favorites.findFirst({
     where: eq(favorites.slug, slug),
     with: {
@@ -196,7 +199,7 @@ export async function getFavorite(slug: string, userId: string) {
 
   const likedByUser = await db.query.userLikes.findFirst({
     where: and(
-      eq(userLikes.userId, userId),
+      eq(userLikes.userId, userId!),
       eq(userLikes.favoriteId, favorite.id)
     )
   })
