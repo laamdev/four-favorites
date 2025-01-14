@@ -8,10 +8,10 @@ import { UserMovieActionButtons } from '@/components/user/user-movie-action-butt
 import { SectionHeading } from '@/components/globals/section-heading'
 import { EmptyState } from '@/components/globals/empty-state'
 import { ShareButton } from '@/components/user/share-button'
+import { ItemCard } from '@/components/globals/item-card'
 
 import { getUserLikedFavorites, getUserMovies } from '@/db/queries'
 import { getFormattedYear } from '@/lib/utils'
-import { ItemCard } from '@/components/globals/item-card'
 
 export async function generateMetadata() {
   const user = await currentUser()

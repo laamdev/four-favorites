@@ -13,14 +13,17 @@ export async function searchMovies(query: string) {
       `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`,
       {
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_READ_TOKEN}`,
+          Authorization: `Bearer ${process.env.TMDB_READ_TOKEN}`,
           Accept: 'application/json'
         }
       }
     )
 
     if (!res.ok) {
-      throw new Error('Failed to fetch movies')
+      const errorData = await res.json().catch(() => ({}))
+      throw new Error(
+        `Failed to fetch movies: ${res.status} ${JSON.stringify(errorData)}`
+      )
     }
 
     const data: MovieSearchResponse = await res.json()

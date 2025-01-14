@@ -30,7 +30,7 @@ export default async function ListsPage({
         </PageTitle>
         <PageSummary size='lg'>
           <div className='flex flex-wrap items-baseline gap-x-1 text-base sm:text-lg'>
-            <p>{`Discover curated movie lists from the entertainment industry's finest. From actors and directors to composers and writers, explore their Four Favorites picks.`}</p>
+            <p>{`Discover curated movie lists from the entertainment industry's finest. From actors and directors to composers and writers, explore their Letterboxd's Four Favorites picks.`}</p>
           </div>
         </PageSummary>
       </div>
