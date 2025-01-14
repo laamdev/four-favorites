@@ -20,10 +20,10 @@ export async function generateStaticParams() {
   return slugs.map(slug => ({ slug }))
 }
 
-export async function generateMetadata(
-  props: FavoritesPageProps
-): Promise<Metadata> {
-  const { listSlug } = await props.params
+export async function generateMetadata({
+  params
+}: FavoritesPageProps): Promise<Metadata> {
+  const { listSlug } = await params
   const { userId } = await auth()
   const favorite = await getFavorite(listSlug, userId!)
 
