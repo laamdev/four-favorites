@@ -24,8 +24,9 @@ export async function generateMetadata({
   params
 }: FavoritesPageProps): Promise<Metadata> {
   const { listSlug } = await params
+  const { userId } = await auth()
 
-  const favorite = await getFavorite(listSlug)
+  const favorite = await getFavorite(listSlug, userId!)
 
   if (!favorite) return notFound()
 
@@ -35,7 +36,7 @@ export async function generateMetadata({
 export default async function FavoritesPage({ params }: FavoritesPageProps) {
   const { listSlug } = await params
   const { userId } = await auth()
-  const favorite = await getFavorite(listSlug)
+  const favorite = await getFavorite(listSlug, userId!)
 
   if (!favorite) return notFound()
 
