@@ -12,7 +12,6 @@ import {
   artistsRolesEnum
 } from '@/db/schema'
 import { movieGenres } from '@/lib/data/movie-genres'
-import { auth } from '@clerk/nextjs/server'
 
 export interface DecadeCount {
   decade: number
@@ -168,9 +167,7 @@ export async function getFavorites({
   }
 }
 
-export async function getFavorite(slug: string) {
-  const { userId } = await auth()
-
+export async function getFavorite(slug: string, userId: string) {
   const favorite = await db.query.favorites.findFirst({
     where: eq(favorites.slug, slug),
     with: {
@@ -199,7 +196,7 @@ export async function getFavorite(slug: string) {
 
   const likedByUser = await db.query.userLikes.findFirst({
     where: and(
-      eq(userLikes.userId, userId!),
+      eq(userLikes.userId, userId),
       eq(userLikes.favoriteId, favorite.id)
     )
   })
@@ -612,7 +609,9 @@ export async function getDirector(
   }
 }
 
-export async function getAllDirectors(): Promise<DirectorWithSlug[]> {
+export async function getAllDirectors({ offset = 0, limit = 20 } = {}): Promise<
+  DirectorWithSlug[]
+> {
   const results = await db
     .select({
       director: movies.director,
@@ -635,7 +634,7 @@ export async function getAllDirectors(): Promise<DirectorWithSlug[]> {
     })
   })
 
-  // Convert to array and sort by movie count
+  // Convert to array, sort by movie count, and apply pagination
   return Array.from(directorsMap.entries())
     .map(([name, count]) => ({
       name,
@@ -643,6 +642,7 @@ export async function getAllDirectors(): Promise<DirectorWithSlug[]> {
       movieCount: count
     }))
     .sort((a, b) => b.movieCount - a.movieCount)
+    .slice(offset, offset + limit)
 }
 
 export async function getAllGenres(): Promise<GenreWithCount[]> {

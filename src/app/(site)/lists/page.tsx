@@ -7,7 +7,6 @@ import { FavoritesGrid } from '@/components/favorites/favorites-grid'
 import { GridSkeleton } from '@/components/globals/grid-skeleton'
 
 import { getMostRecentFavorite } from '@/db/queries'
-import { getFormattedDate } from '@/lib/utils'
 
 interface FourFavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -20,13 +19,11 @@ export default async function ListsPage({
 
   const currentPage = page ? parseInt(page as string) : 1
 
-  const lastUpdated = await getMostRecentFavorite()
-
   return (
     <div className='mb-12 mt-24 sm:mt-28'>
       <div>
         <PageTitle size='lg' className='flex flex-col text-5xl md:text-7xl'>
-          {`${role ? `${role}'s Lists` : 'All Lists'}`}
+          {`${role ? `${role}'s Lists` : 'Lists'}`}
         </PageTitle>
         <PageSummary size='lg'>
           <div className='flex flex-wrap items-baseline gap-x-1 text-base sm:text-lg'>
