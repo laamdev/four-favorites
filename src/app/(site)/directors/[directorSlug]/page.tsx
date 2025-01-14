@@ -14,15 +14,15 @@ interface DirectorPageProps {
   }>
 }
 
-// // export async function generateStaticParams() {
-// //   const directors = await getAllDirectors()
-// //   return directors.map(director => ({ slug: director.slug }))
-// // }
+export async function generateStaticParams() {
+  const directors = await getAllDirectors()
+  return directors.map(director => ({ directorSlug: director.slug }))
+}
 
-export async function generateMetadata(
-  props: DirectorPageProps
-): Promise<Metadata> {
-  const { directorSlug } = await props.params
+export async function generateMetadata({
+  params
+}: DirectorPageProps): Promise<Metadata> {
+  const { directorSlug } = await params
   const director = await getDirector(directorSlug)
 
   if (!director) return notFound()
