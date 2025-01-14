@@ -15,10 +15,10 @@ interface FavoritesPageProps {
   params: Promise<{ listSlug: string }>
 }
 
-// // export async function generateStaticParams() {
-// //   const slugs = await getFavoritesSlugs()
-// //   return slugs.map(slug => ({ slug }))
-// // }
+export async function generateStaticParams() {
+  const slugs = await getFavoritesSlugs()
+  return slugs.map(slug => ({ listSlug: slug }))
+}
 
 export async function generateMetadata({
   params
