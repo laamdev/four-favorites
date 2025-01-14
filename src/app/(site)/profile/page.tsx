@@ -98,7 +98,7 @@ export default async function ProfilePage() {
             {userLikedFavoriteLists.map(({ favorite }) => (
               <ItemCard
                 key={favorite.id}
-                slug={favorite.slug}
+                slug={`/lists/${favorite.slug}`}
                 heading={favorite.name}
                 image={
                   favorite.artistsToFavorites[0]?.artist?.headshotUrl
