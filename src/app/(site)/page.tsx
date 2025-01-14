@@ -74,7 +74,7 @@ export default async function FourFavoritesPage() {
               </p>
               <Button asChild size='lg' variant='outline' className='group'>
                 <a
-                  href='mailto:contact@fourfavorites.com'
+                  href='mailto:hello@laam.dev'
                   className='inline-flex items-center gap-x-2'
                 >
                   <EnvelopeSimple
