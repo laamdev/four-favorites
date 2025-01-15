@@ -9,9 +9,9 @@ import { SectionHeading } from '@/components/globals/section-heading'
 import { EmptyState } from '@/components/globals/empty-state'
 import { ShareButton } from '@/components/user/share-button'
 import { ItemCard } from '@/components/globals/item-card'
+import { PageSummary } from '@/components/globals/page-summary'
 
 import { getUserLikedFavorites, getUserMovies } from '@/db/queries'
-import { getFormattedYear } from '@/lib/utils'
 
 export async function generateMetadata() {
   const user = await currentUser()
@@ -30,18 +30,24 @@ export default async function ProfilePage() {
 
   const userLikedFavoriteLists = await getUserLikedFavorites(user.id)
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
-      <div className='flex items-end justify-between gap-x-2'>
-        <PageTitle>My Four Favorites</PageTitle>
+    <div className='mb-12 mt-16 sm:mt-24'>
+      <div className='flex flex-col justify-between gap-y-4 sm:flex-row sm:items-end sm:gap-y-0'>
+        <div>
+          <PageTitle size='lg'>My Four Favorites</PageTitle>
+          <PageSummary size='lg'>
+            All directors featured in the Four Favorites lists.
+          </PageSummary>
+        </div>
         <ShareButton userId={user.id} />
       </div>
-      <div className='mt-6 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-4'>
+
+      <div className='mt-8 grid grid-cols-2 gap-4 sm:mt-12 sm:grid-cols-4'>
         {[0, 1, 2, 3].map(position => {
           const movie = userMovies.find(m => m.position === position + 1)
 
           return movie ? (
-            <div key={position}>
-              <div className='group relative aspect-[2/3] overflow-hidden rounded'>
+            <div key={position} className='group'>
+              <div className='tw-animation relative aspect-[2/3] overflow-hidden rounded border border-transparent group-hover:border-primary'>
                 <Image
                   src={`https://image.tmdb.org/t/p/w780${movie.movie.posterUrl}`}
                   alt={movie.movie.name}
@@ -56,14 +62,9 @@ export default async function ProfilePage() {
                   movieSlug={movie.movie.slug}
                 />
               </div>
-              <div className='mt-2 flex flex-col gap-y-1'>
-                <h2 className='text-sm font-bold text-white sm:text-base'>
-                  {`${movie.movie.name} `}
-                </h2>
-                <h3 className='text-sm text-zinc-300'>
-                  {movie.movie && getFormattedYear(movie.movie.releaseDate)}
-                </h3>
-              </div>
+              <h2 className='mt-2 text-lg font-bold'>
+                {`${movie.movie.name} `}
+              </h2>
             </div>
           ) : (
             <Link
@@ -77,7 +78,7 @@ export default async function ProfilePage() {
         })}
       </div>
 
-      <section className='mt-24 sm:mt-28'>
+      <section className='mt-8 sm:mt-12'>
         <SectionHeading text='My liked lists' />
 
         {userLikedFavoriteLists.length === 0 ? (

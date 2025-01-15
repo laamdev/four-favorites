@@ -1,4 +1,3 @@
-import { Metadata } from 'next'
 import { currentUser } from '@clerk/nextjs/server'
 import { notFound } from 'next/navigation'
 
@@ -36,10 +35,16 @@ export default async function UserPage({ params }: UserPageProps) {
   }
 
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
+    <div className='mb-12 mt-16 sm:mt-24'>
       <div>
-        <PageTitle>{user.fullName}</PageTitle>
-        <PageSummary>The user's Four Favorites list.</PageSummary>
+        <PageTitle className='flex flex-col'>
+          <span>{`${user.fullName}'s`}</span>
+          <span>Four Favorites</span>
+        </PageTitle>
+        <PageSummary>
+          A curated collection of four all-time favorite films, personally
+          selected by {user.fullName}.
+        </PageSummary>
       </div>
 
       {favorites.length === 0 ? (
@@ -49,7 +54,7 @@ export default async function UserPage({ params }: UserPageProps) {
           {favorites.map(favorite => (
             <ItemCard
               key={favorite.movieId}
-              slug={favorite.movie.slug}
+              slug={`/movies/${favorite.movie.slug}`}
               heading={favorite.movie.name}
               subheading={getFormattedYear(favorite.movie.releaseDate)}
               image={`https://image.tmdb.org/t/p/w780${favorite.movie.posterUrl}`}

@@ -73,7 +73,7 @@ export const DirectorBarChart = ({
   } satisfies ChartConfig
 
   return (
-    <Card className='flex flex-col'>
+    <Card className='flex h-fit flex-col'>
       <CardHeader className='items-center pb-0'>
         <CardTitle>Top 20 Directors</CardTitle>
         <CardDescription>

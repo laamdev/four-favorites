@@ -44,24 +44,17 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
     : null
 
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
+    <div className='mb-12 mt-16 sm:mt-24'>
       <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
         <div>
           <PageTitle size='lg'>
-            {genreName ? `${genreName} Movies` : 'Movies'}
+            {genreName ? `${genreName} Movies` : 'All Movies'}
           </PageTitle>
 
           <PageSummary size='lg'>
-            <span>{`A list of all the movies present in a `}</span>
-            <a
-              href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='tw-animation font-medium text-white underline hover:text-primary'
-            >
-              {`Four Favorites`}
-            </a>
-            <span>{` celebrity pick.`}</span>
+            {genreName
+              ? `A list of the unique ${genreName.toLowerCase()} movies present in the Four Favorites celebrity lists.`
+              : `A list of all the unique movies present in the Four Favorites celebrity lists.`}
           </PageSummary>
         </div>
 
@@ -70,7 +63,7 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
         </div>
       </div>
 
-      <div className='col-span-4 mt-4 sm:mt-8'>
+      <div className='col-span-4 mt-8 sm:mt-12'>
         <div>
           <Suspense fallback={<GridSkeleton />}>
             <MoviesGrid

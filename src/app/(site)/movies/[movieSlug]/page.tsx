@@ -59,7 +59,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
     }))
 
     return (
-      <div className='mb-12 mt-24 sm:mt-28'>
+      <div className='mb-12 mt-16 sm:mt-24'>
         <div>
           <div className='flex flex-col gap-y-2 sm:gap-y-4'>
             <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between'>
@@ -134,7 +134,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
           </div>
         </div>
 
-        <div className='mt-24 sm:mt-28'>
+        <div className='mt-16 sm:mt-24'>
           <SectionHeading text='Picked by' />
           {movie.favorites.length > 0 ? (
             <div className='mt-4 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-5'>

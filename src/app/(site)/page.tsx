@@ -17,7 +17,7 @@ export default async function FourFavoritesPage() {
   ])
 
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
+    <div className='mb-12 mt-16 sm:mt-24'>
       <div className='relative'>
         <div className='relative mx-auto max-w-[1400px] px-4'>
           <div className='max-w-2xl'>
@@ -45,7 +45,7 @@ export default async function FourFavoritesPage() {
       </div>
 
       {featuredFavorites.length > 0 && (
-        <div className='mt-24 sm:mt-28'>
+        <div className='mt-16 sm:mt-24'>
           <SectionHeading text='Featured Lists' />
           <FeaturedCarousel featuredFavorites={featuredFavorites} />
           <div className='mt-6 sm:mt-12'>
@@ -58,7 +58,7 @@ export default async function FourFavoritesPage() {
         </div>
       )}
 
-      <div className='mt-24 sm:mt-28'>
+      <div className='mt-16 sm:mt-24'>
         <div className='relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-8 shadow-lg backdrop-blur-sm sm:p-12'>
           <div className='bg-grid-white/5 absolute inset-0' />
           <div className='relative'>

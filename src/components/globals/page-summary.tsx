@@ -16,7 +16,7 @@ export const PageSummary = ({
   return (
     <div
       className={cn(
-        'mt-2 max-w-2xl text-sm text-zinc-300 sm:mt-4 sm:text-base',
+        'mt-2 max-w-2xl text-sm text-zinc-400 sm:mt-4 sm:text-base',
         size === 'lg' ? 'text-base md:text-lg' : 'text-sm md:text-base',
 
         className

@@ -47,7 +47,7 @@ export function DecadeRadialChart({ data }: DecadeRadialChartProps) {
   const totalMovies = data.reduce((sum, item) => sum + item.count, 0)
 
   return (
-    <Card className='flex flex-col'>
+    <Card className='flex h-fit flex-col'>
       <CardHeader className='items-center pb-0'>
         <CardTitle>Movies by Decade</CardTitle>
         <CardDescription>Distribution of movies across decades</CardDescription>

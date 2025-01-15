@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import useSWRInfinite from 'swr/infinite'
-import { Loader2 } from 'lucide-react'
 
 import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
@@ -66,17 +65,15 @@ export default function DirectorsPage() {
   }, [isLoading, isReachingEnd, isLoadingMore, setSize, size])
 
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
-      <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
-        <div>
-          <PageTitle size='lg'>Directors</PageTitle>
-          <PageSummary size='lg'>
-            All directors featured in the Four Favorites lists.
-          </PageSummary>
-        </div>
+    <div className='mb-12 mt-16 sm:mt-24'>
+      <div>
+        <PageTitle size='lg'>Directors</PageTitle>
+        <PageSummary size='lg'>
+          All directors featured in the Four Favorites lists.
+        </PageSummary>
       </div>
 
-      <div className='mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+      <div className='mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {directors.map((director, index) => (
           <Link
             key={`${director.slug}-${index}`}
@@ -94,11 +91,10 @@ export default function DirectorsPage() {
         ))}
       </div>
 
-      <div ref={loadMoreRef} className='mt-8 flex justify-center'>
+      <div ref={loadMoreRef} className='mt-8 flex justify-center sm:mt-12'>
         {isLoadingMore && (
-          <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-            <Loader2 className='h-4 w-4 animate-spin' />
-            <span>Loading more directors...</span>
+          <div className='text-sm text-muted-foreground'>
+            Loading more directors...
           </div>
         )}
         {isReachingEnd && directors.length > 0 && (

@@ -161,17 +161,17 @@ export default function Layout({ children }: { children: ReactNode }) {
       <html
         suppressHydrationWarning
         className={cn(
-          'dark font-sans',
+          'dark overflow-x-hidden font-sans',
           neueMontreal.variable,
           grafier.variable
         )}
       >
-        <body>
+        <body className='overflow-x-hidden'>
           <Header />
 
           <main>{children}</main>
 
-          <Toaster />
+          <Toaster position='bottom-left' />
 
           <Footer />
         </body>

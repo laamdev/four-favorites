@@ -1,5 +1,6 @@
 import { ItemCard } from '@/components/globals/item-card'
 import { PaginationFavorites } from '@/components/favorites/pagination'
+import { FilmSlate } from '@phosphor-icons/react/dist/ssr'
 
 import { getFavorites } from '@/db/queries'
 
@@ -26,6 +27,20 @@ export const FavoritesGrid = async ({
   })
 
   const totalPages = Math.ceil(totalCount / favoritesPerPage)
+
+  if (favorites.length === 0) {
+    return (
+      <div className='flex min-h-[400px] flex-col items-center justify-center rounded-lg bg-card px-6 py-16 shadow-inner'>
+        <FilmSlate className='h-12 w-12 text-zinc-300' weight='thin' />
+        <h3 className='mt-4 text-2xl font-semibold'>No lists found</h3>
+        <p className='mt-2 max-w-sm text-center text-sm text-zinc-400'>
+          {query
+            ? 'Try adjusting your search terms or filters'
+            : 'No lists have been created yet'}
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div>

@@ -13,12 +13,7 @@ export const ShareButton = ({ userId }: { userId: string }) => {
   }
 
   return (
-    <Button
-      onClick={handleShare}
-      variant='outline'
-      size='sm'
-      className='gap-x-2'
-    >
+    <Button onClick={handleShare} variant='outline' className='gap-x-2'>
       <Share className='size-4' />
       <span>Share</span>
     </Button>

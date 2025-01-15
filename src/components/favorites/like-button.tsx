@@ -61,7 +61,7 @@ export const LikeButton = ({
       <Heart
         weight='fill'
         className={cn('tw-animation size-6 group-hover:fill-white sm:size-8', {
-          'fill-stone-300': !isLiked,
+          'fill-zinc-300': !isLiked,
           'fill-primary': isLiked
         })}
       />

@@ -16,8 +16,7 @@ export const PageTitle = ({
   return (
     <h1
       className={cn(
-        'max-w-5xl font-serif font-bold uppercase',
-        size === 'lg' ? 'text-5xl md:text-7xl' : 'text-2xl md:text-5xl',
+        'max-w-5xl break-words font-serif text-3xl font-bold uppercase sm:text-5xl',
         className
       )}
     >

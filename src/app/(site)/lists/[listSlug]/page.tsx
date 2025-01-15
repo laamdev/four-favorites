@@ -10,6 +10,8 @@ import { LikeButton } from '@/components/favorites/like-button'
 
 import { getFavorite, getFavoritesSlugs } from '@/db/queries'
 import { getFormattedDate } from '@/lib/utils'
+import { Badge, badgeVariants } from '@/components/ui/badge'
+import Link from 'next/link'
 
 interface FavoritesPageProps {
   params: Promise<{ listSlug: string }>
@@ -44,7 +46,7 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
   const primaryArtist = favorite.artistsToFavorites?.[0]?.artist
 
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
+    <div className='mb-12 mt-16 sm:mt-24'>
       <h2 className='text-xs font-medium uppercase tracking-widest text-primary sm:text-sm'>
         {favorite.category
           ? `${favorite.category} Favorites`
@@ -52,13 +54,17 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
       </h2>
 
       <div className='mt-2 flex items-end justify-between'>
-        <div className='flex flex-col gap-y-2'>
-          <PageTitle size='lg'>
-            {favorite.name}
-            <span className='ml-2 font-sans text-xs font-medium uppercase tracking-wider text-zinc-400 sm:text-sm'>
-              {primaryArtist?.role}
-            </span>
-          </PageTitle>
+        <div>
+          <PageTitle>{favorite.name}</PageTitle>
+          <Link
+            href={`/lists?role=${primaryArtist?.role}`}
+            className={badgeVariants({
+              variant: 'outline',
+              className: 'mt-2 capitalize sm:mt-4'
+            })}
+          >
+            {primaryArtist?.role}
+          </Link>
         </div>
 
         <LikeButton
@@ -71,9 +77,7 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
 
       <div className='mt-4 sm:mt-8'>
         {favorite.moviesToFavorites && favorite.moviesToFavorites.length > 0 ? (
-          <div className='px-8 sm:px-0'>
-            <MovieCarousel movies={favorite.moviesToFavorites} />
-          </div>
+          <MovieCarousel movies={favorite.moviesToFavorites} />
         ) : (
           <EmptyState>No movies found.</EmptyState>
         )}

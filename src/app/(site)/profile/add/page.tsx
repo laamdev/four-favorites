@@ -33,7 +33,7 @@ export default async function AddMoviePage({
   if (existingMovie) {
     // Optionally redirect to edit page or show message
     return (
-      <div className='mb-12 mt-24 sm:mt-28'>
+      <div className='mb-12 mt-16 sm:mt-24'>
         <PageTitle>Position #{position} Already Taken</PageTitle>
         <p>You already have {existingMovie.movie.name} in this position.</p>
       </div>
@@ -41,7 +41,7 @@ export default async function AddMoviePage({
   }
 
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
+    <div className='mb-12 mt-16 sm:mt-24'>
       <PageTitle>favorite #{Number(position)}</PageTitle>
 
       <div className='mt-4 sm:mt-8'>

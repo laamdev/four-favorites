@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Carousel,
   CarouselContent,
@@ -41,17 +43,15 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
         ))}
       </CarouselContent>
 
-      <div className={cn('', movies.length <= 4 && 'sm:hidden')}>
-        <CarouselPrevious />
-        <CarouselNext />
+      <div
+        className={cn(
+          'mt-4 flex justify-center gap-4 sm:mt-0 sm:block',
+          movies.length <= 4 && 'sm:hidden'
+        )}
+      >
+        <CarouselPrevious className='static translate-y-0 sm:absolute' />
+        <CarouselNext className='static translate-y-0 sm:absolute' />
       </div>
-
-      {/* {movies.length > 4 && (
-        <>
-          <CarouselPrevious />
-          <CarouselNext />
-        </>
-      )} */}
     </Carousel>
   )
 }

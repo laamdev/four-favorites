@@ -7,7 +7,7 @@ export default async function GenresPage() {
   const genres = await getAllGenres()
 
   return (
-    <div className='mb-12 mt-24 sm:mt-28'>
+    <div className='mb-12 mt-16 sm:mt-24'>
       <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
         <div>
           <PageTitle size='lg'>Genres</PageTitle>
@@ -17,7 +17,7 @@ export default async function GenresPage() {
         </div>
       </div>
 
-      <div className='mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+      <div className='mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {genres.map(genre => (
           <Link
             key={genre.id}
