@@ -1,6 +1,5 @@
 import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
-import { SectionHeading } from '@/components/globals/section-heading'
 import { DecadeRadialChart } from '@/components/charts/decade-radial-chart'
 import { DirectorBarChart } from '@/components/charts/director-bar-chart'
 
@@ -13,12 +12,12 @@ export default async function StatsPage() {
   ])
 
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-24'>
       <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
         <div>
-          <PageTitle size='lg'>{`Stats`}</PageTitle>
+          <PageTitle>{`Stats`}</PageTitle>
 
-          <PageSummary size='lg'>
+          <PageSummary>
             <span>{`Visualize stats of the `}</span>
             <a
               href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'

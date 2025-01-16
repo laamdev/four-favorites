@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
-    <footer className='pb-8 pt-24'>
-      <div className='tw-animation text-center text-xs text-zinc-400'>
+    <footer className='mt-16 py-4'>
+      <div className='tw-animation text-center text-[10px] text-zinc-400 sm:text-xs'>
         <span>{`Created by `}</span>
         <a
           href='https://www.laam.dev'
@@ -9,19 +9,18 @@ export const Footer = () => {
           rel='noopener noreferrer'
           className='tw-animation font-medium underline hover:text-primary'
         >
-          {`laam.dev`}
+          {`laam.dev.`}
         </a>
 
-        <span>{`. You can `}</span>
+        <span>{` If you like my work, `}</span>
         <a
           href='https://buymeacoffee.com/laamdev'
           target='_blank'
           rel='noopener noreferrer'
           className='tw-animation font-medium underline hover:text-primary'
         >
-          {`buy me a cofee`}
+          {`buy me a cofee!`}
         </a>
-        <span>{` if you like my work.`}</span>
       </div>
     </footer>
   )

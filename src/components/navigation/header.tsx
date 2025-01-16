@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { FilmReel } from '@phosphor-icons/react/dist/ssr'
 
 import { Menu } from '@/components/navigation/menu'
+import { ThemeToggle } from '@/components/globals/theme-toggle'
 
 export const Header = () => {
   return (
@@ -12,7 +13,10 @@ export const Header = () => {
           className='tw-animation size-7 hover:text-primary'
         />
       </Link>
-      <Menu />
+      <div className='flex items-center gap-x-4'>
+        <Menu />
+        <ThemeToggle />
+      </div>
     </div>
   )
 }

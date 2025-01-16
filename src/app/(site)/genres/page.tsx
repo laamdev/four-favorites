@@ -1,4 +1,5 @@
 import Link from 'next/link'
+
 import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
 import { getAllGenres } from '@/db/queries'
@@ -7,11 +8,11 @@ export default async function GenresPage() {
   const genres = await getAllGenres()
 
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-24'>
       <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
         <div>
-          <PageTitle size='lg'>Genres</PageTitle>
-          <PageSummary size='lg'>
+          <PageTitle>Genres</PageTitle>
+          <PageSummary>
             All movie genres featured in the Four Favorites lists.
           </PageSummary>
         </div>

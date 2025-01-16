@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { format, parseISO } from 'date-fns'
-import { LinkSimple } from '@phosphor-icons/react/dist/ssr'
 
 import { PageTitle } from '@/components/globals/page-title'
 import { StatCard } from '@/components/movies/stat-card'
@@ -10,7 +9,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { EmptyState } from '@/components/globals/empty-state'
 import { SectionHeading } from '@/components/globals/section-heading'
 import { ItemCard } from '@/components/globals/item-card'
-import { Badge } from '@/components/ui/badge'
+import { badgeVariants } from '@/components/ui/badge'
 
 import { getMovie, getMoviesSlugs } from '@/db/queries'
 import { movieGenres } from '@/lib/data/movie-genres'
@@ -59,13 +58,13 @@ export default async function MoviePage({ params }: MoviePageProps) {
     }))
 
     return (
-      <div className='mb-12 mt-16 sm:mt-24'>
+      <div className='mt-24'>
         <div>
           <div className='flex flex-col gap-y-2 sm:gap-y-4'>
             <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between'>
-              <PageTitle size='lg'>{movie.name}</PageTitle>
-              <div className='mt-4 flex flex-col gap-y-1 sm:mt-0 sm:items-end'>
-                <span className='text-xs uppercase text-zinc-400'>
+              <PageTitle>{movie.name}</PageTitle>
+              <div className='mt-2 flex items-baseline gap-x-2 gap-y-1 sm:mt-0 sm:flex-col sm:items-end'>
+                <span className='text-[10px] uppercase text-zinc-400 sm:text-xs'>
                   Directed by
                 </span>
                 <div className='flex flex-wrap gap-2 sm:justify-end'>
@@ -91,17 +90,20 @@ export default async function MoviePage({ params }: MoviePageProps) {
                   genre => genre.id === Number(genreId)
                 )
                 return (
-                  <Link key={genreId} href={`/movies?genre=${genreId}`}>
-                    <Badge variant='secondary'>
-                      {genre?.name || 'Unknown Genre'}
-                    </Badge>
+                  <Link
+                    href={`/movies?genre=${genreId}`}
+                    className={badgeVariants({
+                      className: 'capitalize'
+                    })}
+                  >
+                    {genre?.name}
                   </Link>
                 )
               })}
             </div>
           </div>
         </div>
-        <div className='mt-4 grid gap-4 sm:mt-8 sm:grid-cols-3'>
+        <div className='mt-8 grid gap-4 sm:mt-16 sm:grid-cols-3'>
           <div className='col-span-1'>
             <div className='relative aspect-[2/3] w-auto rounded-lg bg-white'>
               <Image
@@ -117,7 +119,6 @@ export default async function MoviePage({ params }: MoviePageProps) {
               rel='noopener noreferrer'
               className={buttonVariants({ className: 'mt-4 w-full' })}
             >
-              <LinkSimple weight='bold' className='size-4' />
               View on Letterboxd
             </a>
           </div>

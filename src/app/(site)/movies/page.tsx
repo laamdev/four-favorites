@@ -5,9 +5,9 @@ import { PageTitle } from '@/components/globals/page-title'
 import { FiltersSlider } from '@/components/movies/filters-slider'
 import { PageSummary } from '@/components/globals/page-summary'
 import { GridSkeleton } from '@/components/globals/grid-skeleton'
-import { movieGenres } from '@/lib/data/movie-genres'
-
 import { MoviesGrid } from '@/components/movies/movies-grid'
+
+import { movieGenres } from '@/lib/data/movie-genres'
 
 interface MoviesPageProps {
   searchParams: Promise<{
@@ -44,14 +44,24 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
     : null
 
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-24'>
       <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
         <div>
-          <PageTitle size='lg'>
-            {genreName ? `${genreName} Movies` : 'All Movies'}
+          <PageTitle className='flex flex-col'>
+            {genreName ? (
+              <>
+                <span>{genreName}</span>
+                <span>Movies</span>
+              </>
+            ) : (
+              <>
+                <span>All</span>
+                <span>Movies</span>
+              </>
+            )}
           </PageTitle>
 
-          <PageSummary size='lg'>
+          <PageSummary>
             {genreName
               ? `A list of the unique ${genreName.toLowerCase()} movies present in the Four Favorites celebrity lists.`
               : `A list of all the unique movies present in the Four Favorites celebrity lists.`}

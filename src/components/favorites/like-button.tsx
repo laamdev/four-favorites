@@ -65,7 +65,7 @@ export const LikeButton = ({
           'fill-primary': isLiked
         })}
       />
-      <span className='w-16 text-xs tabular-nums'>
+      <span className='text-[10px] tabular-nums sm:text-xs'>
         {likesCount} {likesCount !== 1 ? 'Likes' : 'Like'}
       </span>
     </button>

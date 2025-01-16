@@ -23,11 +23,11 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
         align: 'start'
       }}
     >
-      <CarouselContent className='-ml-4'>
+      <CarouselContent className='-ml-4 mt-2'>
         {movies.map(item => (
           <CarouselItem
             key={item.movie.id}
-            className='pl-4 md:basis-1/2 lg:basis-1/4'
+            className='basis-1/2 pl-4 md:basis-1/2 lg:basis-1/4'
           >
             <ItemCard
               slug={`/movies/${item.movie.slug}`}
@@ -43,6 +43,7 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
         ))}
       </CarouselContent>
 
+      {/* Navigation Buttons */}
       <div
         className={cn(
           'mt-4 flex justify-center gap-4 sm:mt-0 sm:block',

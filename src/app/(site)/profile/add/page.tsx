@@ -41,7 +41,7 @@ export default async function AddMoviePage({
   }
 
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-24'>
       <PageTitle>favorite #{Number(position)}</PageTitle>
 
       <div className='mt-4 sm:mt-8'>
@@ -53,14 +53,14 @@ export default async function AddMoviePage({
           movies.length > 0 &&
           movies.map(movie => (
             <li key={movie.id} className='group relative'>
-              <div className='relative aspect-[2/3] overflow-hidden rounded'>
+              <div className='relative aspect-[2/3] overflow-hidden rounded-md'>
                 <Image
                   src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
                   alt={movie.title}
                   fill
-                  className='tw-gradient tw-animation relative rounded object-cover object-center'
+                  className='tw-gradient tw-animation relative rounded-md object-cover object-center'
                 />
-                <div className='tw-animation absolute inset-0 z-10 bg-black opacity-0 group-hover:opacity-50' />
+                <div className='tw-animation absolute inset-0 z-10 rounded-md bg-black opacity-0 group-hover:opacity-50' />
               </div>
               <div className='mt-2 flex flex-col gap-y-1'>
                 <h2 className='text-base font-bold text-white'>

@@ -8,15 +8,11 @@ interface PageTitleProps {
   className?: string
 }
 
-export const PageTitle = ({
-  children,
-  className,
-  size = 'default'
-}: PageTitleProps) => {
+export const PageTitle = ({ children, className }: PageTitleProps) => {
   return (
     <h1
       className={cn(
-        'max-w-5xl break-words font-serif text-3xl font-bold uppercase sm:text-5xl',
+        'max-w-5xl break-words font-serif text-5xl font-bold uppercase md:text-8xl',
         className
       )}
     >

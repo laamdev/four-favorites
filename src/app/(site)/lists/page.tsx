@@ -18,14 +18,24 @@ export default async function ListsPage({
   const currentPage = page ? parseInt(page as string) : 1
 
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-24'>
       <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
         <div>
-          <PageTitle size='lg'>
-            {`${role ? `${role} Lists` : 'All Lists'}`}
+          <PageTitle className='flex flex-col'>
+            {role ? (
+              <>
+                <span>{role}</span>
+                <span>Lists</span>
+              </>
+            ) : (
+              <>
+                <span>All</span>
+                <span>Lists</span>
+              </>
+            )}
           </PageTitle>
 
-          <PageSummary size='lg'>
+          <PageSummary>
             <span>{`Discover curated movie lists from the entertainment industry's finest. From actors and directors to composers and writers, explore their `}</span>
             <a
               href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'

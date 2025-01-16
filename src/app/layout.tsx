@@ -8,6 +8,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/navigation/footer'
 import { Header } from '@/components/navigation/header'
+import { ThemeProvider } from '@/components/globals/theme-provider'
 
 import { cn } from '@/lib/utils'
 import { SITE } from '@/utils/constants'
@@ -161,19 +162,23 @@ export default function Layout({ children }: { children: ReactNode }) {
       <html
         suppressHydrationWarning
         className={cn(
-          'dark overflow-x-hidden font-sans',
+          'overflow-x-hidden font-sans',
           neueMontreal.variable,
           grafier.variable
         )}
       >
         <body className='overflow-x-hidden'>
-          <Header />
-
-          <main>{children}</main>
-
-          <Toaster position='bottom-left' />
-
-          <Footer />
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main>{children}</main>
+            <Toaster position='bottom-left' />
+            <Footer />
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

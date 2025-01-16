@@ -30,11 +30,11 @@ export default async function ProfilePage() {
 
   const userLikedFavoriteLists = await getUserLikedFavorites(user.id)
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-24'>
       <div className='flex flex-col justify-between gap-y-4 sm:flex-row sm:items-end sm:gap-y-0'>
         <div>
-          <PageTitle size='lg'>My Four Favorites</PageTitle>
-          <PageSummary size='lg'>
+          <PageTitle>My Four Favorites</PageTitle>
+          <PageSummary>
             All directors featured in the Four Favorites lists.
           </PageSummary>
         </div>
@@ -47,14 +47,14 @@ export default async function ProfilePage() {
 
           return movie ? (
             <div key={position} className='group'>
-              <div className='tw-animation relative aspect-[2/3] overflow-hidden rounded border border-transparent group-hover:border-primary'>
+              <div className='tw-animation relative aspect-[2/3] overflow-hidden rounded-md border border-transparent group-hover:border-primary'>
                 <Image
                   src={`https://image.tmdb.org/t/p/w780${movie.movie.posterUrl}`}
                   alt={movie.movie.name}
                   fill
-                  className='tw-animation rounded bg-zinc-800 object-cover transition-transform'
+                  className='tw-animation rounded-md bg-zinc-800 object-cover transition-transform'
                 />
-                <div className='tw-animation absolute inset-0 z-10 bg-black opacity-0 group-hover:opacity-50' />
+                <div className='tw-animation absolute inset-0 z-10 rounded-md bg-black opacity-0 group-hover:opacity-50' />
 
                 <UserMovieActionButtons
                   movieId={movie.movieId}
@@ -70,7 +70,7 @@ export default async function ProfilePage() {
             <Link
               key={position}
               href={`/profile/add?position=${position + 1}`}
-              className='group relative aspect-[2/3] overflow-hidden rounded bg-zinc-800'
+              className='group relative aspect-[2/3] overflow-hidden rounded-md bg-zinc-800'
             >
               <PlusCircle className='tw-animation absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 text-white group-hover:text-primary' />
             </Link>
@@ -95,7 +95,7 @@ export default async function ProfilePage() {
             </EmptyState>
           </div>
         ) : (
-          <div className='mt-4 grid grid-cols-5 gap-4 sm:mt-8'>
+          <div className='mt-4 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-5'>
             {userLikedFavoriteLists.map(({ favorite }) => (
               <ItemCard
                 key={favorite.id}

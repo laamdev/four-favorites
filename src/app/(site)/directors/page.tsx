@@ -65,10 +65,10 @@ export default function DirectorsPage() {
   }, [isLoading, isReachingEnd, isLoadingMore, setSize, size])
 
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-24'>
       <div>
-        <PageTitle size='lg'>Directors</PageTitle>
-        <PageSummary size='lg'>
+        <PageTitle>Directors</PageTitle>
+        <PageSummary>
           All directors featured in the Four Favorites lists.
         </PageSummary>
       </div>
