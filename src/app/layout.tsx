@@ -8,7 +8,6 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/navigation/footer'
 import { Header } from '@/components/navigation/header'
-import { ThemeProvider } from '@/components/globals/theme-provider'
 
 import { cn } from '@/lib/utils'
 import { SITE } from '@/utils/constants'
@@ -246,16 +245,10 @@ export default function Layout({ children }: { children: ReactNode }) {
         )}
       >
         <body className='overflow-x-hidden'>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='light'
-            disableTransitionOnChange
-          >
-            <Header />
-            <main>{children}</main>
-            <Toaster position='bottom-left' />
-            <Footer />
-          </ThemeProvider>
+          <Header />
+          <main>{children}</main>
+          <Toaster position='bottom-left' />
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
