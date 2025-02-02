@@ -8,20 +8,20 @@ interface HeroCardProps {
 const HeroCard = ({ type }: HeroCardProps) => {
   if (type === 'poster') {
     return (
-      <div className='relative aspect-[2/3] w-[160px] overflow-hidden rounded-xl bg-gradient-to-br from-primary/80 to-primary/20'>
+      <div className='relative aspect-2/3 w-[160px] overflow-hidden rounded-xl bg-linear-to-br from-primary/80 to-primary/20'>
         <img
           src='https://image.tmdb.org/t/p/w780/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg'
           alt='Movie Poster'
           className='absolute inset-0 h-full w-full object-cover'
         />
-        <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent' />
+        <div className='absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent' />
         <div className='absolute inset-0 rounded-xl ring-1 ring-white/10' />
       </div>
     )
   }
 
   return (
-    <div className='relative aspect-[2/3] w-[160px] overflow-hidden rounded-xl bg-gradient-to-br from-zinc-900/90 to-zinc-900/50'>
+    <div className='relative aspect-2/3 w-[160px] overflow-hidden rounded-xl bg-linear-to-br from-zinc-900/90 to-zinc-900/50'>
       <div className='bg-grid-white/[0.02] absolute inset-0' />
       <div className='flex h-full items-center justify-center'>
         <QuestionMark weight='fill' className='size-14 text-white/80' />

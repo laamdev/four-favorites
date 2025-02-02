@@ -10,12 +10,7 @@ interface PageTitleProps {
 
 export const PageTitle = ({ children, className }: PageTitleProps) => {
   return (
-    <h1
-      className={cn(
-        'max-w-5xl break-words font-serif text-5xl font-bold uppercase md:text-8xl',
-        className
-      )}
-    >
+    <h1 className={cn('font-serif text-7xl font-bold uppercase', className)}>
       {children}
     </h1>
   )

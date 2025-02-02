@@ -21,9 +21,14 @@ interface FiltersSliderProps {
 export const FiltersSlider = ({ sort, genre }: FiltersSliderProps) => {
   return (
     <Sheet>
-      <SheetTrigger className='flex items-center gap-x-2'>
-        <SlidersHorizontal weight='fill' className='size-4' />
-        <span className='text-sm'>Show filters</span>
+      <SheetTrigger className='group flex cursor-pointer items-center justify-center gap-x-2'>
+        <SlidersHorizontal
+          weight='fill'
+          className='group-hover:text-primary tw-animation size-5'
+        />
+        <span className='text-[10px] font-medium tracking-widest text-zinc-700 uppercase sm:text-xs'>
+          Show filters
+        </span>
       </SheetTrigger>
       <SheetContent side='right'>
         <SheetHeader>
@@ -33,17 +38,17 @@ export const FiltersSlider = ({ sort, genre }: FiltersSliderProps) => {
 
         <div className='mt-8 flex max-h-[calc(100vh-8rem)] flex-col gap-y-8 overflow-y-auto'>
           <div className='flex flex-col gap-y-4'>
-            <Label className='text-xs uppercase tracking-wider text-zinc-300'>{`Search`}</Label>
+            <Label className='text-xs tracking-wider uppercase'>{`Search`}</Label>
             <Search placeholder='Find a movie...' />
           </div>
 
           <div className='flex flex-col gap-y-4'>
-            <Label className='text-xs uppercase tracking-wider text-zinc-300'>{`Sort`}</Label>
+            <Label className='text-xs tracking-wider uppercase'>{`Sort`}</Label>
             <SortSelect sort={sort as string} />
           </div>
 
           <div className='flex flex-col gap-y-4'>
-            <Label className='text-xs uppercase tracking-wider text-zinc-300'>{`Genre`}</Label>
+            <Label className='text-xs tracking-wider uppercase'>{`Genre`}</Label>
             <FiltersRadio selectedGenre={genre as string} />
           </div>
         </div>

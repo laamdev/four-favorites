@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import { ItemCard } from '@/components/globals/item-card'
+import { MovieCard } from '@/components/movies/movie-card'
 
 import { cn, getFormattedYear } from '@/lib/utils'
 import { MoviesToFavorites } from '@/types'
@@ -23,13 +23,13 @@ export const MovieCarousel = ({ movies }: MovieCarouselProps) => {
         align: 'start'
       }}
     >
-      <CarouselContent className='-ml-4 mt-2'>
+      <CarouselContent className='mt-2 -ml-4'>
         {movies.map(item => (
           <CarouselItem
             key={item.movie.id}
             className='basis-1/2 pl-4 md:basis-1/2 lg:basis-1/4'
           >
-            <ItemCard
+            <MovieCard
               slug={`/movies/${item.movie.slug}`}
               heading={item.movie.name}
               subheading={getFormattedYear(item.movie.releaseDate)}

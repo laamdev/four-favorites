@@ -2,6 +2,7 @@ import { ItemCard } from '@/components/globals/item-card'
 import { PaginationFavorites } from '@/components/favorites/pagination'
 
 import { getRankedMovies } from '@/db/queries'
+import { getYear } from '@/lib/utils'
 
 interface MoviesGridProps {
   filter: string | string[] | undefined
@@ -28,7 +29,7 @@ export const MoviesGrid = async ({
   const totalPages = Math.ceil(totalCount / moviesPerPage)
 
   return (
-    <div>
+    <div className='mt-4 sm:mt-8'>
       <div className='grid grid-cols-2 gap-4 md:grid-cols-5'>
         {movies.map(movie => {
           return (
@@ -36,6 +37,7 @@ export const MoviesGrid = async ({
               key={movie.id}
               slug={`/movies/${movie.slug}`}
               heading={movie.name}
+              subheading={getYear(movie.releaseDate)}
               image={
                 movie.posterUrl?.includes('cloudinary')
                   ? movie.posterUrl

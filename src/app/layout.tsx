@@ -13,6 +13,83 @@ import { ThemeProvider } from '@/components/globals/theme-provider'
 import { cn } from '@/lib/utils'
 import { SITE } from '@/utils/constants'
 
+const rader = localFont({
+  src: [
+    {
+      path: '../../public/fonts/rader/PPRader-Hairline.woff2',
+      weight: '100',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-HairlineItalic.woff2',
+      weight: '100',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-Thin.woff2',
+      weight: '200',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-ThinItalic.woff2',
+      weight: '200',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-Extralight.woff2',
+      weight: '300',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-ExtralightItalic.woff2',
+      weight: '300',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-Regular.woff2',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-Italic.woff2',
+      weight: '400',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-Medium.woff2',
+      weight: '500',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-MediumItalic.woff2',
+      weight: '500',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-Semibold.woff2',
+      weight: '600',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-SemiboldItalic.woff2',
+      weight: '600',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-Bold.woff2',
+      weight: '700',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/rader/PPRader-BoldItalic.woff2',
+      weight: '700',
+      style: 'italic'
+    }
+  ],
+  display: 'swap',
+  variable: '--font-rader'
+})
+
 const grafier = localFont({
   src: [
     {
@@ -164,14 +241,14 @@ export default function Layout({ children }: { children: ReactNode }) {
         className={cn(
           'overflow-x-hidden font-sans',
           neueMontreal.variable,
-          grafier.variable
+          grafier.variable,
+          rader.variable
         )}
       >
         <body className='overflow-x-hidden'>
           <ThemeProvider
             attribute='class'
-            defaultTheme='system'
-            enableSystem
+            defaultTheme='light'
             disableTransitionOnChange
           >
             <Header />

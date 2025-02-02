@@ -11,7 +11,7 @@ export default function SignInPage() {
           fill
           className='object-cover'
         />
-        <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent' />
+        <div className='absolute inset-0 bg-linear-to-t from-black/70 to-transparent' />
         <div className='absolute bottom-8 left-8 z-10'>
           <div className='flex flex-col gap-y-2'>
             <p className='text-2xl font-medium text-white'>

@@ -11,7 +11,7 @@ export const PageSummary = ({ children, className }: PageSummaryProps) => {
   return (
     <div
       className={cn(
-        'mt-2 max-w-2xl text-base text-zinc-400 sm:mt-4 md:text-lg',
+        'mt-2 max-w-xl text-center sm:mt-4 md:text-base',
 
         className
       )}

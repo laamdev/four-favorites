@@ -53,7 +53,7 @@ export default async function AddMoviePage({
           movies.length > 0 &&
           movies.map(movie => (
             <li key={movie.id} className='group relative'>
-              <div className='relative aspect-[2/3] overflow-hidden rounded-md'>
+              <div className='relative aspect-2/3 overflow-hidden rounded-md'>
                 <Image
                   src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
                   alt={movie.title}

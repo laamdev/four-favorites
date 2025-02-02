@@ -2,12 +2,14 @@ import { type ClassValue, clsx } from 'clsx'
 import { format } from 'date-fns'
 import { twMerge } from 'tailwind-merge'
 import { enGB } from 'date-fns/locale'
+import { countries } from '@/data/countries'
+import { movieGenres } from '@/data/movie-genres'
 
-export function cn(...inputs: ClassValue[]) {
+export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
-export function getDecadeColor(decade: number) {
+export const getDecadeColor = (decade: number) => {
   return `hsl(${((decade - 1920) / 100) * 360}, 70%, 50%)`
 }
 
@@ -85,4 +87,21 @@ export const getYear = (date: string) => {
   const year = date.split('-')[0]
 
   return year
+}
+
+export const createUrl = (pathname: string, params: URLSearchParams) => {
+  const paramsString = params.toString()
+  return `${pathname}${paramsString ? '?' : ''}${paramsString}`
+}
+
+export const getCountryNameFromCode = (code: string): string => {
+  const country = countries.find(
+    (country: any) => country.code.toLowerCase() === code.toLowerCase()
+  )
+  return country ? country.name : code
+}
+
+export const getGenreNameFromId = (id: number): string => {
+  const genre = movieGenres.find(g => g.id === id)
+  return genre ? genre.name : 'Unknown Genre'
 }

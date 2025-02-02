@@ -12,7 +12,7 @@ import {
   PaginationEllipsis
 } from '@/components/ui/pagination'
 
-import { createUrl } from '@/lib/helpers'
+import { createUrl } from '@/lib/utils'
 
 interface PaginationFavoritesProps {
   page: number
@@ -97,7 +97,7 @@ export function PaginationFavorites({
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-      <span className='text-sm text-zinc-400'>
+      <span className='text-xs text-zinc-500 sm:text-sm'>
         Showing {startIndex} to {endIndex} of {totalDocs}
       </span>
     </div>

@@ -4,7 +4,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { movieGenres } from '@/lib/data/movie-genres'
+import { movieGenres } from '@/data/movie-genres'
 
 interface FiltersRadioProps {
   selectedGenre: string

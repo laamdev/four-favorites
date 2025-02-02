@@ -11,7 +11,7 @@ import {
   artistsToFavorites,
   artistsRolesEnum
 } from '@/db/schema'
-import { movieGenres } from '@/lib/data/movie-genres'
+import { movieGenres } from '@/data/movie-genres'
 
 export interface DecadeCount {
   decade: number
@@ -708,4 +708,17 @@ export async function getFeaturedFavorites() {
       artist: atf.artist
     }))
   }))
+}
+
+export const getMoviesByGenre = async (genreId: number) => {
+  return await db.query.movies.findMany({
+    where: sql`${genreId.toString()} = ANY(${movies.genres})`,
+    with: {
+      moviesToFavorites: {
+        with: {
+          favorite: true
+        }
+      }
+    }
+  })
 }

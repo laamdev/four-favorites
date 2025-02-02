@@ -47,7 +47,7 @@ export default async function ProfilePage() {
 
           return movie ? (
             <div key={position} className='group'>
-              <div className='tw-animation relative aspect-[2/3] overflow-hidden rounded-md border border-transparent group-hover:border-primary'>
+              <div className='tw-animation relative aspect-2/3 overflow-hidden rounded-md border border-transparent group-hover:border-primary'>
                 <Image
                   src={`https://image.tmdb.org/t/p/w780${movie.movie.posterUrl}`}
                   alt={movie.movie.name}
@@ -70,7 +70,7 @@ export default async function ProfilePage() {
             <Link
               key={position}
               href={`/profile/add?position=${position + 1}`}
-              className='group relative aspect-[2/3] overflow-hidden rounded-md bg-zinc-800'
+              className='group relative aspect-2/3 overflow-hidden rounded-md bg-zinc-800'
             >
               <PlusCircle className='tw-animation absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 text-white group-hover:text-primary' />
             </Link>

@@ -1,35 +1,34 @@
-import Link from 'next/link'
+import { Metadata } from 'next'
 
-import { PageTitle } from '@/components/globals/page-title'
-import { PageSummary } from '@/components/globals/page-summary'
+import { SimpleCard } from '@/components/globals/simple-card'
+import { Hero } from '@/components/globals/hero'
+
 import { getAllGenres } from '@/db/queries'
+
+export const metadata: Metadata = {
+  title: 'Genres',
+  description: 'Discover all the genres featured in the Four Favorites lists.'
+}
 
 export default async function GenresPage() {
   const genres = await getAllGenres()
 
   return (
-    <div className='mt-24'>
-      <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
-        <div>
-          <PageTitle>Genres</PageTitle>
-          <PageSummary>
-            All movie genres featured in the Four Favorites lists.
-          </PageSummary>
-        </div>
-      </div>
+    <div>
+      <Hero
+        title='Genres'
+        summary={`Discover all the movie genres featured in the Four Favorites celebrity picks.`}
+        isCentered
+      />
 
-      <div className='mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+      <div className='container mt-4 grid grid-cols-1 gap-4 py-8 sm:mt-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {genres.map(genre => (
-          <Link
-            key={genre.id}
-            href={`/movies?genre=${genre.id}`}
-            className='group rounded-lg border border-border bg-card p-4 transition-colors hover:bg-accent'
-          >
-            <h3 className='font-medium text-card-foreground'>{genre.name}</h3>
-            <p className='mt-1 text-sm text-muted-foreground'>
-              {genre.movieCount} {genre.movieCount === 1 ? 'movie' : 'movies'}
-            </p>
-          </Link>
+          <SimpleCard
+            key={genre.slug}
+            title={genre.name}
+            count={genre.movieCount}
+            href={`/genres/${genre.id}`}
+          />
         ))}
       </div>
     </div>

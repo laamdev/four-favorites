@@ -1,18 +1,16 @@
-import Link from 'next/link'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { auth } from '@clerk/nextjs/server'
 
 import { MovieCarousel } from '@/components/favorites/movie-carousel'
-import { PageTitle } from '@/components/globals/page-title'
 import { EmptyState } from '@/components/globals/empty-state'
-import { SectionHeading } from '@/components/globals/section-heading'
 import { LikeButton } from '@/components/favorites/like-button'
-import { badgeVariants } from '@/components/ui/badge'
 import { VideoPlayer } from '@/components/globals/video-player'
 
 import { getFavorite, getFavoritesSlugs } from '@/db/queries'
 import { getFormattedDate } from '@/lib/utils'
+import { SectionWrapper } from '@/components/globals/section-wrapper'
+import Link from 'next/link'
 
 interface FavoritesPageProps {
   params: Promise<{ listSlug: string }>
@@ -43,31 +41,28 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
 
   if (!favorite) return notFound()
 
-  // Get first artist's role if exists
-  const primaryArtist = favorite.artistsToFavorites?.[0]?.artist
-
   return (
-    <div className='mt-24'>
-      <h2 className='text-xs font-medium uppercase tracking-widest text-primary sm:text-sm'>
-        {favorite.category
-          ? `${favorite.category} Favorites`
-          : 'All Time Favorites'}
-      </h2>
+    <div>
+      <div className='bg-card'>
+        <div className='container flex flex-col py-36'>
+          <Link
+            href={`/lists?role=${favorite.artistsToFavorites?.[0]?.artist.role}`}
+            className='text-primary font-black tracking-widest uppercase sm:text-sm'
+          >
+            {favorite.artistsToFavorites?.[0]?.artist.role}
+          </Link>
 
-      <div className='mt-2'>
-        <PageTitle>{favorite.name}</PageTitle>
-        <Link
-          href={`/lists?role=${primaryArtist?.role}`}
-          className={badgeVariants({
-            className: 'mt-2 capitalize'
-          })}
-        >
-          {primaryArtist?.role}
-        </Link>
+          <div className='mt-4'>
+            <h1 className='flex flex-col font-serif text-7xl font-medium capitalize'>
+              <span>{`${favorite.name}'s`}</span>
+              <span className='text-zinc-500'>{`Four ${favorite.category === 'overall' ? 'Favorites' : `${favorite.category} Favorites`}`}</span>
+            </h1>
+          </div>
+        </div>
       </div>
 
-      <div className='mt-8 sm:mt-16'>
-        <div className='mb-2 flex justify-end'>
+      <SectionWrapper>
+        <div className='absolute top-4 right-4'>
           <LikeButton
             favoriteId={favorite.id}
             userId={userId!}
@@ -75,22 +70,22 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
             likes={Number(favorite.likes)}
           />
         </div>
-
-        {favorite.moviesToFavorites && favorite.moviesToFavorites.length > 0 ? (
-          <MovieCarousel movies={favorite.moviesToFavorites} />
-        ) : (
-          <EmptyState>No movies found.</EmptyState>
-        )}
-      </div>
-
-      <div className='relative mx-auto mt-16 sm:mt-32'>
-        <div className='flex flex-col items-center justify-center'>
-          <SectionHeading
-            text={`Published on ${getFormattedDate(favorite.publishingDate)}`}
-          />
+        <div className='container'>
+          {favorite.moviesToFavorites &&
+          favorite.moviesToFavorites.length > 0 ? (
+            <MovieCarousel movies={favorite.moviesToFavorites} />
+          ) : (
+            <EmptyState>No movies found.</EmptyState>
+          )}
         </div>
-        <div className='mt-4 sm:mt-8'>
+      </SectionWrapper>
+
+      <div className='relative mx-auto bg-zinc-700 py-16'>
+        <div className='container flex flex-col items-center justify-center gap-y-2 sm:mt-8'>
           <VideoPlayer videoUrl={favorite.videoUrl} title={favorite.name} />
+          <p className='text-sm text-neutral-300'>
+            {`Published on ${getFormattedDate(favorite.publishingDate)}`}
+          </p>
         </div>
       </div>
     </div>

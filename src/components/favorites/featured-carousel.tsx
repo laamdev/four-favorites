@@ -55,7 +55,7 @@ export function FeaturedCarousel({
               <ItemCard
                 slug={`/lists/${featuredFavorite.slug}`}
                 heading={featuredFavorite.name}
-                subheading={featuredFavorite.artistsToFavorites[0]?.artist.name}
+                subheading={featuredFavorite.artistsToFavorites[0]?.artist.role}
                 image={
                   featuredFavorite.artistsToFavorites?.[0]?.artist?.headshotUrl?.includes(
                     'cloudinary'

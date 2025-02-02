@@ -9,7 +9,7 @@ export const SectionHeading = ({ text, className }: SectionHeadingProps) => {
   return (
     <h2
       className={cn(
-        'text-center font-serif text-lg font-medium uppercase text-zinc-100 sm:text-3xl',
+        'text-center font-serif text-2xl font-semibold sm:text-3xl',
         className
       )}
     >

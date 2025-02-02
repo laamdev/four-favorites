@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Link from 'next/link'
 import useSWRInfinite from 'swr/infinite'
 
 import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
+import { SimpleCard } from '@/components/globals/simple-card'
+import { Hero } from '@/components/globals/hero'
 
 interface DirectorsResponse {
   directors: {
@@ -65,40 +66,34 @@ export default function DirectorsPage() {
   }, [isLoading, isReachingEnd, isLoadingMore, setSize, size])
 
   return (
-    <div className='mt-24'>
-      <div>
-        <PageTitle>Directors</PageTitle>
-        <PageSummary>
-          All directors featured in the Four Favorites lists.
-        </PageSummary>
-      </div>
+    <div>
+      <Hero
+        title='Directors'
+        summary={`Discover all the directors featured in the Four Favorites celebrity picks.`}
+        isCentered
+      />
 
-      <div className='mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {directors.map((director, index) => (
-          <Link
-            key={`${director.slug}-${index}`}
-            href={`/directors/${director.slug}`}
-            className='group rounded-lg border border-border bg-card p-4 transition-colors hover:bg-accent'
-          >
-            <h3 className='font-medium text-card-foreground'>
-              {director.name}
-            </h3>
-            <p className='mt-1 text-sm text-muted-foreground'>
-              {director.movieCount}{' '}
-              {director.movieCount === 1 ? 'movie' : 'movies'}
-            </p>
-          </Link>
-        ))}
+      <div className='mt-4 sm:mt-8'>
+        <div className='container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+          {directors.map((director, index) => (
+            <SimpleCard
+              key={`${director.slug}-${index}`}
+              title={director.name}
+              count={director.movieCount}
+              href={`/directors/${director.slug}`}
+            />
+          ))}
+        </div>
       </div>
 
       <div ref={loadMoreRef} className='mt-8 flex justify-center sm:mt-12'>
         {isLoadingMore && (
-          <div className='text-sm text-muted-foreground'>
+          <div className='text-muted-foreground text-sm'>
             Loading more directors...
           </div>
         )}
         {isReachingEnd && directors.length > 0 && (
-          <div className='text-sm text-muted-foreground'>
+          <div className='text-muted-foreground text-sm'>
             No more directors to load.
           </div>
         )}

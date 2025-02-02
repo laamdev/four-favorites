@@ -1,10 +1,9 @@
 import { Suspense } from 'react'
 
-import { PageTitle } from '@/components/globals/page-title'
 import { FiltersSlider } from '@/components/favorites/filters-slider'
-import { PageSummary } from '@/components/globals/page-summary'
 import { FavoritesGrid } from '@/components/favorites/favorites-grid'
 import { GridSkeleton } from '@/components/globals/grid-skeleton'
+import { Hero } from '@/components/globals/hero'
 
 interface FourFavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -18,44 +17,18 @@ export default async function ListsPage({
   const currentPage = page ? parseInt(page as string) : 1
 
   return (
-    <div className='mt-24'>
-      <div className='flex flex-col justify-between gap-y-8 sm:flex-row sm:items-end sm:gap-y-0'>
-        <div>
-          <PageTitle className='flex flex-col'>
-            {role ? (
-              <>
-                <span>{role}</span>
-                <span>Lists</span>
-              </>
-            ) : (
-              <>
-                <span>All</span>
-                <span>Lists</span>
-              </>
-            )}
-          </PageTitle>
+    <div>
+      <Hero
+        title={`${role ? `${role}s'` : 'All'} Lists`}
+        summary={`Discover curated movie lists from the entertainment industry's finest. From actors and directors to composers and writers, explore their Four Favorite picks.`}
+        isCentered
+      />
 
-          <PageSummary>
-            <span>{`Discover curated movie lists from the entertainment industry's finest. From actors and directors to composers and writers, explore their `}</span>
-            <a
-              href='https://www.youtube.com/playlist?list=PL5aexARLijfUCryhTPUxTlCo5MIkwqTBA'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='tw-animation font-medium text-white underline hover:text-primary'
-            >
-              {`Four Favorites`}
-            </a>
-            <span>{` picks.`}</span>
-          </PageSummary>
-        </div>
-
-        <div className='flex justify-end'>
+      <div className='col-span-4 container mt-8 sm:mt-12'>
+        <div className='flex justify-center sm:justify-end'>
           <FiltersSlider sort={sort as string} role={role as string} />
         </div>
-      </div>
-
-      <div className='col-span-4 mt-8 sm:mt-12'>
-        <div>
+        <div className='mt-4 sm:mt-8'>
           <Suspense fallback={<GridSkeleton />}>
             <FavoritesGrid
               filter={role}

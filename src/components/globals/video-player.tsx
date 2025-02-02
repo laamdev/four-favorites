@@ -48,11 +48,11 @@ export const VideoPlayer = ({ videoUrl, title }: VideoPlayerProps) => {
   }
 
   return (
-    <div className='relative aspect-video w-full overflow-hidden rounded-lg'>
+    <div className='relative aspect-video w-full max-w-5xl overflow-hidden'>
       {!isPlaying ? (
         <button
           onClick={loadVideo}
-          className='group relative h-full w-full focus:outline-none'
+          className='group relative h-full w-full focus:outline-hidden'
           aria-label='Play video'
         >
           <Image
@@ -64,8 +64,8 @@ export const VideoPlayer = ({ videoUrl, title }: VideoPlayerProps) => {
             onError={handleThumbnailError}
             className='object-cover transition-transform duration-300 group-hover:scale-105'
           />
-          <div className='absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-300 group-hover:bg-black/30'>
-            <div className='rounded-full bg-white/10 p-4 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110'>
+          <div className='tw-animation absolute inset-0 flex cursor-pointer items-center justify-center bg-black/20 group-hover:bg-black/30'>
+            <div className='bg-primary tw-animation rounded-full p-4 group-hover:scale-105'>
               <Play weight='fill' className='size-8 text-white' />
             </div>
           </div>

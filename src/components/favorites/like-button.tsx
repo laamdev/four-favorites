@@ -55,15 +55,18 @@ export const LikeButton = ({
       onClick={handleLike}
       disabled={!userId || isLoading}
       className={cn(
-        'group flex flex-col items-center gap-y-1 disabled:cursor-not-allowed disabled:opacity-50'
+        'group flex flex-col items-center gap-y-1 disabled:pointer-events-none disabled:opacity-50'
       )}
     >
       <Heart
         weight='fill'
-        className={cn('tw-animation size-6 group-hover:fill-white sm:size-8', {
-          'fill-zinc-300': !isLiked,
-          'fill-primary': isLiked
-        })}
+        className={cn(
+          'tw-animation size-6 group-hover:fill-zinc-300 sm:size-8',
+          {
+            'fill-zinc-300': !isLiked,
+            'fill-primary': isLiked
+          }
+        )}
       />
       <span className='text-[10px] tabular-nums sm:text-xs'>
         {likesCount} {likesCount !== 1 ? 'Likes' : 'Like'}

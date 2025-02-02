@@ -8,19 +8,33 @@ interface ItemCardProps {
   image: string
 }
 
-export const ItemCard = ({ slug, heading, image }: ItemCardProps) => {
+export const ItemCard = ({
+  slug,
+  heading,
+  subheading,
+  image
+}: ItemCardProps) => {
   return (
-    <Link href={slug} className='group'>
-      <div className='tw-animation relative aspect-[2/3] overflow-hidden rounded-md border-2 border-transparent group-hover:border-primary'>
+    <Link
+      href={slug}
+      className='group block transform transition-transform duration-300 ease-out hover:-translate-y-2'
+    >
+      <div className='tw-animation relative aspect-2/3 overflow-hidden'>
         <Image
           src={image}
           alt={heading}
           fill
-          className='tw-gradient tw-animation relative rounded-md object-cover object-center group-hover:scale-105'
+          className='bg-card tw-animation relative object-cover object-center'
         />
-        <div className='tw-animation absolute inset-0 z-10 rounded-md bg-black opacity-30 group-hover:opacity-0' />
       </div>
-      <h2 className='mt-2 text-sm font-semibold sm:text-lg'>{heading}</h2>
+      <div className='mt-2'>
+        <h2 className='group-hover:text-primary tw-animation font-serif text-base font-bold tracking-wider sm:text-lg'>
+          {heading}
+        </h2>
+        <p className='text-xs tracking-wide text-neutral-500 capitalize italic sm:text-base'>
+          {subheading}
+        </p>
+      </div>
     </Link>
   )
 }
