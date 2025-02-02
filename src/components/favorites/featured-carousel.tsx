@@ -17,6 +17,17 @@ type Artist = {
   id: number
   name: string
   headshotUrl: string | null
+  role:
+    | 'director'
+    | 'actor'
+    | 'producer'
+    | 'writer'
+    | 'composer'
+    | 'costume'
+    | 'musician'
+    | 'cinematographer'
+    | 'fictional'
+    | 'critic'
 }
 
 type FeaturedFavorite = {

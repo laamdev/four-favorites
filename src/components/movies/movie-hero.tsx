@@ -25,7 +25,7 @@ interface MovieHeroProps {
     country: string
     rank: number
     listCount: number
-    letterboxdUrl: string
+    letterboxdUrl: string | null
   }
 }
 
@@ -73,7 +73,10 @@ export const MovieHero = ({ movie }: MovieHeroProps) => {
           <div className='mt-16 sm:mt-8 sm:hidden'>
             <div className='flex flex-col gap-4'>
               <Link
-                href={`https://letterboxd.com/film/${movie.slug}`}
+                href={
+                  movie.letterboxdUrl ||
+                  `https://letterboxd.com/film/${movie.slug}`
+                }
                 className={buttonVariants({ className: 'w-full' })}
               >
                 See on Letterboxd
@@ -107,7 +110,10 @@ export const MovieHero = ({ movie }: MovieHeroProps) => {
         <div className='bg-card hidden flex-col gap-8 p-8 sm:flex'>
           <div className='flex flex-col gap-4'>
             <Link
-              href={movie.letterboxdUrl}
+              href={
+                movie.letterboxdUrl ||
+                `https://letterboxd.com/film/${movie.slug}`
+              }
               target='_blank'
               rel='noopener noreferrer'
               className={buttonVariants({ className: 'w-full' })}
