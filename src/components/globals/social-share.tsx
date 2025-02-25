@@ -6,18 +6,68 @@ import {
   XLogo
 } from '@phosphor-icons/react/dist/ssr'
 
+import { SmallTitle } from '@/components/globals/small-title'
+
 export const SocialShare = () => {
   return (
     <div className='flex flex-col items-center justify-center gap-2'>
-      <p className='text-xs font-medium text-zinc-500 uppercase sm:text-sm'>
-        Share
-      </p>
+      <SmallTitle text='Share' />
       <div className='flex items-center justify-center gap-4'>
-        <XLogo weight='fill' className='text-primary size-6' />
-        <InstagramLogo weight='fill' className='text-primary size-6' />
-        <FacebookLogo weight='fill' className='text-primary size-6' />
-        <Envelope weight='fill' className='text-primary size-6' />
-        <LinkSimple weight='bold' className='text-primary size-6' />
+        <a
+          href='https://x.com/fourfavorites'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='group'
+        >
+          <XLogo
+            weight='fill'
+            className='text-primary tw-animation size-6 group-hover:fill-black'
+          />
+        </a>
+        <a
+          href='https://www.instagram.com/fourfavorites'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='group'
+        >
+          <InstagramLogo
+            weight='fill'
+            className='text-primary tw-animation size-6 group-hover:fill-black'
+          />
+        </a>
+        <a
+          href='https://www.facebook.com/fourfavorites'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='group'
+        >
+          <FacebookLogo
+            weight='fill'
+            className='text-primary tw-animation size-6 group-hover:fill-black'
+          />
+        </a>
+        <a
+          href='mailto:hello@laam.dev'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='group'
+        >
+          <Envelope
+            weight='fill'
+            className='text-primary tw-animation size-6 group-hover:fill-black'
+          />
+        </a>
+        <a
+          href='https://www.facebook.com/fourfavorites'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='group'
+        >
+          <LinkSimple
+            weight='bold'
+            className='text-primary tw-animation size-6 group-hover:fill-black'
+          />
+        </a>
       </div>
     </div>
   )

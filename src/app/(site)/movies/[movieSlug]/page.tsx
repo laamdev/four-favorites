@@ -6,6 +6,7 @@ import { ItemCard } from '@/components/globals/item-card'
 
 import { getMovie, getMoviesSlugs } from '@/db/queries'
 import { MovieHero } from '@/components/movies/movie-hero'
+import { SectionContainer } from '@/components/globals/section-wrapper'
 
 interface MoviePageProps {
   params: Promise<{ movieSlug: string }>
@@ -48,9 +49,10 @@ export default async function MoviePage({ params }: MoviePageProps) {
       <div>
         <MovieHero movie={movie} />
 
-        <div className='bg-card py-16'>
+        <SectionContainer className='bg-card'>
           <div className='container'>
             <SectionHeading text='Picked by' />
+
             {movie.favorites.length > 0 ? (
               <div className='mt-4 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-5'>
                 {movie.favorites.map(favorite => (
@@ -77,7 +79,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
               </div>
             )}
           </div>
-        </div>
+        </SectionContainer>
       </div>
     )
   } catch (error) {

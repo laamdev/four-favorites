@@ -61,7 +61,7 @@ export function FeaturedCarousel({
           {featuredFavorites.map((featuredFavorite: FeaturedFavorite) => (
             <CarouselItem
               key={featuredFavorite.id}
-              className='basis-1/2 pl-4 md:basis-1/2 lg:basis-1/4'
+              className='basis-1/2 pl-4 md:basis-1/2 lg:basis-1/5'
             >
               <ItemCard
                 slug={`/lists/${featuredFavorite.slug}`}

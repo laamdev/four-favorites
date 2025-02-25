@@ -4,6 +4,7 @@ import { FiltersSlider } from '@/components/favorites/filters-slider'
 import { FavoritesGrid } from '@/components/favorites/favorites-grid'
 import { GridSkeleton } from '@/components/globals/grid-skeleton'
 import { Hero } from '@/components/globals/hero'
+import { SectionContainer } from '@/components/globals/section-wrapper'
 
 interface FourFavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -24,21 +25,23 @@ export default async function ListsPage({
         isCentered
       />
 
-      <div className='col-span-4 container mt-8 sm:mt-12'>
-        <div className='flex justify-center sm:justify-end'>
-          <FiltersSlider sort={sort as string} role={role as string} />
+      <SectionContainer>
+        <div className='container'>
+          <div className='flex justify-center sm:justify-end'>
+            <FiltersSlider sort={sort as string} role={role as string} />
+          </div>
+          <div className='mt-4 sm:mt-8'>
+            <Suspense fallback={<GridSkeleton />}>
+              <FavoritesGrid
+                filter={role}
+                sort={sort}
+                query={query}
+                page={currentPage}
+              />
+            </Suspense>
+          </div>
         </div>
-        <div className='mt-4 sm:mt-8'>
-          <Suspense fallback={<GridSkeleton />}>
-            <FavoritesGrid
-              filter={role}
-              sort={sort}
-              query={query}
-              page={currentPage}
-            />
-          </Suspense>
-        </div>
-      </div>
+      </SectionContainer>
     </div>
   )
 }

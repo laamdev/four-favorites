@@ -1,17 +1,15 @@
 import { cn } from '@/lib/utils'
 
-interface SectionWrapperProps {
+interface SectionContainerProps {
   children: React.ReactNode
   className?: string
 }
 
-export const SectionWrapper = ({
+export const SectionContainer = ({
   children,
   className
-}: SectionWrapperProps) => {
+}: SectionContainerProps) => {
   return (
-    <section className={cn('relative py-12 sm:py-16', className)}>
-      {children}
-    </section>
+    <section className={cn('py-16 sm:py-28', className)}>{children}</section>
   )
 }

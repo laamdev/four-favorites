@@ -1,8 +1,8 @@
 'use client'
 
-import { toast } from 'sonner'
 import { redirect } from 'next/navigation'
-import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
+import { toast } from 'sonner'
+import { Plus } from '@phosphor-icons/react/dist/ssr'
 
 import { addUserMovie } from '@/app/_actions'
 
@@ -13,20 +13,21 @@ interface AddMovieButtonProps {
 
 export const AddMovieButton = ({ movie, position }: AddMovieButtonProps) => {
   return (
-    <button
-      onClick={async () => {
-        await addUserMovie({ movie, position })
-
-        toast.success(`Added ${movie.title} as your #${position} favorite.`)
-
-        redirect('/profile')
-      }}
-      className='tw-animation absolute left-2 top-2 z-50 scale-75 transform opacity-0 group-hover:scale-100 group-hover:opacity-100'
-    >
-      <PlusCircle
-        weight='fill'
-        className='tw-animation h-6 w-6 text-white hover:text-primary'
-      />
-    </button>
+    <div className='tw-animation absolute top-4 left-4 z-50'>
+      <button
+        onClick={async () => {
+          const result = await addUserMovie({ movie, position })
+          if (!result.success) {
+            toast.error(result.error)
+          } else {
+            toast.success(`Added ${movie.title} as your #${position} favorite.`)
+            redirect('/profile')
+          }
+        }}
+        className='tw-animation bg-primary flex size-10 transform cursor-pointer items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 hover:bg-black hover:text-zinc-200'
+      >
+        <Plus weight='bold' className='size-6' />
+      </button>
+    </div>
   )
 }

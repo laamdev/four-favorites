@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils'
 import { getOrdinalSuffix } from '@/lib/utils'
 
+import { SmallTitle } from '@/components/globals/small-title'
+
 interface StatItemProps {
   label: string
   value: string | number
@@ -12,7 +14,7 @@ const StatItem = ({ label, value }: StatItemProps) => {
       <p className='text-muted-foreground shrink-0 text-sm font-medium tracking-wide'>
         {label}
       </p>
-      <div className='h-[1px] grow bg-[repeating-linear-gradient(to_right,currentColor_0_1px,transparent_1px_6px)] opacity-30' />
+      <div className='h-0 grow border-b border-dotted border-current opacity-50' />
       <p className='text-foreground shrink-0 text-right font-serif'>{value}</p>
     </div>
   )
@@ -37,23 +39,21 @@ export const MovieStats = ({
 }: MovieStatsProps) => {
   return (
     <div className={cn('mt-16 max-w-xl', className)}>
-      <h3 className='mb-8 text-sm font-bold tracking-widest uppercase'>
-        Details
-      </h3>
-
-      <div className='flex flex-col space-y-4 border-t-2 border-black pt-8'>
-        <StatItem label='Release Date' value={releaseYear} />
-        <StatItem label='Director' value={director} />
-        <StatItem label='Country' value={country} />
+      <div>
+        <SmallTitle text='Details' />
+        <div className='mt-8 flex flex-col space-y-4 border-t-2 border-black pt-8'>
+          <StatItem label='Release Date' value={releaseYear} />
+          <StatItem label='Director' value={director} />
+          <StatItem label='Country' value={country} />
+        </div>
       </div>
 
-      <h3 className='mt-16 mb-8 text-sm font-bold tracking-widest uppercase'>
-        Stats
-      </h3>
-
-      <div className='flex flex-col space-y-4 border-t-2 border-black pt-8'>
-        <StatItem label='Number of Lists' value={favoritesCount} />
-        <StatItem label='Rank Position' value={getOrdinalSuffix(rank)} />
+      <div className='mt-16 mb-8'>
+        <SmallTitle text='Stats' />
+        <div className='mt-8 flex flex-col space-y-4 border-t-2 border-black pt-8'>
+          <StatItem label='Rank Position' value={getOrdinalSuffix(rank)} />
+          <StatItem label='Number of Lists' value={favoritesCount} />
+        </div>
       </div>
     </div>
   )

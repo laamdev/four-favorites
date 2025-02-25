@@ -7,6 +7,7 @@ import { PageTitle } from '@/components/globals/page-title'
 import { PageSummary } from '@/components/globals/page-summary'
 import { SimpleCard } from '@/components/globals/simple-card'
 import { Hero } from '@/components/globals/hero'
+import { SectionContainer } from '@/components/globals/section-wrapper'
 
 interface DirectorsResponse {
   directors: {
@@ -73,7 +74,7 @@ export default function DirectorsPage() {
         isCentered
       />
 
-      <div className='mt-4 sm:mt-8'>
+      <SectionContainer>
         <div className='container grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {directors.map((director, index) => (
             <SimpleCard
@@ -84,20 +85,20 @@ export default function DirectorsPage() {
             />
           ))}
         </div>
-      </div>
 
-      <div ref={loadMoreRef} className='mt-8 flex justify-center sm:mt-12'>
-        {isLoadingMore && (
-          <div className='text-muted-foreground text-sm'>
-            Loading more directors...
-          </div>
-        )}
-        {isReachingEnd && directors.length > 0 && (
-          <div className='text-muted-foreground text-sm'>
-            No more directors to load.
-          </div>
-        )}
-      </div>
+        <div ref={loadMoreRef} className='mt-8 flex justify-center sm:mt-12'>
+          {isLoadingMore && (
+            <div className='text-muted-foreground text-sm'>
+              Loading more directors...
+            </div>
+          )}
+          {isReachingEnd && directors.length > 0 && (
+            <div className='text-muted-foreground text-sm'>
+              No more directors to load.
+            </div>
+          )}
+        </div>
+      </SectionContainer>
     </div>
   )
 }

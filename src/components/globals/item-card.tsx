@@ -31,7 +31,7 @@ export const ItemCard = ({
         <h2 className='group-hover:text-primary tw-animation font-serif text-base font-bold tracking-wider sm:text-lg'>
           {heading}
         </h2>
-        <p className='text-xs tracking-wide text-neutral-500 capitalize italic sm:text-base'>
+        <p className='text-xs tracking-wide text-neutral-500 capitalize italic sm:text-sm'>
           {subheading}
         </p>
       </div>

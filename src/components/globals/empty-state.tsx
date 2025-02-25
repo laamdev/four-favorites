@@ -6,7 +6,7 @@ interface EmptyStateProps {
 
 export const EmptyState = ({ children }: EmptyStateProps) => {
   return (
-    <div className='rounded-lg bg-zinc-800/50 p-10 text-center text-sm sm:text-base'>
+    <div className='bg-card p-10 text-center text-sm sm:text-base'>
       {children}
     </div>
   )

@@ -18,21 +18,21 @@ export const UserMovieActionButtons = ({
   movieSlug
 }: UserMovieActionButtonsProps) => {
   return (
-    <div className='tw-animation absolute left-2 top-2 z-50 flex flex-col gap-y-2'>
+    <div className='tw-animation absolute top-4 left-4 z-50 flex flex-col gap-y-2'>
       <button
         onClick={async () => {
           await deleteUserMovie({ movieId: movieId, position: position })
           toast.success('Movie deleted')
         }}
-        className='tw-animation flex size-10 scale-75 transform items-center justify-center rounded-full bg-black/50 opacity-0 group-hover:scale-100 group-hover:opacity-100'
+        className='tw-animation bg-primary flex size-10 transform cursor-pointer items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 hover:bg-black'
       >
-        <Minus className='tw-animation size-6 text-white hover:text-primary' />
+        <Minus className='size-6' />
       </button>
       <Link
         href={`/movies/${movieSlug}`}
-        className='tw-animation flex size-10 scale-75 transform items-center justify-center rounded-full bg-black/50 opacity-0 group-hover:scale-100 group-hover:opacity-100'
+        className='tw-animation bg-primary flex size-10 transform cursor-pointer items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 hover:bg-black'
       >
-        <Eye className='tw-animation size-6 text-white hover:text-primary' />
+        <Eye className='size-6' />
       </Link>
     </div>
   )

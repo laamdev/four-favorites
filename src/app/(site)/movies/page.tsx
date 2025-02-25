@@ -7,6 +7,7 @@ import { MoviesGrid } from '@/components/movies/movies-grid'
 
 import { movieGenres } from '@/data/movie-genres'
 import { Hero } from '@/components/globals/hero'
+import { SectionContainer } from '@/components/globals/section-wrapper'
 
 interface MoviesPageProps {
   searchParams: Promise<{
@@ -50,22 +51,24 @@ export default async function MoviesPage({ searchParams }: MoviesPageProps) {
         isCentered
       />
 
-      <div className='container'>
-        <div className='mt-8 flex justify-center sm:justify-end'>
-          <FiltersSlider sort={sort as string} genre={genre as string} />
-        </div>
+      <SectionContainer>
+        <div className='container'>
+          <div className='flex justify-center sm:justify-end'>
+            <FiltersSlider sort={sort as string} genre={genre as string} />
+          </div>
 
-        <div className='mt-8'>
-          <Suspense fallback={<GridSkeleton />}>
-            <MoviesGrid
-              filter={genre}
-              sort={sort}
-              query={query}
-              page={currentPage}
-            />
-          </Suspense>
+          <div className='mt-8'>
+            <Suspense fallback={<GridSkeleton />}>
+              <MoviesGrid
+                filter={genre}
+                sort={sort}
+                query={query}
+                page={currentPage}
+              />
+            </Suspense>
+          </div>
         </div>
-      </div>
+      </SectionContainer>
     </div>
   )
 }

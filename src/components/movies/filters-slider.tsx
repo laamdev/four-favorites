@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
+import { SmallTitle } from '@/components/globals/small-title'
 
 interface FiltersSliderProps {
   sort: string
@@ -26,9 +27,10 @@ export const FiltersSlider = ({ sort, genre }: FiltersSliderProps) => {
           weight='fill'
           className='group-hover:text-primary tw-animation size-5'
         />
-        <span className='text-[10px] font-medium tracking-widest text-zinc-700 uppercase sm:text-xs'>
-          Show filters
-        </span>
+        <SmallTitle
+          text='Show filters'
+          className='text-[10px] font-medium sm:text-xs'
+        />
       </SheetTrigger>
       <SheetContent side='right'>
         <SheetHeader>

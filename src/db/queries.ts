@@ -299,7 +299,8 @@ export async function getUserLikedFavorites(userId: string) {
               with: {
                 artist: {
                   columns: {
-                    headshotUrl: true
+                    headshotUrl: true,
+                    role: true
                   }
                 }
               }
@@ -702,6 +703,32 @@ export async function getFeaturedFavorites() {
   })
 
   // Transform the results to ensure we have the correct structure
+  return results.map(favorite => ({
+    ...favorite,
+    artistsToFavorites: favorite.artistsToFavorites.map(atf => ({
+      artist: atf.artist
+    }))
+  }))
+}
+
+export async function getLastFiveFavorites() {
+  const results = await db.query.favorites.findMany({
+    with: {
+      artistsToFavorites: {
+        with: {
+          artist: true
+        }
+      },
+      moviesToFavorites: {
+        with: {
+          movie: true
+        }
+      }
+    },
+    orderBy: desc(favorites.publishingDate),
+    limit: 5
+  })
+
   return results.map(favorite => ({
     ...favorite,
     artistsToFavorites: favorite.artistsToFavorites.map(atf => ({

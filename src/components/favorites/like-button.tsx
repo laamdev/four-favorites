@@ -55,7 +55,7 @@ export const LikeButton = ({
       onClick={handleLike}
       disabled={!userId || isLoading}
       className={cn(
-        'group flex flex-col items-center gap-y-1 disabled:pointer-events-none disabled:opacity-50'
+        'group flex w-14 cursor-pointer flex-col items-center gap-y-1 disabled:pointer-events-none disabled:opacity-50'
       )}
     >
       <Heart
@@ -68,7 +68,7 @@ export const LikeButton = ({
           }
         )}
       />
-      <span className='text-[10px] tabular-nums sm:text-xs'>
+      <span className='text-[10px] font-medium tracking-wider uppercase tabular-nums sm:text-xs'>
         {likesCount} {likesCount !== 1 ? 'Likes' : 'Like'}
       </span>
     </button>

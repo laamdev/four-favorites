@@ -10,7 +10,7 @@ export const HeroTagline = ({
   return (
     <h2
       className={cn(
-        'text-primary text-xs font-black tracking-widest uppercase sm:text-sm',
+        'text-primary text-xs font-black tracking-wider uppercase sm:text-sm',
         className
       )}
     >

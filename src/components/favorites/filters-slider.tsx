@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
+import { SmallTitle } from '@/components/globals/small-title'
 
 interface FiltersSliderProps {
   sort: string
@@ -26,29 +27,32 @@ export const FiltersSlider = ({ sort, role }: FiltersSliderProps) => {
           weight='fill'
           className='group-hover:text-primary tw-animation size-5'
         />
-        <span className='text-[10px] font-medium tracking-widest text-zinc-700 uppercase sm:text-xs'>
-          Show filters
-        </span>
+        <SmallTitle
+          text='Show filters'
+          className='text-[10px] font-medium sm:text-xs'
+        />
       </SheetTrigger>
       <SheetContent side='right'>
         <SheetHeader>
-          <SheetTitle>Lists Filters</SheetTitle>
+          <SheetTitle className='font-serif text-lg font-semibold tracking-wider uppercase'>
+            Lists Filters
+          </SheetTitle>
           <SheetDescription>{`Filter, search, and sort the Four Favorite lists of your favorite artists.`}</SheetDescription>
         </SheetHeader>
 
         <div className='mt-8 flex max-h-[calc(100vh-8rem)] flex-col gap-y-8 overflow-y-auto'>
           <div className='flex flex-col gap-y-3'>
-            <Label className='text-xs tracking-wider text-zinc-300 uppercase'>{`Search`}</Label>
+            <Label className='text-xs tracking-wider text-zinc-500 uppercase'>{`Search`}</Label>
             <Search placeholder='Find a list...' />
           </div>
 
           <div className='flex flex-col gap-y-3'>
-            <Label className='text-xs tracking-wider text-zinc-300 uppercase'>{`Sort`}</Label>
+            <Label className='text-xs tracking-wider text-zinc-500 uppercase'>{`Sort`}</Label>
             <SortSelect sort={sort as string} />
           </div>
 
           <div className='flex flex-col gap-y-3'>
-            <Label className='text-xs tracking-wider text-zinc-300 uppercase'>{`Role`}</Label>
+            <Label className='text-xs tracking-wider text-zinc-500 uppercase'>{`Role`}</Label>
             <FiltersRadio role={role as string} />
           </div>
         </div>

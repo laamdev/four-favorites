@@ -88,12 +88,21 @@ export async function addUserMovie({ movie, position }: addUserMovieProps) {
   if (!userId) throw new Error('Unauthorized')
 
   try {
-    // Check if movie exists
+    // Check if movie exists in the movies table
     const existingMovie = await db.query.movies.findFirst({
       where: eq(movies.name, movie.title)
     })
 
-    let movieId: number
+    let movieId = existingMovie?.id || movie.id
+
+    // Check if user already has this movie in their favorites
+    const existingUserMovie = await db.query.userMovies.findFirst({
+      where: and(eq(userMovies.userId, userId), eq(userMovies.movieId, movieId))
+    })
+
+    if (existingUserMovie) {
+      return { success: false, error: 'Movie already in your favorites' }
+    }
 
     if (!existingMovie) {
       // Insert new movie if it doesn't exist
@@ -112,8 +121,6 @@ export async function addUserMovie({ movie, position }: addUserMovieProps) {
         .returning()
 
       movieId = newMovie.id
-    } else {
-      movieId = existingMovie.id
     }
 
     // Create user-movie relationship
