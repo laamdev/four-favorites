@@ -26,7 +26,10 @@ export async function generateMetadata({
 
   if (!director) return notFound()
 
-  return { title: director.name }
+  return {
+    title: director.name,
+    description: `${director.name}'s Four Favorites picks.`
+  }
 }
 
 export default async function DirectorPage({ params }: DirectorPageProps) {

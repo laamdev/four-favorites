@@ -3,8 +3,6 @@
 import { useEffect, useRef } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-import { PageTitle } from '@/components/globals/page-title'
-import { PageSummary } from '@/components/globals/page-summary'
 import { SimpleCard } from '@/components/globals/simple-card'
 import { Hero } from '@/components/globals/hero'
 import { SectionContainer } from '@/components/globals/section-wrapper'

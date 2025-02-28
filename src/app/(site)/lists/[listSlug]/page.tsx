@@ -31,7 +31,10 @@ export async function generateMetadata({
 
   if (!favorite) return notFound()
 
-  return { title: favorite.name }
+  return {
+    title: favorite.name,
+    description: `Discover ${favorite.name}'s Four Favorites picks.`
+  }
 }
 
 export default async function FavoritesPage({ params }: FavoritesPageProps) {

@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { Suspense } from 'react'
 
 import { FiltersSlider } from '@/components/favorites/filters-slider'
@@ -8,6 +9,12 @@ import { SectionContainer } from '@/components/globals/section-wrapper'
 
 interface FourFavoritesPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export const metadata: Metadata = {
+  title: 'Lists',
+  description:
+    "Discover curated movie lists from the entertainment industry's finest. From actors and directors to composers and writers, explore their Four Favorite picks."
 }
 
 export default async function ListsPage({

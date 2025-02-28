@@ -2,7 +2,7 @@ export const SITE = {
   TITLE: 'Four Favorites',
   DESCRIPTION:
     "An ever-growing collection of Letterboxd's Four Favorites picks by celebrities.",
-  URL: 'https://fourfavorites.vercel.app'
+  URL: 'https://fourfavourites.com'
 }
 
 export const genresEnum = [

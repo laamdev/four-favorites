@@ -8,7 +8,8 @@ import { getAllGenres } from '@/db/queries'
 
 export const metadata: Metadata = {
   title: 'Genres',
-  description: 'Discover all the genres featured in the Four Favorites lists.'
+  description:
+    'Discover all the movie genres featured in the Four Favorites celebrity picks.'
 }
 
 export default async function GenresPage() {
