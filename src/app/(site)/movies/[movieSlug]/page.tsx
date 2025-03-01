@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation'
 import { EmptyState } from '@/components/globals/empty-state'
 import { SectionHeading } from '@/components/globals/section-heading'
 import { ItemCard } from '@/components/globals/item-card'
-
-import { getMovie, getMoviesSlugs } from '@/db/queries'
 import { MovieHero } from '@/components/movies/movie-hero'
 import { SectionContainer } from '@/components/globals/section-wrapper'
+
+import { getMovie, getMoviesSlugs } from '@/db/queries'
 
 interface MoviePageProps {
   params: Promise<{ movieSlug: string }>

@@ -11,11 +11,11 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-primary tw-animation text-white shadow-sm hover:bg-zinc-950',
+        secondary: 'bg-zinc-400 text-white shadow-xs hover:bg-zinc-950',
         destructive:
           'bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90',
         outline:
-          'bg-background border-primary border-2 hover:border-zinc-950 hover:bg-zinc-950 hover:text-zinc-50',
-        secondary: 'bg-zinc-400 text-white shadow-xs hover:bg-zinc-950',
+          'bg-transparent border-primary text-primary border-2 hover:border-zinc-950 hover:bg-zinc-950 hover:text-zinc-50',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         criterion:

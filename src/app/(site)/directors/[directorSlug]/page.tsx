@@ -4,6 +4,7 @@ import { format, parseISO } from 'date-fns'
 
 import { ItemCard } from '@/components/globals/item-card'
 import { Hero } from '@/components/globals/hero'
+import { PageBreadcrumb } from '@/components/globals/page-breadcrumb'
 
 import { getAllDirectors, getDirector } from '@/db/queries'
 
@@ -52,8 +53,9 @@ export default async function DirectorPage({ params }: DirectorPageProps) {
         } featured in the Four Favorites celebrity picks.`}
       />
 
-      <div className='py-4 sm:py-8'>
-        <div className='container grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+      <div className='container py-4 sm:py-8'>
+        <PageBreadcrumb />
+        <div className='mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
           {director.movies.map(movie => (
             <ItemCard
               key={movie.slug}
