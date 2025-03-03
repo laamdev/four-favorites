@@ -1,6 +1,7 @@
 import { ItemCard } from '@/components/globals/item-card'
 import { PaginationFavorites } from '@/components/favorites/pagination'
 import { FilmSlate } from '@phosphor-icons/react/dist/ssr'
+import { EmptyState } from '@/components/globals/empty-state'
 
 import { getFavorites } from '@/db/queries'
 
@@ -30,15 +31,14 @@ export const FavoritesGrid = async ({
 
   if (favorites.length === 0) {
     return (
-      <div className='flex min-h-[400px] flex-col items-center justify-center'>
-        <FilmSlate weight='light' className='size-10 text-zinc-700' />
-        <h3 className='mt-4 text-2xl font-semibold'>No lists found!</h3>
-        <p className='mt-2 max-w-sm text-center text-sm text-zinc-600'>
-          {query
+      <EmptyState
+        title='No lists found!'
+        description={
+          query
             ? 'Please adjust your search terms or the selected filters.'
-            : 'No lists have been created yet.'}
-        </p>
-      </div>
+            : 'No lists have been created yet.'
+        }
+      />
     )
   }
 
