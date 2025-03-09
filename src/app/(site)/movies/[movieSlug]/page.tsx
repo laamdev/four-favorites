@@ -73,9 +73,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
               </div>
             ) : (
               <div className='mt-4 sm:mt-8'>
-                <EmptyState>
-                  This movie is not included in any lists yet.
-                </EmptyState>
+                <EmptyState title='This movie is not included in any lists yet.' />
               </div>
             )}
           </div>

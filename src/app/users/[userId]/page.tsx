@@ -35,7 +35,7 @@ export default async function UserPage({ params }: UserPageProps) {
   }
 
   return (
-    <div className='mb-12 mt-16 sm:mt-24'>
+    <div className='mt-16 mb-12 sm:mt-24'>
       <div>
         <PageTitle className='flex flex-col'>
           <span>{`${user.fullName}'s`}</span>
@@ -48,7 +48,7 @@ export default async function UserPage({ params }: UserPageProps) {
       </div>
 
       {favorites.length === 0 ? (
-        <EmptyState>This user hasn't picked any favorites yet.</EmptyState>
+        <EmptyState title='This user hasn’t picked any favorites yet.' />
       ) : (
         <div className='mt-8 grid grid-cols-2 gap-4 md:grid-cols-4'>
           {favorites.map(favorite => (

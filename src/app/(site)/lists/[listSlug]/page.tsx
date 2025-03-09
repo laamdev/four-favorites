@@ -79,7 +79,7 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
             favorite.moviesToFavorites.length > 0 ? (
               <MovieCarousel movies={favorite.moviesToFavorites} />
             ) : (
-              <EmptyState>No movies found.</EmptyState>
+              <EmptyState title='No movies found.' />
             )}
           </div>
         </div>

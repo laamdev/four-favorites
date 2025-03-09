@@ -94,16 +94,7 @@ export default async function ProfilePage() {
 
           {userLikedFavoriteLists.length === 0 ? (
             <div className='mt-4 sm:mt-8'>
-              <EmptyState>
-                <p>
-                  <span>{`You haven't liked any lists yet. `}</span>
-                  <Link
-                    href='/'
-                    className='tw-animation hover:text-primary font-medium underline'
-                  >{`Explore some lists`}</Link>
-                  <span>{` and hit the like button!`}</span>
-                </p>
-              </EmptyState>
+              <EmptyState title='You haven’t liked any lists yet.' />
             </div>
           ) : (
             <div className='mt-4 grid grid-cols-2 gap-4 sm:mt-8 sm:grid-cols-5'>
