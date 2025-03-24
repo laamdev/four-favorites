@@ -19,19 +19,19 @@ export const MovieCard = ({
       href={slug}
       className='group block transform transition-transform duration-300 ease-out hover:-translate-y-2'
     >
-      <div className='tw-animation relative aspect-2/3 overflow-hidden'>
+      <div className='tw-animation aspect-2/3 relative overflow-hidden'>
         <Image
           src={image}
           alt={heading}
           fill
-          className='tw-gradient tw-animation relative object-cover object-center'
+          className='tw-gradient tw-animation relative border object-cover object-center'
         />
       </div>
       <div className='mt-2'>
         <h2 className='group-hover:text-primary tw-animation font-serif text-lg font-bold tracking-wider'>
           {heading}
         </h2>
-        <p className='font-serif text-sm text-neutral-500 capitalize italic'>
+        <p className='font-serif text-sm capitalize italic text-neutral-500'>
           {subheading}
         </p>
       </div>

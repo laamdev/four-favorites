@@ -19,7 +19,7 @@ export const ItemCard = ({
       href={slug}
       className='group block transform transition-transform duration-300 ease-out hover:-translate-y-2'
     >
-      <div className='tw-animation relative aspect-2/3 overflow-hidden'>
+      <div className='tw-animation aspect-2/3 relative overflow-hidden'>
         <Image
           src={image}
           alt={heading}
@@ -31,7 +31,7 @@ export const ItemCard = ({
         <h2 className='group-hover:text-primary tw-animation font-serif text-base font-bold tracking-wider sm:text-lg'>
           {heading}
         </h2>
-        <p className='text-xs tracking-wide text-neutral-500 capitalize italic sm:text-sm'>
+        <p className='text-xs capitalize italic tracking-wide text-neutral-500 sm:text-sm'>
           {subheading}
         </p>
       </div>

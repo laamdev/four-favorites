@@ -102,12 +102,12 @@ export const MovieHero = ({ movie }: MovieHeroProps) => {
         </div>
 
         <div className='col-span-1 row-start-1 sm:row-start-auto'>
-          <div className='relative aspect-2/3 w-auto'>
+          <div className='aspect-2/3 relative w-auto'>
             <Image
               src={`https://image.tmdb.org/t/p/w780${movie.posterUrl}`}
               alt={movie.name}
               fill
-              className='tw-gradient object-cover object-center'
+              className='tw-gradient border object-cover object-center'
             />
           </div>
           <div className='bg-card hidden flex-col gap-8 p-8 sm:flex'>
