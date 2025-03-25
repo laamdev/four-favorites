@@ -236,6 +236,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider>
       <html
+        lang='en'
         suppressHydrationWarning
         className={cn(
           'overflow-x-hidden font-sans',
