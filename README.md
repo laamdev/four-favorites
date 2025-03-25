@@ -46,6 +46,7 @@ their most cherished movies.
 - PostgreSQL database (or Neon account)
 - TMDB API key
 - Clerk account
+- Google OAuth
 
 ### Installation
 
