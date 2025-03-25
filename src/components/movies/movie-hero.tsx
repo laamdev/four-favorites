@@ -47,13 +47,13 @@ export const MovieHero = ({ movie }: MovieHeroProps) => {
             </HeroSummary>
 
             <div className='mt-4 flex flex-wrap gap-2 sm:mt-8 sm:gap-4'>
-              {(movie.genres ?? []).map(genreId => {
+              {(movie.genres ?? []).map((genreId, idx) => {
                 const genre = movieGenres.find(
                   genre => genre.id === Number(genreId)
                 )
                 return (
                   <Link
-                    key={genreId}
+                    key={idx}
                     href={`/movies?genre=${genreId}`}
                     className={badgeVariants({
                       className: 'capitalize'
@@ -85,13 +85,13 @@ export const MovieHero = ({ movie }: MovieHeroProps) => {
                   See on Letterboxd
                 </Link>
                 <Link
-                  href={`https://letterboxd.com/film/${movie.slug}`}
+                  href={`https://letterboxd.com/director/${movie.director.toLowerCase().replace(/ /g, '-')}`}
                   className={buttonVariants({
                     variant: 'secondary',
                     className: 'w-full'
                   })}
                 >
-                  See on Letterboxd
+                  See Director's Films
                 </Link>
               </div>
               <div className='mt-8'>
@@ -117,22 +117,18 @@ export const MovieHero = ({ movie }: MovieHeroProps) => {
                   movie.letterboxdUrl ||
                   `https://letterboxd.com/film/${movie.slug}`
                 }
-                target='_blank'
-                rel='noopener noreferrer'
                 className={buttonVariants({ className: 'w-full' })}
               >
                 See on Letterboxd
               </Link>
               <Link
-                href={`https://letterboxd.com/film/${movie.slug}`}
-                target='_blank'
-                rel='noopener noreferrer'
+                href={`https://letterboxd.com/director/${movie.director.toLowerCase().replace(/ /g, '-')}`}
                 className={buttonVariants({
                   variant: 'secondary',
                   className: 'w-full'
                 })}
               >
-                See on Letterboxd
+                See Director's Films
               </Link>
             </div>
 

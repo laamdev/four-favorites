@@ -24,7 +24,7 @@ export const ItemCard = ({
           src={image}
           alt={heading}
           fill
-          className='bg-card tw-animation relative object-cover object-center'
+          className='bg-card tw-animation relative border object-cover object-center'
         />
       </div>
       <div className='mt-2'>

@@ -175,7 +175,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border selection:bg-primary outline-ring/50 selection:text-white;
   }
   body {
     @apply bg-background text-foreground;
