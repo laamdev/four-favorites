@@ -526,10 +526,63 @@ export const moviesToFavoritesRelations = relations(
   })
 )
 
+export const featuredCategoriesEnum = pgEnum('featured_categories_enum', [
+  'oscar_winners',
+  'classic_directors',
+  'new_releases',
+  'staff_picks'
+  // Add more categories as needed
+])
+
+export const featuredCategories = pgTable(
+  'featured_categories',
+  {
+    id: serial().primaryKey().notNull(),
+    name: varchar().notNull(),
+    slug: varchar().notNull(),
+    description: varchar(),
+    displayOrder: integer().default(0).notNull()
+  },
+  table => [unique('featured_categories_slug_unique').on(table.slug)]
+)
+
+export const favoritesToFeaturedCategories = pgTable(
+  'favorites_to_featured_categories',
+  {
+    favoriteId: integer('favorite_id').notNull(),
+    categoryId: integer('category_id').notNull(),
+    displayOrder: integer().default(0).notNull() // For ordering within each category
+  },
+  table => [
+    foreignKey({
+      columns: [table.favoriteId],
+      foreignColumns: [favorites.id],
+      name: 'favorites_to_featured_categories_favorite_id_fkey'
+    }),
+    foreignKey({
+      columns: [table.categoryId],
+      foreignColumns: [featuredCategories.id],
+      name: 'favorites_to_featured_categories_category_id_fkey'
+    }),
+    primaryKey({
+      columns: [table.favoriteId, table.categoryId],
+      name: 'favorites_to_featured_categories_pkey'
+    })
+  ]
+)
+
+export const featuredCategoriesRelations = relations(
+  featuredCategories,
+  ({ many }) => ({
+    favoritesToFeaturedCategories: many(favoritesToFeaturedCategories)
+  })
+)
+
 export const favoritesRelations = relations(favorites, ({ many }) => ({
   moviesToFavorites: many(moviesToFavorites),
   artistsToFavorites: many(artistsToFavorites),
-  userLikes: many(userLikes)
+  userLikes: many(userLikes),
+  favoritesToFeaturedCategories: many(favoritesToFeaturedCategories)
 }))
 
 export const artistsToFavoritesRelations = relations(
