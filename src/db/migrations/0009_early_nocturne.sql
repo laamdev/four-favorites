@@ -1,0 +1,1 @@
+ALTER TYPE "public"."featured_categories_enum" ADD VALUE 'old_stars';

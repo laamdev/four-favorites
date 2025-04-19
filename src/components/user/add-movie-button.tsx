@@ -13,7 +13,7 @@ interface AddMovieButtonProps {
 
 export const AddMovieButton = ({ movie, position }: AddMovieButtonProps) => {
   return (
-    <div className='tw-animation absolute top-4 left-4 z-50'>
+    <div className='tw-animation absolute left-4 top-4 z-50'>
       <button
         onClick={async () => {
           const result = await addUserMovie({ movie, position })
@@ -24,7 +24,7 @@ export const AddMovieButton = ({ movie, position }: AddMovieButtonProps) => {
             redirect('/profile')
           }
         }}
-        className='tw-animation bg-primary flex size-10 transform cursor-pointer items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 hover:bg-black hover:text-zinc-200'
+        className='tw-animation bg-primary flex size-10 transform cursor-pointer items-center justify-center rounded-full text-white opacity-0 hover:bg-black hover:text-neutral-200 group-hover:opacity-100'
       >
         <Plus weight='bold' className='size-6' />
       </button>

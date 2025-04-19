@@ -46,7 +46,7 @@ export default async function ProfilePage() {
                 key={position}
                 className='group block transform transition-transform duration-300 ease-out hover:-translate-y-2'
               >
-                <div className='tw-animation relative aspect-2/3 overflow-hidden'>
+                <div className='tw-animation aspect-2/3 relative overflow-hidden'>
                   <Image
                     src={`https://image.tmdb.org/t/p/w780${movie.movie.posterUrl}`}
                     alt={movie.movie.name}
@@ -65,7 +65,7 @@ export default async function ProfilePage() {
                   <h2 className='group-hover:text-primary tw-animation font-serif text-base font-bold tracking-wider sm:text-lg'>
                     {movie.movie.name}
                   </h2>
-                  <p className='text-xs tracking-wide text-neutral-500 capitalize italic sm:text-sm'>
+                  <p className='text-xs capitalize italic tracking-wide text-neutral-500 sm:text-sm'>
                     {getYear(movie.movie.releaseDate)}
                   </p>
                 </div>
@@ -74,9 +74,9 @@ export default async function ProfilePage() {
               <Link
                 key={position}
                 href={`/profile/add?position=${position + 1}`}
-                className='group relative aspect-2/3 overflow-hidden bg-gradient-to-br from-zinc-300 to-zinc-100'
+                className='aspect-2/3 group relative overflow-hidden bg-gradient-to-br from-neutral-300 to-neutral-100'
               >
-                <div className='bg-primary tw-animation absolute top-1/2 left-1/2 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full group-hover:bg-black'>
+                <div className='bg-primary tw-animation absolute left-1/2 top-1/2 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full group-hover:bg-black'>
                   <Plus
                     weight='bold'
                     className='tw-animation size-6 text-white'

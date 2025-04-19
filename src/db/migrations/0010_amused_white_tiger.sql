@@ -1,0 +1,2 @@
+ALTER TYPE "public"."featured_categories_enum" ADD VALUE 'old_directors' BEFORE 'new_stars';--> statement-breakpoint
+ALTER TYPE "public"."featured_categories_enum" ADD VALUE 'new_directors' BEFORE 'new_stars';

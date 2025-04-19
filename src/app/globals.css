@@ -170,7 +170,7 @@
 }
 
 @utility tw-gradient {
-  @apply bg-linear-to-br from-zinc-400 to-zinc-200;
+  @apply bg-linear-to-br from-neutral-400 to-neutral-200;
 }
 
 @layer base {

@@ -4,26 +4,30 @@ import { FeaturedCarousel } from '@/components/favorites/featured-carousel'
 import { SectionHeading } from '@/components/globals/section-heading'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Hero } from '@/components/globals/hero'
-
-import {
-  getFeaturedFavorites,
-  getMostRecentFavorite,
-  getLastFiveFavorites
-} from '@/db/queries'
-import { getFormattedDate } from '@/lib/utils'
 import { SectionContainer } from '@/components/globals/section-wrapper'
 
+import {
+  getMostRecentFavorite,
+  getNewDirectors,
+  getOldDirectors,
+  getNewStars,
+  getOldStars
+} from '@/db/queries'
+import { getFormattedDate } from '@/lib/utils'
+
 export default async function FourFavoritesPage() {
-  const [lastUpdated, featuredFavorites, lastFiveFavorites] = await Promise.all(
-    [getMostRecentFavorite(), getFeaturedFavorites(), getLastFiveFavorites()]
-  )
+  const [lastUpdated, newDirectors, oldDirectors, newStars, oldStars] =
+    await Promise.all([
+      getMostRecentFavorite(),
+      getNewDirectors(),
+      getOldDirectors(),
+      getNewStars(),
+      getOldStars()
+    ])
 
   const lastUpdatedDate = lastUpdated?.publishingDate
     ? getFormattedDate(lastUpdated.publishingDate)
     : null
-
-  const favoritesToShow =
-    featuredFavorites.length > 0 ? featuredFavorites : lastFiveFavorites
 
   return (
     <div>
@@ -49,15 +53,15 @@ export default async function FourFavoritesPage() {
         isCentered
       />
 
-      {favoritesToShow.length > 0 && (
+      {oldDirectors && oldDirectors.length > 0 && (
         <SectionContainer>
           <div className='container'>
-            <SectionHeading
-              text={
-                featuredFavorites.length > 0 ? 'Featured Lists' : 'Recent Lists'
-              }
+            <SectionHeading text='Legendary Lenses' />
+            <FeaturedCarousel
+              data={{
+                oldDirectors
+              }}
             />
-            <FeaturedCarousel featuredFavorites={favoritesToShow} />
             <div className='mt-4 flex items-center justify-center sm:mt-8'>
               <Link href='/lists'>
                 <Button variant='default'>All Lists</Button>
@@ -67,14 +71,68 @@ export default async function FourFavoritesPage() {
         </SectionContainer>
       )}
 
-      <SectionContainer className='bg-zinc-800'>
+      {newDirectors && newDirectors.length > 0 && (
+        <SectionContainer className='bg-neutral-200'>
+          <div className='container'>
+            <SectionHeading text='Modern Masters' />
+            <FeaturedCarousel
+              data={{
+                newDirectors
+              }}
+            />
+            <div className='mt-4 flex items-center justify-center sm:mt-8'>
+              <Link href='/lists'>
+                <Button variant='default'>All Lists</Button>
+              </Link>
+            </div>
+          </div>
+        </SectionContainer>
+      )}
+
+      {oldStars && oldStars.length > 0 && (
+        <SectionContainer>
+          <div className='container'>
+            <SectionHeading text='Hollywood Royalty' />
+            <FeaturedCarousel
+              data={{
+                oldStars
+              }}
+            />
+            <div className='mt-4 flex items-center justify-center sm:mt-8'>
+              <Link href='/lists'>
+                <Button variant='default'>All Lists</Button>
+              </Link>
+            </div>
+          </div>
+        </SectionContainer>
+      )}
+
+      {newStars && newStars.length > 0 && (
+        <SectionContainer className='bg-neutral-200'>
+          <div className='container'>
+            <SectionHeading text='The New Guard' />
+            <FeaturedCarousel
+              data={{
+                newStars
+              }}
+            />
+            <div className='mt-4 flex items-center justify-center sm:mt-8'>
+              <Link href='/lists'>
+                <Button variant='default'>All Lists</Button>
+              </Link>
+            </div>
+          </div>
+        </SectionContainer>
+      )}
+
+      <SectionContainer className='bg-neutral-800'>
         <div className='container'>
           <SectionHeading
             text='Are We Missing a List?'
             className='text-center text-white'
           />
           <div className='mt-2 flex flex-col items-center gap-y-6 text-center sm:mt-4'>
-            <p className='max-w-2xl text-zinc-300'>
+            <p className='max-w-2xl text-neutral-300'>
               If you've found a Four Favorites list that's not on our website,
               or noticed any errors, please let us know. We're always looking to
               expand our collection.

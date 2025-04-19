@@ -36,6 +36,55 @@
       "when": 1744151036605,
       "tag": "0004_simple_ultimates",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1744995137803,
+      "tag": "0005_dashing_carnage",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1745022472165,
+      "tag": "0006_lean_nightmare",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1745022573806,
+      "tag": "0007_legal_expediter",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1745022716499,
+      "tag": "0008_nasty_greymalkin",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1745024881953,
+      "tag": "0009_early_nocturne",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1745025678304,
+      "tag": "0010_amused_white_tiger",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1745025760232,
+      "tag": "0011_woozy_galactus",
+      "breakpoints": true
     }
   ]
 }

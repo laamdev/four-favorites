@@ -40,10 +40,70 @@ type FeaturedFavorite = {
 }
 
 export function FeaturedCarousel({
-  featuredFavorites
+  data
 }: {
-  featuredFavorites: FeaturedFavorite[]
+  data: {
+    featuredFavorites?: FeaturedFavorite[]
+    legendaryDirectors?: Array<{
+      id: number
+      name: string
+      slug: string
+      artistsToFavorites: Array<{
+        artist: Artist
+      }>
+    }>
+    oscarWinners?: Array<{
+      id: number
+      name: string
+      slug: string
+      artistsToFavorites: Array<{
+        artist: Artist
+      }>
+    }>
+    newStars?: Array<{
+      id: number
+      name: string
+      slug: string
+      artistsToFavorites: Array<{
+        artist: Artist
+      }>
+    }>
+    oldStars?: Array<{
+      id: number
+      name: string
+      slug: string
+      artistsToFavorites: Array<{
+        artist: Artist
+      }>
+    }>
+    newDirectors?: Array<{
+      id: number
+      name: string
+      slug: string
+      artistsToFavorites: Array<{
+        artist: Artist
+      }>
+    }>
+    oldDirectors?: Array<{
+      id: number
+      name: string
+      slug: string
+      artistsToFavorites: Array<{
+        artist: Artist
+      }>
+    }>
+  }
 }) {
+  const itemsToShow =
+    data.legendaryDirectors ||
+    data.oscarWinners ||
+    data.newStars ||
+    data.oldStars ||
+    data.newDirectors ||
+    data.oldDirectors ||
+    data.featuredFavorites ||
+    []
+
   return (
     <div className='relative'>
       <Carousel
@@ -58,36 +118,36 @@ export function FeaturedCarousel({
         ]}
       >
         <CarouselContent className='mt-4 sm:mt-8'>
-          {featuredFavorites.map((featuredFavorite: FeaturedFavorite) => (
-            <CarouselItem
-              key={featuredFavorite.id}
-              className='basis-1/2 pl-4 md:basis-1/2 lg:basis-1/5'
-            >
-              <ItemCard
-                slug={`/lists/${featuredFavorite.slug}`}
-                heading={featuredFavorite.name}
-                subheading={featuredFavorite.artistsToFavorites[0]?.artist.role}
-                image={
-                  featuredFavorite.artistsToFavorites?.[0]?.artist?.headshotUrl?.includes(
-                    'cloudinary'
-                  )
-                    ? featuredFavorite.artistsToFavorites[0]?.artist
-                        ?.headshotUrl
-                    : featuredFavorite.artistsToFavorites?.[0]?.artist
-                          ?.headshotUrl
-                      ? `https://image.tmdb.org/t/p/h632${featuredFavorite.artistsToFavorites[0]?.artist?.headshotUrl}`
-                      : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
-                }
-              />
-            </CarouselItem>
-          ))}
+          {itemsToShow.map((item: FeaturedFavorite) => {
+            const firstArtist = item.artistsToFavorites?.[0]?.artist
+            const headshotUrl = firstArtist?.headshotUrl
+            const imageUrl = headshotUrl?.includes('cloudinary')
+              ? headshotUrl
+              : headshotUrl
+                ? `https://image.tmdb.org/t/p/h632${headshotUrl}`
+                : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+
+            return (
+              <CarouselItem
+                key={item.id}
+                className='basis-1/2 pl-4 md:basis-1/2 lg:basis-1/5'
+              >
+                <ItemCard
+                  slug={`/lists/${item.slug}`}
+                  heading={item.name}
+                  subheading={firstArtist?.role || 'Director'}
+                  image={imageUrl}
+                />
+              </CarouselItem>
+            )
+          })}
         </CarouselContent>
 
         {/* Navigation Buttons */}
         <div
           className={cn(
             'mt-4 flex justify-center gap-4 sm:mt-0 sm:block',
-            featuredFavorites.length <= 4 && 'sm:hidden'
+            itemsToShow.length <= 5 && 'sm:hidden'
           )}
         >
           <CarouselPrevious className='static translate-y-0 sm:absolute' />

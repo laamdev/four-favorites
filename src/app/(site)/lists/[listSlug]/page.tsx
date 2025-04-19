@@ -75,7 +75,7 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
               </Link>
               <h1 className='mt-4 flex flex-col font-serif text-6xl font-medium capitalize sm:text-7xl'>
                 <span>{`${favorite.name}'s`}</span>
-                <span className='text-zinc-500'>{`Four ${favorite.category === 'overall' ? 'Favorites' : `${favorite.category} Favorites`}`}</span>
+                <span className='text-neutral-500'>{`Four ${favorite.category === 'overall' ? 'Favorites' : `${favorite.category} Favorites`}`}</span>
               </h1>
             </div>
           </div>
@@ -103,7 +103,7 @@ export default async function FavoritesPage({ params }: FavoritesPageProps) {
         </div>
       </SectionContainer>
 
-      <SectionContainer className='bg-zinc-800'>
+      <SectionContainer className='bg-neutral-800'>
         <div className='container flex flex-col items-center justify-center'>
           <VideoPlayer videoUrl={favorite.videoUrl} title={favorite.name} />
           <p className='mt-4 text-sm text-neutral-300'>

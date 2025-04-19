@@ -1,4 +1,4 @@
-import { and, desc, eq, asc, like, sql, exists, count } from 'drizzle-orm'
+import { and, desc, eq, asc, sql, exists, count } from 'drizzle-orm'
 
 import { db } from '@/db'
 import {
@@ -684,59 +684,6 @@ export async function getAllGenres(): Promise<GenreWithCount[]> {
     .sort((a, b) => b.movieCount - a.movieCount)
 }
 
-export async function getFeaturedFavorites() {
-  const results = await db.query.favorites.findMany({
-    where: eq(favorites.isFeatured, true),
-    with: {
-      artistsToFavorites: {
-        with: {
-          artist: true
-        }
-      },
-      moviesToFavorites: {
-        with: {
-          movie: true
-        }
-      }
-    },
-    orderBy: desc(favorites.publishingDate)
-  })
-
-  // Transform the results to ensure we have the correct structure
-  return results.map(favorite => ({
-    ...favorite,
-    artistsToFavorites: favorite.artistsToFavorites.map(atf => ({
-      artist: atf.artist
-    }))
-  }))
-}
-
-export async function getLastFiveFavorites() {
-  const results = await db.query.favorites.findMany({
-    with: {
-      artistsToFavorites: {
-        with: {
-          artist: true
-        }
-      },
-      moviesToFavorites: {
-        with: {
-          movie: true
-        }
-      }
-    },
-    orderBy: desc(favorites.publishingDate),
-    limit: 5
-  })
-
-  return results.map(favorite => ({
-    ...favorite,
-    artistsToFavorites: favorite.artistsToFavorites.map(atf => ({
-      artist: atf.artist
-    }))
-  }))
-}
-
 export const getMoviesByGenre = async (genreId: number) => {
   return await db.query.movies.findMany({
     where: sql`${genreId.toString()} = ANY(${movies.genres})`,
@@ -747,5 +694,61 @@ export const getMoviesByGenre = async (genreId: number) => {
         }
       }
     }
+  })
+}
+
+export const getNewDirectors = async () => {
+  return await db.query.favorites.findMany({
+    where: eq(favorites.featuredCategory, 'new_directors'),
+    with: {
+      artistsToFavorites: {
+        with: {
+          artist: true
+        }
+      }
+    },
+    orderBy: asc(favorites.name)
+  })
+}
+
+export const getOldDirectors = async () => {
+  return await db.query.favorites.findMany({
+    where: eq(favorites.featuredCategory, 'old_directors'),
+    with: {
+      artistsToFavorites: {
+        with: {
+          artist: true
+        }
+      }
+    },
+    orderBy: asc(favorites.name)
+  })
+}
+
+export const getNewStars = async () => {
+  return await db.query.favorites.findMany({
+    where: eq(favorites.featuredCategory, 'new_stars'),
+    with: {
+      artistsToFavorites: {
+        with: {
+          artist: true
+        }
+      }
+    },
+    orderBy: asc(favorites.name)
+  })
+}
+
+export const getOldStars = async () => {
+  return await db.query.favorites.findMany({
+    where: eq(favorites.featuredCategory, 'old_stars'),
+    with: {
+      artistsToFavorites: {
+        with: {
+          artist: true
+        }
+      }
+    },
+    orderBy: asc(favorites.name)
   })
 }
